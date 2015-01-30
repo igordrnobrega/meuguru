@@ -1,0 +1,69 @@
+/* Empty. Add your own CSS if you like */
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.bar.bar-stable {
+    background-color: #1b3d6e;
+    webkit-box-shadow: 0 1px 5px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 5px 5px rgba(0,0,0,0.1);
+    border-bottom: 3px solid #142e55;
+}
+
+.bar-stable .button.button-clear {
+    color: #fff;
+}
+
+.bar.bar-stable .title {
+    text-align: left;
+    padding-top: 7px;
+}
+
+.scroll-content {
+    background-color: #eaeaea;
+}
+
+.list.inside {
+    width: 90%;
+    margin: 30px auto 0;
+    -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+    border: none;
+    padding: 0 8px;
+    background-color: #fff;
+    color: #1b3d6e;
+}
+
+    .list.inside .item {
+        border: none;
+        border-bottom: 2px solid #ececec;
+    }
+
+.item-input {
+    padding: 6px 16px 5px 16px;
+    background-color: transparent;
+}
+
+label.item.item-input.item-opacity.item-select {
+    border: none;
+    margin-top: 16px;
+}
+
+label.item.item-input.item-opacity.item-select .input-label {
+    opacity: 0.4;
+    font-size: 14px;
+}
+
+.bar-stable .button {
+    border-color: transparent;
+    background-color: transparent;
+    color: #fff;
+}
+
+.button:hover {
+    color: #fff;
+    text-decoration: none;
+}
