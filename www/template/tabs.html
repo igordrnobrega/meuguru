@@ -1,0 +1,104 @@
+<ion-side-menus data-ng-controller="TabsCtrl">
+	<ion-side-menu-content>
+		<ion-nav-bar class="bar-stable">
+			<ion-nav-back-button class="button icon button-clear ion-chevron-left">
+			</ion-nav-back-button>
+
+			<ion-nav-buttons side="left">
+				<button data-ng-click="toggleLeft()" class="button icon button-clear ion-navicon-round"></button>
+			</ion-nav-buttons>
+			<img class="title menu-title" ng-src="img/logo-home.png">
+		</ion-nav-bar>
+		<ion-nav-view name="tab"></ion-nav-view>
+	</ion-side-menu-content>
+	<ion-side-menu side="left">
+		<ion-header-bar class="menu-title-bar">
+			Menu
+		</ion-header-bar>
+		<ion-list class="menu">
+			<ion-item class="item-icon-left" menu-close href="#/index">
+				<i class="icon ion-home"></i>
+				Home
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/eventos">
+				<i class="icon ion-calendar"></i>
+				Agenda
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/fornecedores">
+				<i class="icon ion-person-stalker"></i>
+				Fornecedores
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/pavilhoes">
+				<i class="icon ion-ios-home"></i>
+				Pavilhões
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/servicos">
+				<i class="icon ion-settings"></i>
+				Serviços
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/produtos">
+				<i class="icon ion-ios-book"></i>
+				Cat. de Produtos
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/noticias">
+				<i class="icon ion-ios-paper"></i>
+				Notícias
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/estandes">
+				<i class="icon ion-edit"></i>
+				Proj. de Estandes
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/contato">
+				<i class="icon ion-email"></i>
+				Contato
+			</ion-item>
+	</ion-side-menu>
+</ion-side-menus>
+
+
+<!-- <ion-tabs class="tabs-striped tabs-icon-top tabs-top tabs-color-active-positive">
+	<ion-tab icon="ion-calendar" icon-on="" title="Agenda" href="#/tab/agenda">
+		<ion-nav-view name="tab-agenda"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab icon="ion-person-stalker" icon-on="" title="Fornecedor" href="#/tab/fornecedores">
+		<ion-nav-view name="tab-fornecedores"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab icon="ion-ios-home" icon-on="" title="Pavilhão" href="#/tab/pavilhoes">
+		<ion-nav-view name="tab-pavilhoes"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab icon="ion-settings" icon-on="" title="Serviços" href="#/tab/servicos">
+		<ion-nav-view name="tab-servicos"></ion-nav-view>
+	</ion-tab>
+
+ 	<ion-tab icon="ion-ios-book" icon-on="" title="Produtos" href="#/tab/produtos">
+		<ion-nav-view name="tab-produtos"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab icon="ion-ios-paper" icon-on="" title="Notícias" href="#/tab/noticias">
+		<ion-nav-view name="tab-noticias"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab icon="ion-edit" icon-on="" title="estandes" href="#/tab/estandes">
+		<ion-nav-view name="tab-estandes"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab icon="ion-email" icon-on="" title="Contato" href="#/tab/contato">
+		<ion-nav-view name="tab-contato"></ion-nav-view>
+	</ion-tab>
+
+</ion-tabs> -->
+
+
+
+
+
+
+
+
+
+
+
+

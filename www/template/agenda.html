@@ -1,0 +1,34 @@
+<ion-view view-title="Agenda">
+
+    <div class="tabs tabs-top tabs-icon-left filtro-bar">
+        <a class="tab-item" data-ng-click="getUserPostion()">
+            <i class="icon ion-android-locate"></i>
+            Próximos
+        </a>
+        <a class="tab-item" data-ng-click="showPopup()">
+            <i class="icon ion-funnel"></i>
+            Filtrar
+        </a>
+    </div>
+
+    <ion-content id="index" data-has-bouncing="false" >
+
+    <p data-ng-if="load" class="loading">Carregando ...</p>
+
+        <ion-list class="listar" ng-if="eventos">
+          <ion-item class="item-icon-right" data-ng-repeat="evento in eventos | filtraNome:filtro.nome | filtraEstado:filtro.estado:1:allEventos | filtraSegmento:filtro.segmento | filtraData:filtro.data | filtraPavilhao:filtro.pavilhao | filtraPromotor:filtro.promotor" href="#/tab/evento/{{ evento.ID }}">
+                <div class="thumb" style="background:url({{ evento.guid ? evento.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}">{{ evento.post_title }}</h1>
+                <p>Data:<span>{{ evento.dataInicial ? evento.dataInicial : '-' }}</span></p>
+                <p>Segmento:<span>{{ evento.name ? evento.name : '-'}}</span></p>
+                <p>Uf:<span>{{ evento.estadoFeira ? evento.estadoFeira : '-' }}</span></p>
+                <p>Cidade:<span>{{ evento.cidadeFeira ? evento.cidadeFeira : '-' }}</span></p>
+                <p>Promotor:<span>{{ evento.promotorFeira ? evento.promotorFeira : '-' }}</span></p>
+                <p>Pavilhão:<span>{{ evento.pavilhaoFeira ? evento.pavilhaoFeira : '-' }}</span></p>
+                <i class="icon ion-chevron-right"></i>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,306 @@
+/* Empty. Add your own CSS if you like */
+body {
+	font-family: 'Roboto', sans-serif !important;
+	background-color: #1b3d6e;
+}
+
+#home {
+    background-color: #1b3d6e;
+}
+
+    #home img {
+        margin-top: 234px;
+    }
+
+    #home button {
+		margin-top: 20px;
+		color: #1b3d6e;
+		line-height: 20px;
+		min-height: 26px;
+    }
+
+    #home img,
+    #home button {
+		width: 60%;
+		margin-left: 69px;
+    }
+
+#index {
+	background-color: #ececec;
+}
+	.bar-header {
+		background-color: #1b3d6e !important;
+		color: #fff !important;
+	}
+
+		.bar-header img.menu-title {
+			left: 47px;
+			right: 43px;
+			width: 76px;
+			height: auto;
+			top: 9px;
+		}
+
+        .bar-header .title {
+            color: #fff !important;
+            font-size: 18px;
+        }
+
+	.button-clear.button-clear {
+		color: #fff !important;
+	}
+
+	.list.inside,
+	.listar .list,
+	.listar-evento .list {
+	    width: 90%;
+	    margin: 18px auto 0;
+	    -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+	    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+	    border: none;
+	    padding: 0 8px;
+	    background-color: #fff;
+	    color: #1b3d6e;
+	}
+
+	.listar .list {
+		margin-top: 60px;
+	}
+
+	.listar-evento .list {
+		padding: 14px;
+	}
+
+    .list.inside .item {
+        border: none;
+        border-bottom: 2px solid #ececec;
+        padding: 20px 63px;
+    }
+
+    .listar .list .item,
+    .listar-evento .list .item {
+        border: none;
+        border-bottom: 2px solid #ececec;
+    }
+
+	.listar .list .item:last-child,
+	.listar-evento .list .item:last-child {
+		border: none;
+	}
+
+    .listar .list .item .thumb{
+  		height: 60px;
+  		width: 80px;
+    	border: 1px solid #c1c1c1;
+    	display: inline-block;
+    	margin-bottom: 10px;
+    }
+
+    .listar-evento .list .item .thumb {
+  		height: 90px;
+    	border: 1px solid #c1c1c1;
+    	display: inline-block;
+  		width: 44%;
+  		margin-bottom: 20px;
+    }
+
+    .listar .list .item i.ion-chevron-right {
+  		right: -2px;
+  		top: -100px;
+  		font-size: 16px;
+	}
+
+	.listar .list .item h1,
+	.listar-evento .list .item h1 {
+  		font-size: 14px;
+  		word-break: break-word;
+  		text-overflow: initial;
+  		white-space: initial;
+  		overflow: auto;
+  		width: 61%;
+  		display: inline-block;
+  		color: #1b3d6e;
+  		position: absolute;
+  		top: 0;
+  		margin-left: 5px;
+	}
+
+	.listar-evento .list .item h1 {
+		width: 52%;
+		margin-left: 10px;
+	}
+
+		.listar .list .item h1.small-font {
+			font-size: 14px;
+		}
+
+	.listar .list .item p,
+	.listar-evento .list .item p {
+		color: #1b3d6e;
+	}
+
+	.listar .list .item p span,
+	.listar-evento .list .item p span {
+		color: #808080;
+		margin-left: 5px;
+	}
+
+	.listar-evento .list .item p span {
+		margin-left: 14px;
+	}
+
+	.listar-evento .list .item p span {
+		margin-left: 14px;
+	}
+
+	.listar-evento .list .detail p,
+	.no-wrap {
+  		overflow: auto !important;
+  		text-overflow: initial !important;
+  		white-space: initial !important;
+	}
+
+	.listar-evento .list .detail p {
+  		margin: 10px 0 20px;
+	}
+
+	.menu .list {
+		margin-top: 43px;
+	}
+
+		.menu .list a,
+		.menu {
+			background-color: rgb(68, 68, 68);
+			color: #fff;
+		}
+
+.filtro-bar a {
+    padding-top: 4px;
+}
+
+.menu-title-bar {
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+	.manutencao {
+		width: 90%;
+		margin: 110px 16px 0;
+	}
+
+.loading {
+	margin-top: 240px;
+	margin-left: 136px;
+}
+
+.popup-container .popup {
+	width: 350px;
+}
+
+.popup-buttons {
+	min-height: 50px !important;
+
+	}
+
+	.popup-buttons button {
+		height: 30px !important;
+	    min-height: 20px !important;
+	    font-size: 12px !important;
+	}
+
+	.popup-buttons button:first-child {
+		color: #1b3d6e;
+		background-color: #ececec;
+	}
+
+	.popup-buttons button:last-child {
+		color: #ececec;
+		background-color: #1b3d6e;
+		border: 1px solid #1b3d6e;
+	}
+
+label.item.item-input.item-floating-label,
+.item-stacked-label {
+	background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.ion-funnel {
+	  font-size: 24px !important;
+}
+
+.anuncio {
+	-webkit-box-shadow: 1px -1px 10px 0 rgba(0,0,0,0.1);
+	box-shadow: 1px -1px 10px 0 rgba(0,0,0,0.1);
+	position: absolute;
+	bottom: 0;
+  	width: 100%;
+  	height: 70px;
+  	background-color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 70px;
+	color: #c1c1c1;
+}
+
+.view-container {
+    top: 0;
+}
+
+.tab-item {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px !important;
+    color: #1b3d6e;
+    opacity: 1;
+}
+
+button.button.back-button.hide.buttons.button.icon.button-clear.ion-chevron-left.header-item {
+    margin-left: 6px;
+}
+
+button.button.back-button.hide.buttons.button.icon.button-clear.ion-chevron-left.header-item + div.buttons-left.header-item {
+    display: inherit;
+}
+
+button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + div.buttons-left.header-item {
+  display: none;
+}
+
+input[type="date"] {
+    background-color: transparent;
+    color: rgba(128,128,128,.7);
+    margin-top: 22px;
+}
+
+.popup-body {
+    text-align: center;
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (orientation : landscape) {
+
+    #home img {
+		margin-top: 104px;
+    }
+
+    #home button {
+		display: block;
+		margin-top: 20px;
+    }
+
+    #home img,
+    #home button {
+		width: 35%;
+		margin-left: 206px;
+    }
+
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}

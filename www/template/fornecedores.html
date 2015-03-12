@@ -1,0 +1,27 @@
+<ion-view view-title="Fornecedores">
+
+    <div class="tabs tabs-top tabs-icon-left filtro-bar">
+        <a class="tab-item" data-ng-click="showPopup()">
+            <i class="icon ion-funnel"></i>
+            Filtrar
+        </a>
+    </div>
+
+    <ion-content id="index" data-has-bouncing="false" >
+
+        <p data-ng-if="load" class="loading">Carregando ...</p>
+
+        <ion-list class="listar">
+          <ion-item class="item-icon-right" data-ng-repeat="fornecedor in fornecedores | filtraPalavraChave:filtro.palavra | filtraEstado:filtro.estado:2 | filtraCidade:filtro.cidade | filtraCategoria:filtro.categoria" href="#/tab/fornecedor/{{ fornecedor.ID }}">
+                <div class="thumb" style="background:url({{ fornecedor.guid ? fornecedor.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}">{{ fornecedor.post_title }}</h1>
+                <p>Estado:<span>{{ fornecedor.estado ? fornecedor.estado : '-' }}</span></p>
+                <p>Cidade:<span>{{ fornecedor.cidade ? fornecedor.cidade : '-' }}</span></p>
+                <p class="no-wrap">Serviços:<span>{{ fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : '-'}}</span></p>
+                <i class="icon ion-chevron-right"></i>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
+    </ion-content>
+
+</ion-view>

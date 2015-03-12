@@ -1,0 +1,29 @@
+<ion-view view-title="Agenda">
+
+    <ion-nav-buttons side="right">
+      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Evento', evento.ID)"></button>
+    </ion-nav-buttons>
+
+    <ion-content id="index" data-has-bouncing="false">
+
+        <ion-list class="listar-evento">
+            <ion-item>
+                <div class="thumb" style="background:url({{ evento.guid ? evento.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}">{{ evento.post_title }}</h1>
+                <p><i class="icon ion-calendar"></i><span>{{ evento.dataInicial ? evento.dataInicial : '-' }} a {{ evento.dataFinal ? evento.dataFinal : '-' }}</span></p>
+                <p><i class="icon ion-ios-location"></i><span>{{ evento.cidadeFeira ? evento.cidadeFeira : '-' }}/{{ evento.estadoFeira ? evento.estadoFeira : '-' }}</span></p>
+                <p><i class="icon ion-ios-telephone"></i><span>{{ evento.telefoneFeira ? evento.telefoneFeira : '-' }}</span></p>
+                <p><i class="icon ion-ios-world"></i><span><a href="{{ evento.siteFeira }}">{{ evento.siteFeira ? evento.siteFeira : '-' }}</a></span></p>
+            </ion-item>
+
+            <ion-item class="detail">
+                <h2>Descrição</h2>
+                <p>{{ evento._yoast_wpseo_metadesc }}</p>
+                <h2>Horário</h2>
+                <p>Conteúdo disponível somente para anunciantes.
+                Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão </p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

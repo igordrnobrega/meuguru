@@ -1,0 +1,25 @@
+<ion-view view-title="Local">
+
+	<ion-nav-buttons side="right">
+		<button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Local', pavilhao.ID)"></button>
+	</ion-nav-buttons>
+
+	<ion-content id="index" data-has-bouncing="false">
+
+		<ion-list class="listar-evento">
+			<ion-item>
+				<div class="thumb" style="background:url({{ pavilhao.guid ? pavilhao.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+				<h1 class="{{ pavilhao.post_title.length >= 38 ? 'small-font' : '' }}">{{ pavilhao.post_title }}</h1>
+				<p><i class="icon ion-ios-location"></i><span>{{ pavilhao.ruaPavilhao + ', ' + pavilhao.bairroPavilhao + ' / ' + pavilhao.cepPavilhao + ' - ' + pavilhao.cidadePavilhao + '/' + pavilhao.estadoPavilhao }}</span></p>
+				<p><i class="icon ion-ios-telephone"></i><span>{{ pavilhao.telefonePavilhao ? pavilhao.telefonePavilhao : '-' }}</span></p>
+				<p><i class="icon ion-ios-world"></i><span><a href="{{ pavilhao.siteFeira }}">{{ pavilhao.sitePavilhao ? pavilhao.sitePavilhao : '-' }}</a></span></p>
+			</ion-item>
+
+			<ion-item class="detail">
+				<h2>Descrição</h2>
+				<p>{{ pavilhao._yoast_wpseo_metadesc ? pavilhao._yoast_wpseo_metadesc : 'Sem descrição.' }}</p>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+
+</ion-view>
