@@ -1,4 +1,4 @@
-angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource'])
+angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services' ,'ngResource'])
 
 .run(['$ionicPlatform',
 	function($ionicPlatform) {

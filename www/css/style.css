@@ -10,19 +10,7 @@ body {
 
     #home img {
         margin-top: 234px;
-    }
-
-    #home button {
-		margin-top: 20px;
-		color: #1b3d6e;
-		line-height: 20px;
-		min-height: 26px;
-    }
-
-    #home img,
-    #home button {
 		width: 60%;
-		margin-left: 69px;
     }
 
 #index {
@@ -297,18 +285,8 @@ input[type="date"] {
 and (orientation : landscape) {
 
     #home img {
+        width: 35%;
 		margin-top: 104px;
-    }
-
-    #home button {
-		display: block;
-		margin-top: 20px;
-    }
-
-    #home img,
-    #home button {
-		width: 35%;
-		margin-left: 206px;
     }
 
 }
