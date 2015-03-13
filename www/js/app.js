@@ -1,4 +1,4 @@
-angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services' ,'ngResource'])
+angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource'])
 
 .run(['$ionicPlatform',
 	function($ionicPlatform) {
@@ -144,6 +144,7 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 			views: {
 				'tab': {
 					templateUrl: 'template/contato.html',
+					controller: 'ContatoCtrl'
 				}
 			}
 		})

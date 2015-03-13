@@ -9,9 +9,7 @@
 
     <ion-content id="index" data-has-bouncing="false" >
 
-        <p data-ng-if="load" class="loading">Carregando ...</p>
-
-        <ion-list class="listar">
+        <ion-list class="listar" data-ng-if="!load">
           <ion-item class="item-icon-right" data-ng-repeat="fornecedor in fornecedores | filtraPalavraChave:filtro.palavra | filtraEstado:filtro.estado:2 | filtraCidade:filtro.cidade | filtraCategoria:filtro.categoria" href="#/tab/fornecedor/{{ fornecedor.ID }}">
                 <div class="thumb" style="background:url({{ fornecedor.guid ? fornecedor.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
                 <h1 class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}">{{ fornecedor.post_title }}</h1>

@@ -13,9 +13,7 @@
 
     <ion-content id="index" data-has-bouncing="false" >
 
-    <p data-ng-if="load" class="loading">Carregando ...</p>
-
-        <ion-list class="listar" ng-if="eventos">
+        <ion-list class="listar" data-ng-if="!load">
           <ion-item class="item-icon-right" data-ng-repeat="evento in eventos | filtraNome:filtro.nome | filtraEstado:filtro.estado:1:allEventos | filtraSegmento:filtro.segmento | filtraData:filtro.data | filtraPavilhao:filtro.pavilhao | filtraPromotor:filtro.promotor" href="#/tab/evento/{{ evento.ID }}">
                 <div class="thumb" style="background:url({{ evento.guid ? evento.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
                 <h1 class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}">{{ evento.post_title }}</h1>
@@ -28,6 +26,7 @@
                 <i class="icon ion-chevron-right"></i>
           </ion-item>
         </ion-list>
+
         <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
     </ion-content>
 

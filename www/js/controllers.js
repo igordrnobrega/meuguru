@@ -68,8 +68,8 @@ angular.module('meuguru.controllers', [])
     }
 ])
 
-.controller('AgendaCtrl', ['$scope', '$ionicPopup', '$timeout' ,'MeuGuruService', 'GeoReverseLocationService',
-        function($scope, $ionicPopup, $timeout, MeuGuruService, GeoReverseLocationService) {
+.controller('AgendaCtrl', ['$scope', '$ionicPopup', '$timeout' ,'MeuGuruService', 'GeoReverseLocationService', 'LoadingService',
+        function($scope, $ionicPopup, $timeout, MeuGuruService, GeoReverseLocationService, LoadingService) {
             $scope.load = true;
             $scope.moredata = true;
             $scope.GeoReverseLocationService = GeoReverseLocationService;
@@ -115,6 +115,7 @@ angular.module('meuguru.controllers', [])
             };
 
             $scope.getUserPostion = function() {
+                LoadingService.load('geo');
                 var posOptions = {timeout: 10000, enableHighAccuracy: true};
                 navigator.geolocation.getCurrentPosition(_success, _error, posOptions);
             }
@@ -122,7 +123,7 @@ angular.module('meuguru.controllers', [])
             var _success = function(pos) {
                 var coords = pos.coords;
                 var img = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords.latitude + "," + coords.longitude + "&zoom=13&size=300x300&sensor=false";
-
+                LoadingService.endLoad();
                 var successPopUp = $ionicPopup.show({
                     title: 'Localizado',
                     template: '<img src="' + img + '" />',
@@ -171,6 +172,7 @@ angular.module('meuguru.controllers', [])
             }
 
             var _error = function() {
+                LoadingService.endLoad();
                 var errorPopUp = $ionicPopup.show({
                     title: 'Error',
                     template: '<p style="text-align: center ">Não foi possível localizá-lo.</p>',
@@ -380,5 +382,17 @@ angular.module('meuguru.controllers', [])
                 }
             };
         });
+    }
+])
+
+.controller('ContatoCtrl',  ['$scope',
+    function($scope) {
+        $scope.imgSrc = 'https://maps.googleapis.com/maps/api/staticmap?center=-23.307688,-51.178091&zoom=17&size=300x300&sensor=false&markers=color:red%7Clabel:Aqui%7C-23.307688,-51.178091';
+
+        $scope.openMaps = function() {
+            launchnavigator.navigate(
+              [-23.307688, -51.178091]);
+        };
+
     }
 ])

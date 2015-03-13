@@ -4,11 +4,11 @@
   <description>
         Versão mobile do site Meu Guru
     </description>
-  <author email="" href="http://meuguru.com.br/">
-      Meu Guru
+  <author email="igordouradonobrega@gmail.com" href="http://meuguru.com.br/">
+      Igor Nóbrega
     </author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <access origin="*" launch-external="yes" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

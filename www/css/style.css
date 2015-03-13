@@ -52,7 +52,8 @@ body {
 
 	.list.inside,
 	.listar .list,
-	.listar-evento .list {
+	.listar-evento .list,
+    #contato {
 	    width: 90%;
 	    margin: 18px auto 0;
 	    -webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
@@ -174,6 +175,29 @@ body {
 			color: #fff;
 		}
 
+#contato img {
+    margin: 20px 0;
+}
+
+    #contato .board a {
+        display: block;
+        margin-bottom: 12px;
+        text-decoration: none;
+        color: #1b3d6e;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+        #contato .board a i {
+            font-size: 22px;
+            padding-right: 6px;
+        }
+
+        #contato .board a i.ion-location {
+            padding-left: 5px;
+            padding-right: 9px;
+        }
+
 .filtro-bar a {
     padding-top: 4px;
 }
@@ -181,16 +205,6 @@ body {
 .menu-title-bar {
   font-size: 18px;
   padding: 10px 20px;
-}
-
-	.manutencao {
-		width: 90%;
-		margin: 110px 16px 0;
-	}
-
-.loading {
-	margin-top: 240px;
-	margin-left: 136px;
 }
 
 .popup-container .popup {
@@ -230,20 +244,6 @@ label.item.item-input.item-floating-label,
 	  font-size: 24px !important;
 }
 
-.anuncio {
-	-webkit-box-shadow: 1px -1px 10px 0 rgba(0,0,0,0.1);
-	box-shadow: 1px -1px 10px 0 rgba(0,0,0,0.1);
-	position: absolute;
-	bottom: 0;
-  	width: 100%;
-  	height: 70px;
-  	background-color: #fff;
-	text-align: center;
-	text-transform: uppercase;
-	line-height: 70px;
-	color: #c1c1c1;
-}
-
 .view-container {
     top: 0;
 }
@@ -276,6 +276,21 @@ input[type="date"] {
 .popup-body {
     text-align: center;
 }
+
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+
+.loading {
+    background-color: rgba(27,61,110,0.9) !important;
+    width: 50% !important;
+    padding: 10px !important;
+}
+
+    .loading img {
+        width: 46%;
+    }
 
 /* Smartphones (landscape) ----------- */
 @media only screen

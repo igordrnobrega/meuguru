@@ -1,8 +1,20 @@
-<ion-view>
+<ion-view view-title="Contato">
     <ion-content id="index" data-has-bouncing="false">
-
-        <img class="manutencao" src="img/manutencao-meu-guru.jpg">
-
+        <div id="contato">
+            <div class="row row-center text-center">
+                <div class="col">
+                    <img src="img/logo-blue.png" height="auto" width="60%">
+                </div>
+            </div>
+            <div class="row board">
+                <div class="col">
+                    <a href="tel:+55 43 3029-5510"><i class="ion-android-call"></i> +55 43 3029-5510</a>
+                    <a href="mailto:contato@meuguru.com.br"><i class="ion-email"></i> contato@meuguru.com.br</a>
+                    <a href="#" data-ng-click="openMaps()"><i class="ion-location"></i> Av. Maringá, 725 - Vitoria, Londrina - PR, Brazil</a>
+                    <img data-ng-click="openMaps()" data-ng-src="{{imgSrc}}">
+                </div>
+            </div>
+        </div>
     </ion-content>
 
 </ion-view>

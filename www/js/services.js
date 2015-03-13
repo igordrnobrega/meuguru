@@ -1,7 +1,7 @@
 angular.module('meuguru.services', [])
 
-.factory('MeuGuruService', ['$http', '$log', '$resource',
-    function($http, $log, $resource) {
+.factory('MeuGuruService', ['$http', '$log', 'LoadingService',
+    function($http, $log, LoadingService) {
         var LOAD_INICIAL = 15;
 
         var eventos         = [],
@@ -13,6 +13,7 @@ angular.module('meuguru.services', [])
             getEventos: function($scope) {
 
                 if(eventos.length == 0) {
+                    LoadingService.load();
                     $http.get(url + 'eventos', {responseType: 'json'})
                         .success(function(data) {
                             eventos = data;
@@ -23,6 +24,7 @@ angular.module('meuguru.services', [])
                             };
                             $scope.load = false;
                             $scope.moredata = false;
+                            LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
@@ -34,6 +36,7 @@ angular.module('meuguru.services', [])
             getFornecedores: function($scope) {
 
                 if(fornecedores.length == 0) {
+                    LoadingService.load();
                     $http.get(url + 'fornecedores', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
                             fornecedores = data;
@@ -44,6 +47,7 @@ angular.module('meuguru.services', [])
                             };
                             $scope.load = false;
                             $scope.moredata = false;
+                            LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
@@ -55,6 +59,7 @@ angular.module('meuguru.services', [])
             getPavilhoes: function($scope) {
 
                 if(pavilhoes.length == 0) {
+                    LoadingService.load();
                     $http.get(url + 'locais', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
                             pavilhoes = data;
@@ -65,6 +70,7 @@ angular.module('meuguru.services', [])
                             };
                             $scope.load = false;
                             $scope.moredata = false;
+                            LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
@@ -76,6 +82,7 @@ angular.module('meuguru.services', [])
             getProdutos: function($scope) {
 
                 if(produtos.length == 0) {
+                    LoadingService.load();
                     $http.get(url + 'produtos', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
                             produtos = data;
@@ -86,6 +93,7 @@ angular.module('meuguru.services', [])
                             };
                             $scope.load = false;
                             $scope.moredata = false;
+                            LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
@@ -109,5 +117,34 @@ angular.module('meuguru.services', [])
                 longitude : '@longitude'
             }
         );
+    }
+])
+
+.factory('LoadingService', [
+    '$ionicLoading',
+    function($ionicLoading) {
+        return {
+            load: function(img){
+                var template = '<img src="img/';
+
+                switch(img) {
+                    case 'geo':
+                        template += 'geolocate';
+                        break;
+
+                    default:
+                        template += 'load';
+                }
+
+                template += '.png">';
+
+                $ionicLoading.show({
+                    template: template
+                });
+            },
+            endLoad: function() {
+                $ionicLoading.hide();
+            }
+        }
     }
 ])

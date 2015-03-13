@@ -17,6 +17,7 @@
   "cordovaPlugins": [
     "org.apache.cordova.network-information",
     "com.rjfun.cordova.plugin.admob",
-    "org.apache.cordova.geolocation"
+    "org.apache.cordova.geolocation",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator"
   ]
 }
