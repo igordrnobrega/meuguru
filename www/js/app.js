@@ -13,15 +13,14 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 	}
 ])
 
-.config(['$stateProvider', '$urlRouterProvider',
-	function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider',
+	function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+		$ionicConfigProvider.backButton.previousTitleText(false);
+		$ionicConfigProvider.backButton.text('');
+		$ionicConfigProvider.navBar.alignTitle('center');
 
 		$stateProvider
-		.state('home', {
-			url: '/',
-			templateUrl: 'template/home.html',
-			controller: 'HomeCtrl'
-		})
 
 		.state('index', {
 			url: '/index',
@@ -149,6 +148,6 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 			}
 		})
 
-	  $urlRouterProvider.otherwise('/')
+	  $urlRouterProvider.otherwise('/index')
 	}
 ])

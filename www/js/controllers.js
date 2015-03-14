@@ -1,30 +1,24 @@
 angular.module('meuguru.controllers', [])
 
-.controller('HomeCtrl', ['$scope', '$location', '$timeout', '$ionicPlatform', '$ionicPopup',
-    function($scope, $location, $timeout, $ionicPlatform, $ionicPopup) {
+.controller('IndexCtrl', ['$timeout', '$rootScope', '$ionicPlatform', '$ionicPopup',
+    function($timeout, $rootScope, $ionicPlatform, $ionicPopup) {
         $ionicPlatform.ready(function() {
-                if(window.Connection) {
-                    if(navigator.connection.type == Connection.NONE) {
-                        $ionicPopup.confirm({
-                            title: "Internet Disconnected",
-                            content: "Não possui conexão com Internet."
-                        })
-                        .then(function(result) {
-                            ionic.Platform.exitApp();
-                        });
-                    }
+            if(window.Connection) {
+                if(navigator.connection.type == Connection.NONE) {
+                    $ionicPopup.confirm({
+                        title: "Internet Disconnected",
+                        content: "Não possui conexão com Internet."
+                    })
+                    .then(function(result) {
+                        ionic.Platform.exitApp();
+                    });
                 }
-            });
-        $timeout(function () {
-            $location.path('/index');
-        }, 1500);
-    }
-])
+            }
+        });
 
-.controller('IndexCtrl', ['$timeout',
-    function($timeout) {
         if(window.plugins && window.plugins.AdMob) {
             $timeout(function() {
+                $rootScope.ios = device.platform == "Android" ? false : true;
                 //Fazer o reconhecimento pra Android, IOS e Windows
                 var admob_key = device.platform == "Android" ? "ca-app-pub-5683228122499508/2527360279" : "IOS_PUBLISHER_KEY";
                 var admob = window.plugins.AdMob;
