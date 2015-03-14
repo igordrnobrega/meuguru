@@ -125,18 +125,18 @@ angular.module('meuguru.services', [])
     function($ionicLoading) {
         return {
             load: function(img){
-                var template = '<img src="img/';
+                var template = '<img src="img/logo-oculos.png" /><img mustache-animation ng-animate="mustache" class="bigode" src="img/logo-bigode.png" /><p>';
 
                 switch(img) {
                     case 'geo':
-                        template += 'geolocate';
+                        template += 'Localizando';
                         break;
 
                     default:
-                        template += 'load';
+                        template += 'Carregando';
                 }
 
-                template += '.png">';
+                template += '</p>';
 
                 $ionicLoading.show({
                     template: template

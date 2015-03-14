@@ -8,6 +8,7 @@
       Igor Nóbrega
     </author>
   <content src="index.html"/>
+  <access origin="*"/>
   <access origin="*" launch-external="yes" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
@@ -17,8 +18,11 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <platform name="android">
-
     <icon src="icons/android/launcher-48x48px-android.png" width="48" height="48" />
+  </platform>
 
+  <platform name="ios">
+    <icon src="icons/ios/launcher-48x48px-ios.png" width="76" height="76" />
+    <icon src="icons/ios/launcher-48x48px-ios.png" width="152" height="152" />
   </platform>
 </widget>
