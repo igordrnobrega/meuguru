@@ -7,7 +7,10 @@ angular.module('meuguru.services', [])
         var eventos         = [],
             fornecedores    = [],
             pavilhoes       = [],
-            produtos        = [];
+            produtos        = [],
+            noticias        = [],
+            servicos        = [],
+            estandes        = [];
         var url = "http://prod.igor-teste.61bits.com.br/";
         return {
             getEventos: function($scope) {
@@ -101,6 +104,75 @@ angular.module('meuguru.services', [])
                         })
                 }
                 $scope.produtos = produtos;
+            },
+            getNoticias: function($scope) {
+
+                if(noticias.length == 0) {
+                    LoadingService.load();
+                    $http.get(url + 'noticias', {responseType: 'json'})
+                        .success(function(data, status, headers, config) {
+                            noticias = data;
+                            $scope.allNoticias = data;
+                            $scope.noticias = data.splice(0,15);
+                            for (var i = $scope.noticias.length - 1; i >= 0; i--) {
+                                $scope.allNoticias.unshift($scope.noticias[i]);
+                            };
+                            $scope.load = false;
+                            $scope.moredata = false;
+                            LoadingService.endLoad();
+                            return;
+                        })
+                        .error(function() {
+
+                        })
+                }
+                $scope.noticias = noticias;
+            },
+            getServicos: function($scope) {
+
+                if(servicos.length == 0) {
+                    LoadingService.load();
+                    $http.get(url + 'servicos', {responseType: 'json'})
+                        .success(function(data, status, headers, config) {
+                            servicos = data;
+                            $scope.allServicos = data;
+                            $scope.servicos = data.splice(0,15);
+                            for (var i = $scope.servicos.length - 1; i >= 0; i--) {
+                                $scope.allServicos.unshift($scope.servicos[i]);
+                            };
+                            $scope.load = false;
+                            $scope.moredata = false;
+                            LoadingService.endLoad();
+                            return;
+                        })
+                        .error(function() {
+
+                        })
+                }
+                $scope.servicos = servicos;
+            },
+            getEstandes: function($scope) {
+
+                if(estandes.length == 0) {
+                    LoadingService.load();
+                    $http.get(url + 'estandes', {responseType: 'json'})
+                        .success(function(data, status, headers, config) {
+                            estandes = data;
+                            $scope.allEstandes = data;
+                            $scope.estandes = data.splice(0,15);
+                            for (var i = $scope.estandes.length - 1; i >= 0; i--) {
+                                $scope.allEstandes.unshift($scope.estandes[i]);
+                            };
+                            $scope.load = false;
+                            $scope.moredata = false;
+                            LoadingService.endLoad();
+                            return;
+                        })
+                        .error(function() {
+
+                        })
+                }
+                $scope.estandes = estandes;
             }
         }
 

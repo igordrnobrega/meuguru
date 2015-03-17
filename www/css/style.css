@@ -85,6 +85,11 @@ body {
     	margin-bottom: 10px;
     }
 
+        .listar .list .item .thumb.estande {
+            height: 120px;
+            width: 160px;
+        }
+
     .listar-evento .list .item .thumb {
   		height: 90px;
     	border: 1px solid #c1c1c1;
@@ -95,8 +100,8 @@ body {
 
     .listar .list .item i.ion-chevron-right {
         right: -2px;
-        top: -83px;
-        font-size: 30px;
+        top: -33%;
+        font-size: 22px;
         color: #1b3d6e;
 
 	}
@@ -116,6 +121,14 @@ body {
   		margin-left: 5px;
 	}
 
+        .listar .list .item h1.noticia-h1 {
+            color: #808080;
+        }
+
+        .listar .list .item h1.estande {
+            width: 33%;
+        }
+
 	.listar-evento .list .item h1 {
 		width: 52%;
 		margin-left: 10px;
@@ -129,6 +142,17 @@ body {
 	.listar-evento .list .item p {
 		color: #1b3d6e;
 	}
+
+    .listar .list .item p.estande {
+        display: inline-block;
+        width: 40%;
+        overflow: initial;
+        text-overflow: initial;
+        white-space: initial;
+        word-break: break-word;
+    }
+
+
 
 	.listar .list .item p span,
 	.listar-evento .list .item p span {
@@ -156,7 +180,7 @@ body {
 	}
 
 	.menu .list {
-		margin-top: 43px;
+		margin-top: 44px;
 	}
 
 		.menu .list a,
@@ -244,6 +268,11 @@ label.item.item-input.item-floating-label,
     color: #1b3d6e;
     opacity: 1;
 }
+
+    .tab-item.tab-item-right {
+        position: absolute;
+        right: 5%;
+    }
 
 button.button.back-button.hide.buttons.button.icon.button-clear.ion-chevron-left.header-item {
     margin-left: 6px;
@@ -525,4 +554,12 @@ only screen and (min-device-pixel-ratio : 1.5) {
 .ios div.title.title-center.header-item {
     display: none;
     line-height: 64px;
+}
+
+.ios ion-header-bar.menu-title-bar.bar.bar-header.disable-user-behavior.has-tabs-top {
+    line-height: 64px;
+}
+
+.ios ion-header-bar.menu-title-bar.bar.bar-header.disable-user-behavior.has-tabs-top + .menu .list {
+    margin-top: 64px;
 }

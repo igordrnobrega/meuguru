@@ -16,10 +16,10 @@
 				<p><i class="icon ion-ios-world"></i><span><a href="{{ produto.loja.siteLoja }}">{{ produto.loja.siteLoja ? produto.loja.siteLoja : '-' }}</a></span></p>
 			</ion-item>
 
-<!-- 			<ion-item class="detail">
+			<ion-item class="detail">
 				<h2>Descrição</h2>
-				<p>{{ produto._yoast_wpseo_metadesc ? produto._yoast_wpseo_metadesc : 'Sem descrição.' }}</p>
-			</ion-item> -->
+				<p>{{ produto.post_content ? produto.post_content : 'Sem descrição.' }}</p>
+			</ion-item>
 		</ion-list>
 	</ion-content>
 

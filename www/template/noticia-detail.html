@@ -1,0 +1,23 @@
+<ion-view view-title="Notícia">
+
+    <ion-nav-buttons side="right">
+      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Notícia', noticia.ID)"></button>
+    </ion-nav-buttons>
+
+    <ion-content id="index" data-has-bouncing="false">
+
+        <ion-list class="listar-evento">
+            <ion-item>
+                <div class="thumb" style="background:url({{ noticia.guid ? noticia.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 class="noticia-h1">{{ noticia.post_date | date:'dd/MM/yyyy' }}</h1>
+                <h1 class="noticia-title">{{ noticia.post_title }}</h1>
+            </ion-item>
+
+            <ion-item class="detail">
+                <h2>Descrição</h2>
+                <p>{{ noticia._yoast_wpseo_metadesc }}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

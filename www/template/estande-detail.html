@@ -1,0 +1,27 @@
+<ion-view view-title="Estande">
+
+    <ion-nav-buttons side="right">
+      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Projeto de Estande', estande.ID)"></button>
+    </ion-nav-buttons>
+
+    <ion-content id="index" data-has-bouncing="false">
+
+        <ion-list class="listar-evento">
+            <ion-item>
+                <div class="thumb" style="background:url({{ estande.guid ? estande.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 class="{{ estande.post_title.length >= 38 ? 'small-font' : '' }}">{{ estande.post_title }}</h1>
+                <p><i class="icon ion-person"></i><span>Arquiteto - {{ estande.arquitetoProjeto }}</span></p>
+                <p><i class="icon ion-home"></i><span>Montadora - {{ estande.montadoraProjeto }}</span></p>
+                <p><i class="icon ion-ios-location"></i><span>{{ estande.ruaProjeto + ', ' + estande.numeroProjeto + ' | CEP ' + estande.cepProjeto + '-' + estande.bairroProjeto + '/' + estande.estadoProjeto }}</span></p>
+                <p><i class="icon ion-ios-telephone"></i><span>{{ estande.telefoneProjeto ? estande.telefoneProjeto : '-' }}</span></p>
+                <p><i class="icon ion-ios-world"></i><span><a href="{{ estande.siteProjeto }}">{{ estande.siteProjeto ? estande.siteProjeto : '-' }}</a></span></p>
+            </ion-item>
+
+            <ion-item class="detail">
+                <h2>Descrição</h2>
+                <p ng-bind-html="estande.post_content ? estande.post_content : 'Sem descrição.'"></p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

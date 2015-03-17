@@ -1,4 +1,4 @@
-angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services' ,'ngResource'])
+angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource'])
 
 .run(['$ionicPlatform',
 	function($ionicPlatform) {
@@ -97,6 +97,16 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 			views: {
 				'tab': {
 					templateUrl: 'template/servicos.html',
+					controller: 'ServicosCtrl'
+				}
+			}
+		})
+		.state('tab.servico', {
+			url: '/servico/:servicoId',
+			views: {
+				'tab': {
+					templateUrl: 'template/servico-detail.html',
+					controller: 'ServicoCtrl'
 				}
 			}
 		})
@@ -125,6 +135,16 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 			views: {
 				'tab': {
 					templateUrl: 'template/noticias.html',
+					controller: 'NoticiasCtrl'
+				}
+			}
+		})
+		.state('tab.noticia', {
+			url: '/noticia/:noticiaId',
+			views: {
+				'tab': {
+					templateUrl: 'template/noticia-detail.html',
+					controller: 'NoticiaCtrl'
 				}
 			}
 		})
@@ -134,6 +154,16 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 			views: {
 				'tab': {
 					templateUrl: 'template/estandes.html',
+					controller: 'EstandesCtrl'
+				}
+			}
+		})
+		.state('tab.estande', {
+			url: '/estande/:estandeId',
+			views: {
+				'tab': {
+					templateUrl: 'template/estande-detail.html',
+					controller: 'EstandeCtrl'
 				}
 			}
 		})

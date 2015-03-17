@@ -14,33 +14,32 @@ angular.module('meuguru.controllers', [])
                     });
                 }
             }
+            if(window.plugins && window.plugins.AdMob) {
+                $timeout(function() {
+                    //Fazer o reconhecimento pra Android, IOS e Windows
+                    var admob_key = device.platform == "Android" ? "ca-app-pub-5683228122499508/2527360279" : "IOS_PUBLISHER_KEY";
+                    var admob = window.plugins.AdMob;
+                    admob.createBannerView(
+                    {
+                        'publisherId': admob_key,
+                        'adSize': admob.AD_SIZE.BANNER,
+                        'bannerAtTop': false
+                    },
+                    function() {
+                        admob.requestAd(
+                            { 'isTesting': true },
+                            function() {
+                                admob.showAd(true);
+                            },
+                            function() { console.log('failed to request ad'); }
+                        );
+                    },
+                    function() { console.log('failed to create banner view'); }
+                    );
+                }, 2000);
+            }
         });
 
-        if(window.plugins && window.plugins.AdMob) {
-            $timeout(function() {
-                $rootScope.ios = device.platform == "Android" ? false : true;
-                //Fazer o reconhecimento pra Android, IOS e Windows
-                var admob_key = device.platform == "Android" ? "ca-app-pub-5683228122499508/2527360279" : "IOS_PUBLISHER_KEY";
-                var admob = window.plugins.AdMob;
-                admob.createBannerView(
-                {
-                    'publisherId': admob_key,
-                    'adSize': admob.AD_SIZE.BANNER,
-                    'bannerAtTop': false
-                },
-                function() {
-                    admob.requestAd(
-                        { 'isTesting': true },
-                        function() {
-                            admob.showAd(true);
-                        },
-                        function() { console.log('failed to request ad'); }
-                    );
-                },
-                function() { console.log('failed to create banner view'); }
-                );
-            }, 2000);
-        }
     }
 ])
 
@@ -373,6 +372,192 @@ angular.module('meuguru.controllers', [])
             for (var i = $scope.produtos.length - 1; i >= 0; i--) {
                 if($scope.produtos[i]['ID'] == id) {
                     $scope.produto = $scope.produtos[i];
+                }
+            };
+        });
+    }
+])
+
+.controller('ServicosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
+        function($scope, $ionicPopup, MeuGuruService) {
+            $scope.load = true;
+            $scope.moredata = true;
+            var currentStart = 15;
+            MeuGuruService.getServicos($scope);
+
+            $scope.filtro = {}
+            $scope.showPopup = function() {
+
+                var myPopup = $ionicPopup.show({
+                    templateUrl: 'template/modal/filtro-servico.html',
+                    title: 'Filtrar Serviços',
+                    scope: $scope,
+                    buttons: [
+                        {
+                            text: 'Limpar filtros',
+                            onTap: function(e) {
+                                return $scope.filtro = {}
+                            }
+                        },
+                        {
+                            text: '<b>Aplicar</b>',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                return $scope.filtro;
+                            }
+                        }
+                    ]
+                });
+            };
+
+            $scope.loadMore = function() {
+                if($scope.servicos.length !== $scope.allServicos.length) {
+                    for (var i = currentStart; i < currentStart + 15; i++) {
+                        $scope.servicos.push($scope.allServicos[i]);
+                    };
+                    currentStart+=15;
+                } else {
+                    $scope.moredata = true;
+                }
+                $scope.$apply();
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            };
+
+        }
+])
+.controller('ServicoCtrl',  ['$scope', '$stateParams', 'MeuGuruService',
+    function($scope, $stateParams, MeuGuruService) {
+        var id = $stateParams.servicoId;
+        MeuGuruService.getServicos($scope);
+
+        $scope.$watch('servicos', function() {
+            for (var i = $scope.servicos.length - 1; i >= 0; i--) {
+                if($scope.servicos[i]['ID'] == id) {
+                    $scope.servico = $scope.servicos[i];
+                }
+            };
+        });
+    }
+])
+
+.controller('NoticiasCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
+        function($scope, $ionicPopup, MeuGuruService) {
+            $scope.load = true;
+            $scope.moredata = true;
+            var currentStart = 15;
+            MeuGuruService.getNoticias($scope);
+
+            $scope.filtro = {}
+            $scope.showPopup = function() {
+
+                var myPopup = $ionicPopup.show({
+                    templateUrl: 'template/modal/filtro-noticia.html',
+                    title: 'Filtrar Notícias',
+                    scope: $scope,
+                    buttons: [
+                        {
+                            text: 'Limpar filtros',
+                            onTap: function(e) {
+                                return $scope.filtro = {}
+                            }
+                        },
+                        {
+                            text: '<b>Aplicar</b>',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                return $scope.filtro;
+                            }
+                        }
+                    ]
+                });
+            };
+
+            $scope.loadMore = function() {
+                if($scope.noticias.length !== $scope.allNoticias.length) {
+                    for (var i = currentStart; i < currentStart + 15; i++) {
+                        $scope.noticias.push($scope.allNoticias[i]);
+                    };
+                    currentStart+=15;
+                } else {
+                    $scope.moredata = true;
+                }
+                $scope.$apply();
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            };
+
+        }
+])
+.controller('NoticiaCtrl',  ['$scope', '$stateParams', 'MeuGuruService',
+    function($scope, $stateParams, MeuGuruService) {
+        var id = $stateParams.noticiaId;
+        MeuGuruService.getNoticias($scope);
+
+        $scope.$watch('produtos', function() {
+            for (var i = $scope.noticias.length - 1; i >= 0; i--) {
+                if($scope.noticias[i]['ID'] == id) {
+                    $scope.noticia = $scope.noticias[i];
+                }
+            };
+        });
+    }
+])
+
+.controller('EstandesCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
+        function($scope, $ionicPopup, MeuGuruService) {
+            $scope.load = true;
+            $scope.moredata = true;
+            var currentStart = 15;
+            MeuGuruService.getEstandes($scope);
+
+            $scope.filtro = {}
+            $scope.showPopup = function() {
+
+                var myPopup = $ionicPopup.show({
+                    templateUrl: 'template/modal/filtro-produto.html',
+                    title: 'Filtrar Projetos',
+                    scope: $scope,
+                    buttons: [
+                        {
+                            text: 'Limpar filtros',
+                            onTap: function(e) {
+                                return $scope.filtro = {}
+                            }
+                        },
+                        {
+                            text: '<b>Aplicar</b>',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                return $scope.filtro;
+                            }
+                        }
+                    ]
+                });
+            };
+
+            $scope.loadMore = function() {
+                if($scope.estandes.length !== $scope.allEstandes.length) {
+                    for (var i = currentStart; i < currentStart + 15; i++) {
+                        $scope.estandes.push($scope.allEstandes[i]);
+                    };
+                    currentStart+=15;
+                } else {
+                    $scope.moredata = true;
+                }
+                $scope.$apply();
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            };
+
+        }
+])
+.controller('EstandeCtrl',  ['$scope', '$stateParams', 'MeuGuruService',
+    function($scope, $stateParams, MeuGuruService) {
+        var id = $stateParams.estandeId;
+        MeuGuruService.getEstandes($scope);
+
+        $scope.$watch('estandes', function() {
+            for (var i = $scope.estandes.length - 1; i >= 0; i--) {
+                if($scope.estandes[i]['ID'] == id) {
+                    $scope.estande = $scope.estandes[i];
                 }
             };
         });

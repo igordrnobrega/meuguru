@@ -1,7 +1,24 @@
 <ion-view view-title="Estandes">
+
+    <div class="tabs tabs-top tabs-icon-left filtro-bar">
+        <a class="tab-item tab-item-right" data-ng-click="showPopup()">
+            <i class="icon ion-funnel"></i>
+            Filtrar
+        </a>
+    </div>
+
     <ion-content id="index" data-has-bouncing="false">
 
-        <img class="manutencao" src="img/manutencao-meu-guru.jpg">
+        <ion-list class="listar" data-ng-if="!load">
+          <ion-item class="item-icon-right" data-ng-repeat="estande in estandes track by estande.ID" href="#/tab/estande/{{ estande.ID }}">
+                <div class="thumb estande" style="background:url({{ estande.guid ? estande.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 class="estande">{{ estande.post_title }}</h1>
+                <p class="estande">Arquiteto:<span>{{ estande.arquitetoProjeto }}</span></p>
+                <i class="icon ion-chevron-right"></i>
+          </ion-item>
+        </ion-list>
+
+        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
 
     </ion-content>
 
