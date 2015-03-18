@@ -10,7 +10,7 @@
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-ng-repeat="estande in estandes track by estande.ID" href="#/tab/estande/{{ estande.ID }}">
+          <ion-item class="item-icon-right" data-ng-repeat="estande in estandes | filtraPalavraChave:filtro.palavra:estandes | filtraCategoria:filtro.categoria:estandes | filtraCategoria:filtro.posicao:estandes " href="#/tab/estande/{{ estande.ID }}">
                 <div class="thumb estande" style="background:url({{ estande.guid ? estande.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
                 <h1 class="estande">{{ estande.post_title }}</h1>
                 <p class="estande">Arquiteto:<span>{{ estande.arquitetoProjeto }}</span></p>
@@ -18,8 +18,7 @@
           </ion-item>
         </ion-list>
 
-        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
-
+        <!-- <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll> -->
     </ion-content>
 
 </ion-view>

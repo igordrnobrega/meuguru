@@ -10,7 +10,7 @@
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-ng-repeat="servico in servicos" href="#/tab/servico/{{ servico.ID }}">
+          <ion-item class="item-icon-right" data-ng-repeat="servico in servicos | filtraCategoria:filtro.categoria:allServicos | filtraEstado:filtro.estado:3:allServicos | filtraCidade:filtro.cidade:3:allServicos " href="#/tab/servico/{{ servico.ID }}">
                 <div class="thumb" style="background:url({{ servico.guid ? servico.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
                 <h1 class="{{ servico.post_title.length >= 38 ? 'small-font' : '' }}">{{ servico.post_title }}</h1>
                 <p>Endereço:<span>{{ servico.ruaServico + ', ' + servico.numeroServico + ' | CEP ' + servico.cepServico + '-' + servico.bairroServico + '/' + servico.estadoServico }}</span></p>
@@ -23,5 +23,3 @@
     </ion-content>
 
 </ion-view>
-
- <!-- | filtraNome:filtro.nome | filtraEstado:filtro.estado:1:allServicos | filtraSegmento:filtro.segmento | filtraData:filtro.data | filtraPavilhao:filtro.pavilhao | filtraPromotor:filtro.promotor -->

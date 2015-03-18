@@ -10,12 +10,12 @@
             <ion-item>
                 <div class="thumb" style="background:url({{ noticia.guid ? noticia.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
                 <h1 class="noticia-h1">{{ noticia.post_date | date:'dd/MM/yyyy' }}</h1>
-                <h1 class="noticia-title">{{ noticia.post_title }}</h1>
+                <h2 class="noticia-title">{{ noticia.post_title }}</h2>
+                <p class="noticia-header">{{ (noticia._yoast_wpseo_focuskw).length >= 10 ? noticia._yoast_wpseo_focuskw : '' }}</p>
             </ion-item>
 
             <ion-item class="detail">
-                <h2>Descrição</h2>
-                <p>{{ noticia._yoast_wpseo_metadesc }}</p>
+                <p class="noticia-body">{{ noticia._yoast_wpseo_metadesc }}</p>
             </ion-item>
         </ion-list>
     </ion-content>

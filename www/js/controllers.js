@@ -17,7 +17,7 @@ angular.module('meuguru.controllers', [])
             if(window.plugins && window.plugins.AdMob) {
                 $timeout(function() {
                     //Fazer o reconhecimento pra Android, IOS e Windows
-                    var admob_key = device.platform == "Android" ? "ca-app-pub-5683228122499508/2527360279" : "IOS_PUBLISHER_KEY";
+                    var admob_key = device.platform == "Android" ? "ca-app-pub-9472655871356402/6350910973" : "ca-app-pub-9472655871356402/9304377372";
                     var admob = window.plugins.AdMob;
                     admob.createBannerView(
                     {
@@ -288,7 +288,6 @@ angular.module('meuguru.controllers', [])
             $scope.loadMore = function() {
                 if($scope.pavilhoes.length !== $scope.allPavilhoes.length) {
                     for (var i = currentStart; i < currentStart + 15; i++) {
-                        console.log($scope.allPavilhoes[i]);
                         $scope.pavilhoes.push($scope.allPavilhoes[i]);
                     };
                     currentStart+=15;
@@ -513,8 +512,8 @@ angular.module('meuguru.controllers', [])
             $scope.showPopup = function() {
 
                 var myPopup = $ionicPopup.show({
-                    templateUrl: 'template/modal/filtro-produto.html',
-                    title: 'Filtrar Projetos',
+                    templateUrl: 'template/modal/filtro-estande.html',
+                    title: 'Filtrar Estandes',
                     scope: $scope,
                     buttons: [
                         {

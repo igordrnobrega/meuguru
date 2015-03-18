@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
 body {
-	font-family: 'Roboto', sans-serif !important;
+	font-family: 'Roboto Regular', sans-serif !important;
 	background-color: #1b3d6e;
 }
 
@@ -121,6 +121,7 @@ body {
   		margin-left: 5px;
 	}
 
+        .listar-evento .list .item h1.noticia-h1,
         .listar .list .item h1.noticia-h1 {
             color: #808080;
         }
@@ -138,10 +139,27 @@ body {
 			font-size: 14px;
 		}
 
+    .listar-evento .list .item h2 {
+        word-break: break-word;
+        text-overflow: initial;
+        white-space: initial;
+        overflow: auto;
+        color: #1b3d6e;
+    }
+
 	.listar .list .item p,
 	.listar-evento .list .item p {
 		color: #1b3d6e;
 	}
+
+    .listar-evento .list .item p.noticia-header {
+        font-family: 'Roboto Italic' !important;
+        color: #808080;
+    }
+
+    .listar-evento .list .item p.noticia-body {
+        color: #808080;
+    }
 
     .listar .list .item p.estande {
         display: inline-block;

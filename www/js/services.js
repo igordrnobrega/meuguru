@@ -67,7 +67,7 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             pavilhoes = data;
                             $scope.allPavilhoes = data;
-                            $scope.pavilhoes = data.splice(0,15);
+                            $scope.pavilhoes = data.splice(0,LOAD_INICIAL);
                             for (var i = $scope.pavilhoes.length - 1; i >= 0; i--) {
                                 $scope.allPavilhoes.unshift($scope.pavilhoes[i]);
                             };
@@ -90,7 +90,7 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             produtos = data;
                             $scope.allProdutos = data;
-                            $scope.produtos = data.splice(0,15);
+                            $scope.produtos = data.splice(0,LOAD_INICIAL);
                             for (var i = $scope.produtos.length - 1; i >= 0; i--) {
                                 $scope.allProdutos.unshift($scope.produtos[i]);
                             };
@@ -113,7 +113,7 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             noticias = data;
                             $scope.allNoticias = data;
-                            $scope.noticias = data.splice(0,15);
+                            $scope.noticias = data.splice(0,LOAD_INICIAL);
                             for (var i = $scope.noticias.length - 1; i >= 0; i--) {
                                 $scope.allNoticias.unshift($scope.noticias[i]);
                             };
@@ -136,7 +136,7 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             servicos = data;
                             $scope.allServicos = data;
-                            $scope.servicos = data.splice(0,15);
+                            $scope.servicos = data.splice(0,LOAD_INICIAL);
                             for (var i = $scope.servicos.length - 1; i >= 0; i--) {
                                 $scope.allServicos.unshift($scope.servicos[i]);
                             };
@@ -158,11 +158,12 @@ angular.module('meuguru.services', [])
                     $http.get(url + 'estandes', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
                             estandes = data;
-                            $scope.allEstandes = data;
-                            $scope.estandes = data.splice(0,15);
-                            for (var i = $scope.estandes.length - 1; i >= 0; i--) {
-                                $scope.allEstandes.unshift($scope.estandes[i]);
-                            };
+                            $scope.estandes = data;
+                            // $scope.allEstandes = data;
+                            // $scope.estandes = data.splice(0,LOAD_INICIAL);
+                            // for (var i = $scope.estandes.length - 1; i >= 0; i--) {
+                            //     $scope.allEstandes.unshift($scope.estandes[i]);
+                            // };
                             $scope.load = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();

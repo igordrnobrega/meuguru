@@ -1,20 +1,36 @@
 angular.module('meuguru.filters', [])
 
 .filter('filtraNome', function () {
-	return function (items, nome) {
-
+	return function (items, nome, all) {
 		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('post_title')){
-				if (item['post_title'].indexOf(nome) > -1) {
-					filtered.push(item);
+
+		var _filtra = function(items) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(
+					item.hasOwnProperty('post_title') &&
+					typeof nome != 'undefined'
+				){
+					var post_title = item['post_title'].toLowerCase();
+					if (post_title.indexOf(nome.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
 
+		_filtra(items);
+
 		if(typeof nome == 'undefined'){
 			filtered = items;
+		}
+
+		if(
+			filtered.length == 0 &&
+			typeof all != 'undefined'
+		) {
+			console.log('this');
+			_filtra(all);
 		}
 
 		return filtered;
@@ -47,6 +63,9 @@ angular.module('meuguru.filters', [])
 			case 2:
 				property = 'estadoPavilhao';
 				break;
+			case 3:
+				property = 'estadoServico';
+				break;
 			default:
 				property = 'estado';
 				break;
@@ -70,51 +89,49 @@ angular.module('meuguru.filters', [])
 })
 
 .filter('filtraCidade', function () {
-	return function (items, cidade, tipo) {
+	return function (items, cidade, tipo, all) {
+		var property,
+			filtered = [];
 
-		var property;
+		var _filtra = function(property, items) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(
+					item.hasOwnProperty(property) &&
+					typeof cidade != 'undefined'
+				){
+					var city = item[property].toLowerCase();
+					if (city.indexOf(cidade.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
+				}
+			}
+		}
+
 		switch(tipo) {
 			case 2:
 				property = 'cidadePavilhao';
 				break;
+			case 3:
+				property = 'cidadeServico';
+				break;
 			default:
-				property = 'estado';
+				property = 'cidade';
 				break;
 		}
 
-		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty(property)){
-				if (item[property].indexOf(cidade) > -1) {
-					filtered.push(item);
-				}
-			}
-		}
+		_filtra(property, items);
+
 
 		if(typeof cidade == 'undefined'){
 			filtered = items;
 		}
 
-		return filtered;
-	};
-})
-
-.filter('filtraSegmento', function () {
-	return function (items, segmento) {
-
-		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('name')){
-				if (item['name'].indexOf(segmento) > -1) {
-					filtered.push(item);
-				}
-			}
-		}
-
-		if(typeof segmento == 'undefined'){
-			filtered = items;
+		if(
+			filtered.length == 0 &&
+			typeof all != 'undefined'
+		) {
+			_filtra(property, all);
 		}
 
 		return filtered;
@@ -122,20 +139,35 @@ angular.module('meuguru.filters', [])
 })
 
 .filter('filtraPromotor', function () {
-	return function (items, promotor) {
-
+	return function (items, promotor, all) {
 		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('promotorFeira')){
-				if (item['promotorFeira'].indexOf(promotor) > -1) {
-					filtered.push(item);
+
+		var _filtra = function(items) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(
+					item.hasOwnProperty('promotorFeira') &&
+					typeof promotor != 'undefined'
+				){
+					var prom = item['promotorFeira'].toLowerCase();
+					if (prom.indexOf(promotor.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
 
+		_filtra(items);
+
 		if(typeof promotor == 'undefined'){
 			filtered = items;
+		}
+
+		if(
+			filtered.length == 0 &&
+			typeof all != 'undefined'
+		) {
+			_filtra(all);
 		}
 
 		return filtered;
@@ -143,20 +175,35 @@ angular.module('meuguru.filters', [])
 })
 
 .filter('filtraPavilhao', function () {
-	return function (items, pavilhao) {
-
+	return function (items, pavilhao, all) {
 		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('pavilhaoFeira')){
-				if (item['pavilhaoFeira'].indexOf(pavilhao) > -1) {
-					filtered.push(item);
+
+		var _filtra = function(items) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(
+					item.hasOwnProperty('pavilhaoFeira') &&
+					typeof pavilhao != 'undefined'
+				){
+					var pav = item['pavilhaoFeira'].toLowerCase()
+					if (pav.indexOf(pavilhao.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
 
+		_filtra(items);
+
 		if(typeof pavilhao == 'undefined'){
 			filtered = items;
+		}
+
+		if(
+			filtered.length == 0 &&
+			typeof all != 'undefined'
+		) {
+			_filtra(all);
 		}
 
 		return filtered;
@@ -187,20 +234,38 @@ angular.module('meuguru.filters', [])
 })
 
 .filter('filtraPalavraChave', function () {
-	return function (items, palavra) {
-
+	return function (items, palavra, all) {
 		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('_yoast_wpseo_metadesc')){
-				if (
-				item['_yoast_wpseo_metadesc'].indexOf(palavra) > -1 ||
-				item['post_title'].indexOf(palavra) > -1
-				) {
-					filtered.push(item);
+
+		var _filtra = function(items) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(typeof palavra != 'undefined') {
+					if(item.hasOwnProperty('_yoast_wpseo_metadesc')){
+						var meta = item['_yoast_wpseo_metadesc'].toLowerCase();
+						var title = item['post_title'].toLowerCase();
+						if (
+							meta.indexOf(palavra.toLowerCase()) > -1 ||
+							title.indexOf(palavra.toLowerCase()) > -1
+						) {
+							filtered.push(item);
+						}
+					} else if(item.hasOwnProperty('post_content')) {
+						var content = item['post_content'].toLowerCase();
+						var title = item['post_title'].toLowerCase();
+						if (
+							content.indexOf(palavra.toLowerCase()) > -1 ||
+							title.indexOf(palavra.toLowerCase()) > -1
+						) {
+							filtered.push(item);
+						}
+					} else if(item.hasOwnProperty('post_title')) {
+						var title = item['post_title'].toLowerCase();
+						if (title.indexOf(palavra.toLowerCase()) > -1) {
+							filtered.push(item);
+						}
+					}
 				}
-			} else if (item['post_title'].indexOf(palavra) > -1) {
-					filtered.push(item);
 			}
 		}
 
@@ -208,25 +273,47 @@ angular.module('meuguru.filters', [])
 			filtered = items;
 		}
 
+		if(
+			filtered.length == 0 &&
+			typeof all != 'undefined'
+		) {
+			_filtra(all);
+		}
+
 		return filtered;
 	};
 })
 
 .filter('filtraCategoria', function () {
-	return function (items, categoria) {
-
+	return function (items, categoria, all) {
 		var filtered = [];
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('name')){
-				if (item['name'].indexOf(categoria) > -1) {
-					filtered.push(item);
+
+		var _filtra = function(items) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(
+					item.hasOwnProperty('name') &&
+					typeof categoria != 'undefined'
+				){
+					var name = item['name'].toLowerCase();
+					if (name.indexOf(categoria.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
 
+		_filtra(items);
+
 		if(typeof categoria == 'undefined') {
 			filtered = items;
+		}
+
+		if(
+			filtered.length == 0 &&
+			typeof all != 'undefined'
+		) {
+			_filtra(all);
 		}
 
 		return filtered;

@@ -5,13 +5,13 @@ angular.module('meuguru.directives', [])
 		return {
 			restrict: 'A',
 			link: function ($scope, $element, $attrs) {
-				if(window.plugin) {
-					$ionicPlatform.ready(function() {
+				$ionicPlatform.ready(function() {
+					if(window.plugin) {
 						if(device.platform == "iOS") {
 							$element.addClass('ios');
 						}
-					});
-				}
+					}
+				});
 			}
 		}
 	}

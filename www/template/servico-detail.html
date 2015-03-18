@@ -17,7 +17,7 @@
 
             <ion-item class="detail">
                 <h2>Descrição</h2>
-                <p>{{ servico._yoast_wpseo_metadesc }}</p>
+                <p>{{ servico._yoast_wpseo_metadesc ? servico._yoast_wpseo_metadesc : 'Não possui descrição.' }}</p>
             </ion-item>
         </ion-list>
     </ion-content>
