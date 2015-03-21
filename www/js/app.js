@@ -1,7 +1,7 @@
 angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource'])
 
-.run(['$ionicPlatform',
-	function($ionicPlatform) {
+.run(['$rootScope', '$ionicPlatform',
+	function($rootScope, $ionicPlatform) {
 		$ionicPlatform.ready(function() {
 			if(window.cordova && window.cordova.plugins.Keyboard) {
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -10,6 +10,17 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 				StatusBar.styleDefault();
 			}
 		});
+
+		$rootScope.checkImg = function(url) {
+			if(
+				url.indexOf('.png') > 1 ||
+				url.indexOf('.jpg') > 1
+			) {
+				return true;
+			}
+
+			return false;
+		};
 	}
 ])
 

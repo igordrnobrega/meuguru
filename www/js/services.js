@@ -212,7 +212,8 @@ angular.module('meuguru.services', [])
                 template += '</p>';
 
                 $ionicLoading.show({
-                    template: template
+                    template: template,
+                    hideOnStateChange: true
                 });
             },
             endLoad: function() {
