@@ -6,19 +6,19 @@
 
 	<ion-content id="index" data-has-bouncing="false">
 
-		<ion-list class="listar-evento">
+		<ion-list data-bindonce="produto" class="listar-evento">
 			<ion-item>
-				<div class="thumb" style="background:url({{ produto.guid ? produto.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
-				<h1 class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}">{{ produto.post_title }}</h1>
-				<p><i class="icon ion-home"></i><span>{{ produto.NomedaLoja }}</span></p>
+				<div class="thumb" style="background:url({{ checkImg(produto.guid) ? produto.guid : 'img/no-photo.png' }});"></div>
+				<h1 bo-class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="produto.post_title" ></h1>
+				<p><i class="icon ion-home"></i><span bo-html="produto.NomedaLoja" ></span></p>
 				<p><i class="icon ion-ios-location"></i><span>{{ produto.loja.ruaLoja + ', ' + produto.loja.cepLoja + ' - ' + produto.loja.cidadeLoja + '/' + produto.loja.estadoLoja }}</span></p>
-				<p><i class="icon ion-ios-telephone"></i><span>{{ produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-' }}</span></p>
-				<p><i class="icon ion-ios-world"></i><span><a href="{{ produto.loja.siteLoja }}">{{ produto.loja.siteLoja ? produto.loja.siteLoja : '-' }}</a></span></p>
+				<p><i class="icon ion-ios-telephone"></i><span bo-html="produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-'" ></span></p>
+				<p><i class="icon ion-ios-world"></i><span><a bo-href="produto.loja.siteLoja" bo-html="produto.loja.siteLoja ? produto.loja.siteLoja : '-'" ></a></span></p>
 			</ion-item>
 
 			<ion-item class="detail">
 				<h2>Descrição</h2>
-				<p class="noticia-body">{{ produto.post_content ? produto.post_content : 'Sem descrição.' }}</p>
+				<p class="noticia-body" bo-html="produto.post_content ? produto.post_content : 'Sem descrição.'" ></p>
 			</ion-item>
 		</ion-list>
 	</ion-content>

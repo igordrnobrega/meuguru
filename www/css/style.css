@@ -83,6 +83,9 @@ body {
     	border: 1px solid #c1c1c1;
     	display: inline-block;
     	margin-bottom: 10px;
+        background-size: auto 100% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
 
         .listar .list .item .thumb.estande {
@@ -96,6 +99,9 @@ body {
     	display: inline-block;
   		width: 44%;
   		margin-bottom: 20px;
+        background-size: auto 100% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
 
     .listar .list .item i.ion-chevron-right {
@@ -180,10 +186,7 @@ body {
 
 	.listar-evento .list .item p span {
 		margin-left: 14px;
-	}
-
-	.listar-evento .list .item p span {
-		margin-left: 14px;
+          white-space: initial;
 	}
 
 	.listar-evento .list .detail p,
@@ -580,4 +583,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
 
 .ios ion-header-bar.menu-title-bar.bar.bar-header.disable-user-behavior.has-tabs-top + .menu .list {
     margin-top: 64px;
+}
+
+b {
+    font-weight: normal !important;
 }

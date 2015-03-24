@@ -12,7 +12,7 @@
 
 		<ion-list class="listar" data-ng-if="!load">
 			<ion-item class="item-icon-right" data-bindonce="pavilhoes" data-ng-repeat="pavilhao in pavilhoes | filtrarPavilhao:filtro:allPavilhoes" href="#/tab/pavilhao/{{ pavilhao.ID }}">
-				<div class="thumb" style="background:url({{ checkImg(pavilhao.guid) ? pavilhao.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+				<div class="thumb" style="background:url({{ checkImg(pavilhao.guid) ? pavilhao.guid : 'img/no-photo.png' }});"></div>
 				<h1 bo-class="{{ pavilhao.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="pavilhao.post_title"></h1>
 				<p>Estado:<span bo-html="pavilhao.estadoPavilhao ? pavilhao.estadoPavilhao : '-'"></span></p>
 				<p>Cidade:<span bo-html="pavilhao.cidadePavilhao ? pavilhao.cidadePavilhao : '-'"></span></p>

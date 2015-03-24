@@ -11,7 +11,7 @@
 
         <ion-list class="listar" data-ng-if="!load">
           <ion-item class="item-icon-right" data-bindonce="estandes" data-ng-repeat="estande in estandes | filtrarEstande:filtro:allEstandes" href="#/tab/estande/{{ estande.ID }}">
-                <div class="thumb estande" style="background:url({{ checkImg(estande.guid) ? estande.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <div class="thumb estande" style="background:url({{ checkImg(estande.guid) ? estande.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="estande" bo-html="estande.post_title"></h1>
                 <p class="estande">Arquiteto:<span bo-html="estande.arquitetoProjeto"></span></p>
                 <i class="icon ion-chevron-right"></i>

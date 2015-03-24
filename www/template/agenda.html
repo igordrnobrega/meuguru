@@ -15,7 +15,7 @@
 
         <ion-list class="listar" data-ng-if="!load">
           <ion-item class="item-icon-right" data-bindonce="eventos" data-ng-repeat="evento in eventos | filtrarEvento:filtro:allEventos" href="#/tab/evento/{{ evento.ID }}">
-                <div class="thumb" style="background:url({{ checkImg(evento.guid) ? evento.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <div class="thumb" style="background:url({{ checkImg(evento.guid) ? evento.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="evento.post_title"></h1>
                 <p>Data:<span bo-html="evento.dataInicial ? evento.dataInicial : '-'"></span></p>
                 <p>Segmento:<span bo-html="evento.name ? evento.name : '-'"></span></p>

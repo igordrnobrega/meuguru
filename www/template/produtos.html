@@ -11,7 +11,7 @@
 
         <ion-list class="listar" data-ng-if="!load">
             <ion-item class="item-icon-right" data-bindonce="produtos" data-ng-repeat="produto in produtos | filtrarProduto:filtro:allProdutos" href="#/tab/produto/{{ produto.ID }}">
-                <div class="thumb" style="background:url({{ checkImg(produto.guid) ? produto.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <div class="thumb" style="background:url({{ checkImg(produto.guid) ? produto.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="produto.post_title"></h1>
                 <p>Empresa:<span bo-html="produto.NomedaLoja ? produto.NomedaLoja : '-'"></span></p>
                 <p>Telefone:<span bo-html="produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-'"></span></p>

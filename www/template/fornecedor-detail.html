@@ -6,18 +6,18 @@
 
 	<ion-content id="index" data-has-bouncing="false">
 
-		<ion-list class="listar-evento">
+		<ion-list data-bindonce="fornecedor" class="listar-evento">
 			<ion-item>
-				<div class="thumb" style="background:url({{ fornecedor.guid ? fornecedor.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
-				<h1 class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}">{{ fornecedor.post_title }}</h1>
+				<div class="thumb" style="background:url({{ checkImg(fornecedor.guid) ? fornecedor.guid : 'img/no-photo.png' }});"></div>
+				<h1 bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
 				<p><i class="icon ion-ios-location"></i><span>{{ fornecedor.endereco ? fornecedor.endereco : '-' }} {{ fornecedor.cidade ? fornecedor.cidade : '-' }}/{{ fornecedor.estado ? fornecedor.estado : '-' }}</span></p>
-				<p><i class="icon ion-ios-telephone"></i><span>{{ fornecedor.telefone ? fornecedor.telefone : '-' }}</span></p>
-				<p><i class="icon ion-ios-world"></i><span><a href="{{ fornecedor.siteFeira }}">{{ fornecedor.site ? fornecedor.site : '-' }}</a></span></p>
+				<p><i class="icon ion-ios-telephone"></i><span bo-html="fornecedor.telefone ? fornecedor.telefone : '-'"></span></p>
+				<p><i class="icon ion-ios-world"></i><span><a bo-href="fornecedor.siteFeira" bo-html="fornecedor.site ? fornecedor.site : '-'"></a></span></p>
 			</ion-item>
 
 			<ion-item class="detail">
 				<h2>Descrição</h2>
-				<p>{{ fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : 'Sem descrição.' }}</p>
+				<p bo-html="fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : 'Sem descrição.'"></p>
 			</ion-item>
 		</ion-list>
 	</ion-content>
