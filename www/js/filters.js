@@ -1,24 +1,29 @@
 var _filtraNome = function(items, nome) {
 	var filtered = [];
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		if(typeof item != 'undefined') {
-			if(
-				item.hasOwnProperty('post_title') &&
-				typeof nome != 'undefined'
-			){
-				var post_title = item['post_title'].toLowerCase();
-				if (post_title.indexOf(nome.toLowerCase()) > -1) {
-					filtered.push(item);
+	if(
+		typeof nome != 'undefined' &&
+		nome.length > 3
+	) {
+
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined') {
+				if(
+					item.hasOwnProperty('post_title') &&
+					typeof nome != 'undefined'
+				){
+					var post_title = item['post_title'].toLowerCase();
+					if (post_title.indexOf(nome.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
-	}
-
-	if(typeof nome == 'undefined'){
+	} else {
 		filtered = items;
 	}
+
 
 	return filtered;
 };
@@ -27,36 +32,36 @@ var _filtraEstado = function(items, sigla, tipo) {
 	var property,
 		filtered = [];
 
-	switch(tipo) {
-		case 1:
-			property = 'estadoFeira';
-			break;
-		case 2:
-			property = 'estadoPavilhao';
-			break;
-		case 3:
-			property = 'estadoServico';
-			break;
-		default:
-			property = 'estado';
-			break;
-	}
+	if(
+		typeof sigla != 'undefined' &&
+		sigla.length == 2
+	) {
+		switch(tipo) {
+			case 1:
+				property = 'estadoFeira';
+				break;
+			case 2:
+				property = 'estadoPavilhao';
+				break;
+			case 3:
+				property = 'estadoServico';
+				break;
+			default:
+				property = 'estado';
+				break;
+		}
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		if(typeof item != 'undefined') {
-			if(
-				item.hasOwnProperty(property) &&
-				typeof sigla != 'undefined'
-			){
-				if (item[property].indexOf(sigla.toUpperCase()) > -1) {
-					filtered.push(item);
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined') {
+				if(item.hasOwnProperty(property)){
+					if (item[property].indexOf(sigla.toUpperCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
-	}
-
-	if(typeof sigla == 'undefined'){
+	}else {
 		filtered = items;
 	}
 
@@ -66,22 +71,25 @@ var _filtraEstado = function(items, sigla, tipo) {
 var _filtraCategoria = function(items, categoria) {
 	var filtered = [];
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		if(typeof item != 'undefined') {
-			if(
-				item.hasOwnProperty('name') &&
-				typeof categoria != 'undefined'
-			){
-				var name = item['name'].toLowerCase();
-				if (name.indexOf(categoria.toLowerCase()) > -1) {
-					filtered.push(item);
+	if(
+		typeof categoria != 'undefined' &&
+		categoria.length > 3
+	) {
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined') {
+				if(
+					item.hasOwnProperty('name') &&
+					typeof categoria != 'undefined'
+				){
+					var name = item['name'].toLowerCase();
+					if (name.indexOf(categoria.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
-	}
-
-	if(typeof categoria == 'undefined') {
+	} else {
 		filtered = items;
 	}
 
@@ -91,23 +99,22 @@ var _filtraCategoria = function(items, categoria) {
 var _filtraPavilhao = function(items, pavilhao) {
 	var filtered = [];
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		if(typeof item != 'undefined') {
-			if(
-				item.hasOwnProperty('pavilhaoFeira') &&
-				typeof pavilhao != 'undefined'
-			){
-				var pav = item['pavilhaoFeira'].toLowerCase()
-				if (pav.indexOf(pavilhao.toLowerCase()) > -1) {
-					filtered.push(item);
+	if(
+		typeof pavilhao != 'undefined' &&
+		pavilhao.length >3
+	) {
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined') {
+				if(item.hasOwnProperty('pavilhaoFeira')){
+					var pav = item['pavilhaoFeira'].toLowerCase()
+					if (pav.indexOf(pavilhao.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
-	}
-
-
-	if(typeof pavilhao == 'undefined'){
+	} else {
 		filtered = items;
 	}
 
@@ -117,22 +124,23 @@ var _filtraPavilhao = function(items, pavilhao) {
 var _filtraPromotor = function(items, promotor) {
 	var filtered = [];
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		if(typeof item != 'undefined') {
-			if(
-				item.hasOwnProperty('promotorFeira') &&
-				typeof promotor != 'undefined'
-			){
-				var prom = item['promotorFeira'].toLowerCase();
-				if (prom.indexOf(promotor.toLowerCase()) > -1) {
-					filtered.push(item);
+
+	if(
+		typeof promotor != 'undefined' &&
+		promotor.length > 3
+	) {
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined') {
+				if(item.hasOwnProperty('promotorFeira')){
+					var prom = item['promotorFeira'].toLowerCase();
+					if (prom.indexOf(promotor.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
 				}
 			}
 		}
-	}
-
-	if(typeof promotor == 'undefined'){
+	} else {
 		filtered = items;
 	}
 
@@ -143,38 +151,77 @@ var _filtraCidade = function(items, cidade, tipo) {
 	var property,
 		filtered = [];
 
-	switch(tipo) {
-		case 1:
-			property = 'cidadeFeira';
-			break;
-		case 2:
-			property = 'cidadePavilhao';
-			break;
-		case 3:
-			property = 'cidadeServico';
-			break;
-		default:
-			property = 'cidade';
-			break;
+	if(
+		typeof cidade != 'undefined' &&
+		cidade.length > 3
+	) {
+		switch(tipo) {
+			case 1:
+				property = 'cidadeFeira';
+				break;
+			case 2:
+				property = 'cidadePavilhao';
+				break;
+			case 3:
+				property = 'cidadeServico';
+				break;
+			default:
+				property = 'cidade';
+				break;
+		}
+
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined'){
+				if(item.hasOwnProperty(property)){
+					var city = item[property].toLowerCase();
+					if (city.indexOf(cidade.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
+				}
+			}
+		}
+	} else {
+		filtered = items;
 	}
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		if(typeof item != 'undefined'){
-			if(
-				item.hasOwnProperty(property) &&
-				typeof cidade != 'undefined'
-			){
-				var city = item[property].toLowerCase();
-				if (city.indexOf(cidade.toLowerCase()) > -1) {
+	return filtered;
+}
+
+var _filtraPalavraChave = function(items, palavra) {
+	var filtered = [];
+	if(
+		typeof palavra != 'undefined' &&
+		palavra.length > 3
+	) {
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(item.hasOwnProperty('_yoast_wpseo_metadesc')){
+				var meta = item['_yoast_wpseo_metadesc'].toLowerCase();
+				var title = item['post_title'].toLowerCase();
+				if (
+					meta.indexOf(palavra.toLowerCase()) > -1 ||
+					title.indexOf(palavra.toLowerCase()) > -1
+				) {
+					filtered.push(item);
+				}
+			} else if(item.hasOwnProperty('post_content')) {
+				var content = item['post_content'].toLowerCase();
+				var title = item['post_title'].toLowerCase();
+				if (
+					content.indexOf(palavra.toLowerCase()) > -1 ||
+					title.indexOf(palavra.toLowerCase()) > -1
+				) {
+					filtered.push(item);
+				}
+			} else if(item.hasOwnProperty('post_title')) {
+				var title = item['post_title'].toLowerCase();
+				if (title.indexOf(palavra.toLowerCase()) > -1) {
 					filtered.push(item);
 				}
 			}
 		}
-	}
-
-
-	if(typeof cidade == 'undefined'){
+	} else {
 		filtered = items;
 	}
 
@@ -194,202 +241,209 @@ angular.module('meuguru.filters', [])
 .filter('filtrarEvento', function() {
 	return function(items, filtro, all) {
 
-		var collection = items;
+		var collection = items,
+			retorno;
 
-		if(Object.size(filtro) < 2) {
-			collection = all;
+		var _filtra = function(collection) {
+
+			var retornoNome 		= [],
+				retornoEstado 		= [],
+				retornoCidade 		= [],
+				retornoCategoria 	= [],
+				retornoPavilhao 	= [],
+				retornoPromotor 	= [];
+
+			retornoNome 		= _filtraNome(collection, filtro.nome);
+			retornoEstado 		= _filtraEstado(retornoNome, filtro.estado, 1);
+			retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 1);
+			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
+			retornoPavilhao 	= _filtraPavilhao(retornoCategoria, filtro.pavilhao);
+			retornoPromotor 	= _filtraPromotor(retornoPavilhao, filtro.promotor);
+
+			return retornoPromotor;
 		}
 
-		var retornoNome 		= [],
-			retornoEstado 		= [],
-			retornoCidade 		= [],
-			retornoCategoria 	= [],
-			retornoPavilhao 	= [],
-			retornoPromotor 	= [];
+		retorno = _filtra(collection);
 
-		retornoNome 		= _filtraNome(collection, filtro.nome);
-		retornoEstado 		= _filtraEstado(retornoNome, filtro.estado, 1);
-		retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 1);
-		retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria, 1);
-		retornoPavilhao 	= _filtraPavilhao(retornoCategoria, filtro.pavilhao);
-		retornoPromotor 	= _filtraPromotor(retornoPavilhao, filtro.promotor);
+		if(
+			// Object.size(filtro) == 1 &&
+			retorno.length == 0
+		) {
+			collection = all;
+			retorno = _filtra(collection);
+		}
 
-		return retornoPromotor;
+		return retorno;
 	}
 })
 
-.filter('filtraNome', function () {
-	return function (items, nome, all) {
-		var filtered = [];
+.filter('filtrarFornecedor', function() {
+	return function(items, filtro, all) {
 
-		var _filtra = function(items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(
-					item.hasOwnProperty('post_title') &&
-					typeof nome != 'undefined'
-				){
-					var post_title = item['post_title'].toLowerCase();
-					if (post_title.indexOf(nome.toLowerCase()) > -1) {
-						filtered.push(item);
-					}
-				}
-			}
+		var collection = items,
+			retorno;
+
+		var _filtra = function(collection) {
+
+			var retornoPalavraChave = [],
+				retornoEstado 		= [],
+				retornoCidade 		= [],
+				retornoCategoria 	= [],
+				retornoPavilhao 	= [],
+				retornoPromotor 	= [];
+
+			retornoPalavraChave = _filtraPalavraChave(collection, filtro.palavra);
+			retornoEstado 		= _filtraEstado(retornoPalavraChave, filtro.estado, 4);
+			retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 4);
+			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
+
+			return retornoCategoria;
 		}
 
-		_filtra(all);
+		retorno = _filtra(collection);
 
-		if(typeof nome == 'undefined'){
-			filtered = items;
+		if(
+			// Object.size(filtro) == 1 &&
+			retorno.length == 0
+		) {
+			collection = all;
+			retorno = _filtra(collection);
 		}
 
-		return filtered;
-	};
+		return retorno;
+	}
 })
 
-.filter('filtraEstado', function () {
-	return function (items, sigla, tipo, all) {
-		var property,
-			filtered = [];
+.filter('filtrarPavilhao', function() {
+	return function(items, filtro, all) {
 
-		var _filtra = function(property, items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(
-					item.hasOwnProperty(property) &&
-					typeof sigla != 'undefined'
-				){
-					if (item[property].indexOf(sigla.toUpperCase()) > -1) {
-						filtered.push(item);
-					}
-				}
-			}
+		var collection = items,
+			retorno;
+
+		var _filtra = function(collection) {
+
+			var retornoNome			= [],
+				retornoEstado 		= [],
+				retornoCidade 		= [],
+				retornoCategoria 	= [];
+
+			retornoNome 		= _filtraNome(collection, filtro.nome);
+			retornoEstado 		= _filtraEstado(retornoNome, filtro.estado, 2);
+			retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 2);
+			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
+
+			return retornoCategoria;
 		}
 
-		switch(tipo) {
-			case 1:
-				property = 'estadoFeira';
-				break;
-			case 2:
-				property = 'estadoPavilhao';
-				break;
-			case 3:
-				property = 'estadoServico';
-				break;
-			default:
-				property = 'estado';
-				break;
+		retorno = _filtra(collection);
+
+		if(
+			// Object.size(filtro) == 1 &&
+			retorno.length == 0
+		) {
+			collection = all;
+			retorno = _filtra(collection);
 		}
 
-		_filtra(property, all);
-
-		if(typeof sigla == 'undefined'){
-			filtered = items;
-		}
-
-		return filtered;
-	};
+		return retorno;
+	}
 })
 
-.filter('filtraCidade', function () {
-	return function (items, cidade, tipo, all) {
-		var property,
-			filtered = [];
+.filter('filtrarProduto', function() {
+	return function(items, filtro, all) {
 
-		var _filtra = function(property, items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(
-					item.hasOwnProperty(property) &&
-					typeof cidade != 'undefined'
-				){
-					var city = item[property].toLowerCase();
-					if (city.indexOf(cidade.toLowerCase()) > -1) {
-						filtered.push(item);
-					}
-				}
-			}
+		var collection = items,
+			retorno;
+
+		var _filtra = function(collection) {
+
+			var retornoPalavraChave = [],
+				retornoCategoria 	= [];
+
+			retornoPalavraChave = _filtraPalavraChave(collection, filtro.palavra);
+			retornoCategoria 	= _filtraCategoria(retornoPalavraChave, filtro.categoria);
+
+			return retornoCategoria;
 		}
 
-		switch(tipo) {
-			case 2:
-				property = 'cidadePavilhao';
-				break;
-			case 3:
-				property = 'cidadeServico';
-				break;
-			default:
-				property = 'cidade';
-				break;
+		retorno = _filtra(collection);
+
+		if(
+			// Object.size(filtro) == 1 &&
+			retorno.length == 0
+		) {
+			collection = all;
+			retorno = _filtra(collection);
 		}
 
-		_filtra(property, all);
-
-
-		if(typeof cidade == 'undefined'){
-			filtered = items;
-		}
-
-		return filtered;
-	};
+		return retorno;
+	}
 })
 
-.filter('filtraPromotor', function () {
-	return function (items, promotor, all) {
-		var filtered = [];
+.filter('filtrarServico', function() {
+	return function(items, filtro, all) {
 
-		var _filtra = function(items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(
-					item.hasOwnProperty('promotorFeira') &&
-					typeof promotor != 'undefined'
-				){
-					var prom = item['promotorFeira'].toLowerCase();
-					if (prom.indexOf(promotor.toLowerCase()) > -1) {
-						filtered.push(item);
-					}
-				}
-			}
+		var collection = items,
+			retorno;
+
+		var _filtra = function(collection) {
+
+			var retornoEstado 		= [],
+				retornoCidade 		= [],
+				retornoCategoria 	= [];
+
+			retornoEstado 		= _filtraEstado(collection, filtro.estado, 3);
+			retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 3);
+			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
+
+			return retornoCategoria;
 		}
 
-		_filtra(all);
+		retorno = _filtra(collection);
 
-		if(typeof promotor == 'undefined'){
-			filtered = items;
+		if(
+			// Object.size(filtro) == 1 &&
+			retorno.length == 0
+		) {
+			collection = all;
+			retorno = _filtra(collection);
 		}
 
-		return filtered;
-	};
+		return retorno;
+	}
 })
 
-.filter('filtraPavilhao', function () {
-	return function (items, pavilhao, all) {
-		var filtered = [];
+.filter('filtrarEstande', function() {
+	return function(items, filtro, all) {
 
-		var _filtra = function(items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(
-					item.hasOwnProperty('pavilhaoFeira') &&
-					typeof pavilhao != 'undefined'
-				){
-					var pav = item['pavilhaoFeira'].toLowerCase()
-					if (pav.indexOf(pavilhao.toLowerCase()) > -1) {
-						filtered.push(item);
-					}
-				}
-			}
+		var collection = items,
+			retorno;
+
+		var _filtra = function(collection) {
+
+			var retornoPalavraChave = [],
+				retornoPosicao 		= [],
+				retornoCategoria 	= [];
+
+			retornoPalavraChave = _filtraPalavraChave(collection, filtro.palavra);
+			retornoPosicao 		= _filtraCategoria(retornoPalavraChave, filtro.posicao);
+			retornoCategoria 	= _filtraCategoria(retornoPosicao, filtro.categoria);
+
+			return retornoCategoria;
 		}
 
-		_filtra(all);
+		retorno = _filtra(collection);
 
-		if(typeof pavilhao == 'undefined'){
-			filtered = items;
+		if(
+			// Object.size(filtro) == 1 &&
+			retorno.length == 0
+		) {
+			collection = all;
+			retorno = _filtra(collection);
 		}
 
-		return filtered;
-	};
+		return retorno;
+	}
 })
 
 .filter('filtraData', function () {
@@ -409,81 +463,6 @@ angular.module('meuguru.filters', [])
 					filtered.push(item);
 				}
 			}
-		}
-
-		return filtered;
-	};
-})
-
-.filter('filtraPalavraChave', function () {
-	return function (items, palavra, all) {
-		var filtered = [];
-
-		var _filtra = function(items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(typeof palavra != 'undefined') {
-					if(item.hasOwnProperty('_yoast_wpseo_metadesc')){
-						var meta = item['_yoast_wpseo_metadesc'].toLowerCase();
-						var title = item['post_title'].toLowerCase();
-						if (
-							meta.indexOf(palavra.toLowerCase()) > -1 ||
-							title.indexOf(palavra.toLowerCase()) > -1
-						) {
-							filtered.push(item);
-						}
-					} else if(item.hasOwnProperty('post_content')) {
-						var content = item['post_content'].toLowerCase();
-						var title = item['post_title'].toLowerCase();
-						if (
-							content.indexOf(palavra.toLowerCase()) > -1 ||
-							title.indexOf(palavra.toLowerCase()) > -1
-						) {
-							filtered.push(item);
-						}
-					} else if(item.hasOwnProperty('post_title')) {
-						var title = item['post_title'].toLowerCase();
-						if (title.indexOf(palavra.toLowerCase()) > -1) {
-							filtered.push(item);
-						}
-					}
-				}
-			}
-		}
-
-		_filtra(all);
-
-		if(typeof palavra == 'undefined') {
-			filtered = items;
-		}
-
-		return filtered;
-	};
-})
-
-.filter('filtraCategoria', function () {
-	return function (items, categoria, all) {
-		var filtered = [];
-
-		var _filtra = function(items) {
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				if(
-					item.hasOwnProperty('name') &&
-					typeof categoria != 'undefined'
-				){
-					var name = item['name'].toLowerCase();
-					if (name.indexOf(categoria.toLowerCase()) > -1) {
-						filtered.push(item);
-					}
-				}
-			}
-		}
-
-		_filtra(all);
-
-		if(typeof categoria == 'undefined') {
-			filtered = items;
 		}
 
 		return filtered;

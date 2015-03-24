@@ -10,12 +10,12 @@
     <ion-content id="index" data-has-bouncing="false" >
 
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-ng-repeat="fornecedor in fornecedores | filtraPalavraChave:filtro.palavra:allFornecedores | filtraEstado:filtro.estado:4:allFornecedores | filtraCidade:filtro.cidade:1:allFornecedores | filtraCategoria:filtro.categoria:allFornecedores " href="#/tab/fornecedor/{{ fornecedor.ID }}">
+          <ion-item class="item-icon-right" data-bindonce="fornecedores" data-ng-repeat="fornecedor in fornecedores | filtrarFornecedor:filtro:allFornecedores " href="#/tab/fornecedor/{{ fornecedor.ID }}">
                 <div class="thumb" style="background:url({{ checkImg(fornecedor.guid) ? fornecedor.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
-                <h1 class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}">{{ fornecedor.post_title }}</h1>
-                <p>Estado:<span>{{ fornecedor.estado ? fornecedor.estado : '-' }}</span></p>
-                <p>Cidade:<span>{{ fornecedor.cidade ? fornecedor.cidade : '-' }}</span></p>
-                <p class="no-wrap">Serviços:<span>{{ fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : '-'}}</span></p>
+                <h1 bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
+                <p>Estado:<span bo-html="fornecedor.estado ? fornecedor.estado : '-'"></span></p>
+                <p>Cidade:<span bo-html="fornecedor.cidade ? fornecedor.cidade : '-'"></span></p>
+                <p class="no-wrap">Serviços:<span bo-html="fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : '-'"></span></p>
                 <i class="icon ion-chevron-right"></i>
           </ion-item>
         </ion-list>

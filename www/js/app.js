@@ -1,4 +1,4 @@
-angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource'])
+angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource', 'pasvaz.bindonce'])
 
 .run(['$rootScope', '$ionicPlatform',
 	function($rootScope, $ionicPlatform) {
@@ -7,7 +7,7 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 			}
 			if(window.StatusBar) {
-				StatusBar.styleHex('#FF0000');
+				StatusBar.styleHex('#1b3d6e');
 			}
 		});
 

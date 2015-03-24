@@ -10,11 +10,11 @@
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list class="listar" data-ng-if="!load">
-            <ion-item class="item-icon-right" data-ng-repeat="produto in produtos | filtraPalavraChave:filtro.palavra:allProdutos | filtraCategoria:filtro.categoria:allProdutos " href="#/tab/produto/{{ produto.ID }}">
-                <div class="thumb" style="background:url({{ produto.guid ? produto.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
-                <h1 class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}">{{ produto.post_title }}</h1>
-                <p>Empresa:<span>{{ produto.NomedaLoja ? produto.NomedaLoja : '-' }}</span></p>
-                <p>Telefone:<span>{{ produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-' }}</span></p>
+            <ion-item class="item-icon-right" data-bindonce="produtos" data-ng-repeat="produto in produtos | filtrarProduto:filtro:allProdutos" href="#/tab/produto/{{ produto.ID }}">
+                <div class="thumb" style="background:url({{ checkImg(produto.guid) ? produto.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 bo-class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="produto.post_title"></h1>
+                <p>Empresa:<span bo-html="produto.NomedaLoja ? produto.NomedaLoja : '-'"></span></p>
+                <p>Telefone:<span bo-html="produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-'"></span></p>
                 <i class="icon ion-chevron-right"></i>
             </ion-item>
         </ion-list>

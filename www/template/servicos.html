@@ -10,11 +10,11 @@
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-ng-repeat="servico in servicos | filtraCategoria:filtro.categoria:allServicos | filtraEstado:filtro.estado:3:allServicos | filtraCidade:filtro.cidade:3:allServicos " href="#/tab/servico/{{ servico.ID }}">
-                <div class="thumb" style="background:url({{ servico.guid ? servico.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
-                <h1 class="{{ servico.post_title.length >= 38 ? 'small-font' : '' }}">{{ servico.post_title }}</h1>
-                <p>Endereço:<span>{{ servico.ruaServico + ', ' + servico.numeroServico + ' | CEP ' + servico.cepServico + '-' + servico.bairroServico + '/' + servico.estadoServico }}</span></p>
-                <p>Telefone:<span>{{ servico.telefoneServico ? servico.telefoneServico : 'Não Cadastrado' }}</span></p>
+          <ion-item class="item-icon-right" data-bindonce="servicos" data-ng-repeat="servico in servicos | filtrarServico:filtro:allServicos" href="#/tab/servico/{{ servico.ID }}">
+                <div class="thumb" style="background:url({{ checkImg(servico.guid) ? servico.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+                <h1 bo-class="{{ servico.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="servico.post_title"></h1>
+                <p>Endereço:<span bo-html="servico.ruaServico + ', ' + servico.numeroServico + ' | CEP ' + servico.cepServico + '-' + servico.bairroServico + '/' + servico.estadoServico"></span></p>
+                <p>Telefone:<span bo-html="servico.telefoneServico ? servico.telefoneServico : 'Não Cadastrado'"></span></p>
                 <i class="icon ion-chevron-right"></i>
           </ion-item>
         </ion-list>

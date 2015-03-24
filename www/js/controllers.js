@@ -4,7 +4,10 @@ angular.module('meuguru.controllers', [])
     function($timeout, $rootScope, $ionicPlatform, $ionicPopup) {
         $ionicPlatform.ready(function() {
             if(window.Connection) {
-                if(navigator.connection.type == Connection.NONE) {
+                if(
+                    navigator.connection.type == Connection.NONE ||
+                    navigator.connection.type == Connection.UNKNOWN
+                ) {
                     $ionicPopup.confirm({
                         title: "Internet Disconnected",
                         content: "Não possui conexão com Internet."
@@ -79,6 +82,11 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                if($scope.eventos.length > 15) {
+                                    $scope.eventos.splice(15,$scope.eventos.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {};
                             }
                         },
@@ -86,6 +94,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.eventos.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
@@ -208,6 +220,12 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                console.log($scope.fornecedores);
+                                if($scope.fornecedores.length > 15) {
+                                    $scope.fornecedores.splice(15,$scope.fornecedores.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {}
                             }
                         },
@@ -215,6 +233,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.fornecedores.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
@@ -270,6 +292,11 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                if($scope.pavilhoes.length > 15) {
+                                    $scope.pavilhoes.splice(15,$scope.pavilhoes.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {}
                             }
                         },
@@ -277,6 +304,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.pavilhoes.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
@@ -332,6 +363,11 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                if($scope.produtos.length > 15) {
+                                    $scope.produtos.splice(15,$scope.produtos.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {}
                             }
                         },
@@ -339,6 +375,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.produtos.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
@@ -394,6 +434,11 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                if($scope.servicos.length > 15) {
+                                    $scope.servicos.splice(15,$scope.servicos.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {}
                             }
                         },
@@ -401,6 +446,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.servicos.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
@@ -456,6 +505,11 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                if($scope.noticias.length > 15) {
+                                    $scope.noticias.splice(15,$scope.noticias.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {}
                             }
                         },
@@ -463,6 +517,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.noticias.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
@@ -518,6 +576,11 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
+                                if($scope.estandes.length > 15) {
+                                    $scope.estandes.splice(15,$scope.estandes.length);
+                                }
+
+                                $scope.moredata = false;
                                 return $scope.filtro = {}
                             }
                         },
@@ -525,6 +588,10 @@ angular.module('meuguru.controllers', [])
                             text: '<b>Aplicar</b>',
                             type: 'button-positive',
                             onTap: function(e) {
+                                $scope.moredata = false;
+                                if($scope.estandes.length > 15) {
+                                    $scope.moredata = true;
+                                }
                                 return $scope.filtro;
                             }
                         }
