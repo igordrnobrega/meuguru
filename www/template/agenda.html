@@ -14,8 +14,8 @@
     <ion-content id="index" data-has-bouncing="false" >
 
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-ng-repeat="evento in eventos | filtraNome:filtro.nome:allEventos | filtraEstado:filtro.estado:1:allEventos | filtraCategoria:filtro.segmento:allEventos | filtraData:filtro.data | filtraPavilhao:filtro.pavilhao:allEventos | filtraPromotor:filtro.promotor:allEventos " href="#/tab/evento/{{ evento.ID }}">
-                <div class="thumb" style="background:url({{ evento.guid ? evento.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
+          <ion-item class="item-icon-right" data-ng-repeat="evento in eventos | filtrarEvento:filtro:allEventos" href="#/tab/evento/{{ evento.ID }}">
+                <div class="thumb" style="background:url({{ checkImg(evento.guid) ? evento.guid : 'img/no-photo.png' }}) no-repeat; background-size: auto 100%; background-position: center"></div>
                 <h1 class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}">{{ evento.post_title }}</h1>
                 <p>Data:<span>{{ evento.dataInicial ? evento.dataInicial : '-' }}</span></p>
                 <p>Segmento:<span>{{ evento.name ? evento.name : '-'}}</span></p>
@@ -27,7 +27,7 @@
           </ion-item>
         </ion-list>
 
-        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
+        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata" distance="3%"></ion-infinite-scroll>
     </ion-content>
 
 </ion-view>

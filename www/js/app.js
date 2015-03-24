@@ -7,7 +7,7 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 			}
 			if(window.StatusBar) {
-				StatusBar.styleDefault();
+				StatusBar.styleHex('#FF0000');
 			}
 		});
 

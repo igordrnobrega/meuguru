@@ -2,16 +2,17 @@ angular.module('meuguru.services', [])
 
 .factory('MeuGuruService', ['$http', '$log', 'LoadingService',
     function($http, $log, LoadingService) {
-        var LOAD_INICIAL = 15;
 
-        var eventos         = [],
+        var LOAD_INICIAL    = 15,
+            eventos         = [],
             fornecedores    = [],
             pavilhoes       = [],
             produtos        = [],
             noticias        = [],
             servicos        = [],
-            estandes        = [];
-        var url = "http://prod.igor-teste.61bits.com.br/";
+            estandes        = [],
+            url = "http://prod.igor-teste.61bits.com.br/";
+
         return {
             getEventos: function($scope) {
 
@@ -213,7 +214,8 @@ angular.module('meuguru.services', [])
 
                 $ionicLoading.show({
                     template: template,
-                    hideOnStateChange: true
+                    hideOnStateChange: true,
+                    noBackdrop: false
                 });
             },
             endLoad: function() {

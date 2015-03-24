@@ -6,7 +6,7 @@ angular.module('meuguru.directives', [])
 			restrict: 'A',
 			link: function ($scope, $element, $attrs) {
 				$ionicPlatform.ready(function() {
-					if(window.plugin) {
+					if(window.plugins) {
 						if(device.platform == "iOS") {
 							$element.addClass('ios');
 						}

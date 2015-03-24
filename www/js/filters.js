@@ -1,4 +1,222 @@
+var _filtraNome = function(items, nome) {
+	var filtered = [];
+
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		if(typeof item != 'undefined') {
+			if(
+				item.hasOwnProperty('post_title') &&
+				typeof nome != 'undefined'
+			){
+				var post_title = item['post_title'].toLowerCase();
+				if (post_title.indexOf(nome.toLowerCase()) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+	}
+
+	if(typeof nome == 'undefined'){
+		filtered = items;
+	}
+
+	return filtered;
+};
+
+var _filtraEstado = function(items, sigla, tipo) {
+	var property,
+		filtered = [];
+
+	switch(tipo) {
+		case 1:
+			property = 'estadoFeira';
+			break;
+		case 2:
+			property = 'estadoPavilhao';
+			break;
+		case 3:
+			property = 'estadoServico';
+			break;
+		default:
+			property = 'estado';
+			break;
+	}
+
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		if(typeof item != 'undefined') {
+			if(
+				item.hasOwnProperty(property) &&
+				typeof sigla != 'undefined'
+			){
+				if (item[property].indexOf(sigla.toUpperCase()) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+	}
+
+	if(typeof sigla == 'undefined'){
+		filtered = items;
+	}
+
+	return filtered;
+};
+
+var _filtraCategoria = function(items, categoria) {
+	var filtered = [];
+
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		if(typeof item != 'undefined') {
+			if(
+				item.hasOwnProperty('name') &&
+				typeof categoria != 'undefined'
+			){
+				var name = item['name'].toLowerCase();
+				if (name.indexOf(categoria.toLowerCase()) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+	}
+
+	if(typeof categoria == 'undefined') {
+		filtered = items;
+	}
+
+	return filtered;
+};
+
+var _filtraPavilhao = function(items, pavilhao) {
+	var filtered = [];
+
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		if(typeof item != 'undefined') {
+			if(
+				item.hasOwnProperty('pavilhaoFeira') &&
+				typeof pavilhao != 'undefined'
+			){
+				var pav = item['pavilhaoFeira'].toLowerCase()
+				if (pav.indexOf(pavilhao.toLowerCase()) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+	}
+
+
+	if(typeof pavilhao == 'undefined'){
+		filtered = items;
+	}
+
+	return filtered;
+};
+
+var _filtraPromotor = function(items, promotor) {
+	var filtered = [];
+
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		if(typeof item != 'undefined') {
+			if(
+				item.hasOwnProperty('promotorFeira') &&
+				typeof promotor != 'undefined'
+			){
+				var prom = item['promotorFeira'].toLowerCase();
+				if (prom.indexOf(promotor.toLowerCase()) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+	}
+
+	if(typeof promotor == 'undefined'){
+		filtered = items;
+	}
+
+	return filtered;
+};
+
+var _filtraCidade = function(items, cidade, tipo) {
+	var property,
+		filtered = [];
+
+	switch(tipo) {
+		case 1:
+			property = 'cidadeFeira';
+			break;
+		case 2:
+			property = 'cidadePavilhao';
+			break;
+		case 3:
+			property = 'cidadeServico';
+			break;
+		default:
+			property = 'cidade';
+			break;
+	}
+
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		if(typeof item != 'undefined'){
+			if(
+				item.hasOwnProperty(property) &&
+				typeof cidade != 'undefined'
+			){
+				var city = item[property].toLowerCase();
+				if (city.indexOf(cidade.toLowerCase()) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+	}
+
+
+	if(typeof cidade == 'undefined'){
+		filtered = items;
+	}
+
+	return filtered;
+}
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] != "") size++;
+    }
+    return size;
+};
+
 angular.module('meuguru.filters', [])
+
+.filter('filtrarEvento', function() {
+	return function(items, filtro, all) {
+
+		var collection = items;
+
+		if(Object.size(filtro) < 2) {
+			collection = all;
+		}
+
+		var retornoNome 		= [],
+			retornoEstado 		= [],
+			retornoCidade 		= [],
+			retornoCategoria 	= [],
+			retornoPavilhao 	= [],
+			retornoPromotor 	= [];
+
+		retornoNome 		= _filtraNome(collection, filtro.nome);
+		retornoEstado 		= _filtraEstado(retornoNome, filtro.estado, 1);
+		retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 1);
+		retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria, 1);
+		retornoPavilhao 	= _filtraPavilhao(retornoCategoria, filtro.pavilhao);
+		retornoPromotor 	= _filtraPromotor(retornoPavilhao, filtro.promotor);
+
+		return retornoPromotor;
+	}
+})
 
 .filter('filtraNome', function () {
 	return function (items, nome, all) {
@@ -19,18 +237,10 @@ angular.module('meuguru.filters', [])
 			}
 		}
 
-		_filtra(items);
+		_filtra(all);
 
 		if(typeof nome == 'undefined'){
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			console.log('this');
-			_filtra(all);
 		}
 
 		return filtered;
@@ -71,17 +281,10 @@ angular.module('meuguru.filters', [])
 				break;
 		}
 
-		_filtra(property, items);
+		_filtra(property, all);
 
 		if(typeof sigla == 'undefined'){
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			_filtra(property, all);
 		}
 
 		return filtered;
@@ -120,18 +323,11 @@ angular.module('meuguru.filters', [])
 				break;
 		}
 
-		_filtra(property, items);
+		_filtra(property, all);
 
 
 		if(typeof cidade == 'undefined'){
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			_filtra(property, all);
 		}
 
 		return filtered;
@@ -157,17 +353,10 @@ angular.module('meuguru.filters', [])
 			}
 		}
 
-		_filtra(items);
+		_filtra(all);
 
 		if(typeof promotor == 'undefined'){
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			_filtra(all);
 		}
 
 		return filtered;
@@ -193,17 +382,10 @@ angular.module('meuguru.filters', [])
 			}
 		}
 
-		_filtra(items);
+		_filtra(all);
 
 		if(typeof pavilhao == 'undefined'){
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			_filtra(all);
 		}
 
 		return filtered;
@@ -269,15 +451,10 @@ angular.module('meuguru.filters', [])
 			}
 		}
 
+		_filtra(all);
+
 		if(typeof palavra == 'undefined') {
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			_filtra(all);
 		}
 
 		return filtered;
@@ -303,17 +480,10 @@ angular.module('meuguru.filters', [])
 			}
 		}
 
-		_filtra(items);
+		_filtra(all);
 
 		if(typeof categoria == 'undefined') {
 			filtered = items;
-		}
-
-		if(
-			filtered.length == 0 &&
-			typeof all != 'undefined'
-		) {
-			_filtra(all);
 		}
 
 		return filtered;

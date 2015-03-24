@@ -71,7 +71,6 @@ angular.module('meuguru.controllers', [])
 
             $scope.filtro = {}
             $scope.showPopup = function() {
-
                 var myPopup = $ionicPopup.show({
                     templateUrl: 'template/modal/filtro-evento.html',
                     title: 'Filtrar Eventos',
@@ -80,7 +79,7 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
-                                return $scope.filtro = {}
+                                return $scope.filtro = {};
                             }
                         },
                         {
