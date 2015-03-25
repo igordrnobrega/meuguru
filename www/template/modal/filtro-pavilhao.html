@@ -1,18 +1,26 @@
 <div class="list">
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Nome</span>
-    <input type="text" data-ng-model="filtro.nome" placeholder="Nome">
-  </label>
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Estado (Sigla)</span>
-    <input type="text" data-ng-model="filtro.estado" placeholder="Estado (Sigla)">
-  </label>
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Cidade</span>
-    <input type="text" data-ng-model="filtro.cidade" placeholder="Cidade">
-  </label>
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Segmento</span>
-    <input type="text" data-ng-model="filtro.segmento" placeholder="Segmento">
-  </label>
+	<label class="item item-input">
+		<span class="input-label">Nome</span>
+		<input type="text" data-ng-model="filtro.nome" >
+	</label>
+	<label class="item item-input item-select">
+		<span class="input-label">
+			Estados
+		</span>
+		<select ng-model="filtro.estado" ng-options="estado for estado in estados">
+			<option value=""> -- </option>
+		</select>
+	</label>
+	<label class="item item-input">
+		<span class="input-label">Cidade</span>
+		<input type="text" data-ng-model="filtro.cidade" >
+	</label>
+    <label class="item item-input item-select">
+        <span class="input-label">
+            Segmento
+        </span>
+        <select ng-model="filtro.categoria" ng-options="segmento for segmento in segPav">
+            <option value=""> -- </option>
+        </select>
+    </label>
 </div>

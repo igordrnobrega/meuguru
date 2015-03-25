@@ -5,12 +5,19 @@ angular.module('meuguru.services', [])
 
         var LOAD_INICIAL    = 15,
             eventos         = [],
+            segEventos      = [],
             fornecedores    = [],
+            segFor          = [],
             pavilhoes       = [],
+            segPav          = [],
             produtos        = [],
+            segProd         = [],
             noticias        = [],
+            segNot          = [],
             servicos        = [],
+            segSer          = [],
             estandes        = [],
+            segEst          = [],
             url = "http://prod.igor-teste.61bits.com.br/";
 
         return {
@@ -20,13 +27,17 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'eventos', {responseType: 'json'})
                         .success(function(data) {
-                            eventos = data;
-                            $scope.allEventos = data.concat();
-                            $scope.eventos = data.concat();
-                            if(data.length > 15) {
-                                $scope.eventos.splice(LOAD_INICIAL, data.length);
+                            eventos             = data.eventos;
+                            segEventos          = data.segmentos;
+                            $scope.segEventos   = segEventos;
+                            $scope.allEventos   = eventos.concat();
+                            $scope.eventos      = eventos.concat();
+
+                            if(eventos.length > 15) {
+                                $scope.eventos.splice(LOAD_INICIAL, eventos.length);
                             }
-                            $scope.load = false;
+
+                            $scope.load     = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();
                             return;
@@ -35,7 +46,8 @@ angular.module('meuguru.services', [])
 
                         })
                 }
-                $scope.eventos = eventos;
+                $scope.segEventos   = segEventos;
+                $scope.eventos      = eventos;
             },
             getFornecedores: function($scope) {
 
@@ -43,11 +55,13 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'fornecedores', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
-                            fornecedores = data;
-                            $scope.allFornecedores = data.concat();
-                            $scope.fornecedores = data.concat();
-                            if(data.length > 15) {
-                                $scope.fornecedores.splice(LOAD_INICIAL, data.length);
+                            fornecedores            = data.fornecedores;
+                            segFor                  = data.segmentos;
+                            $scope.segFor           = segFor;
+                            $scope.allFornecedores  = fornecedores.concat();
+                            $scope.fornecedores     = fornecedores.concat();
+                            if(fornecedores.length > 15) {
+                                $scope.fornecedores.splice(LOAD_INICIAL, fornecedores.length);
                             }
                             $scope.load = false;
                             $scope.moredata = false;
@@ -58,6 +72,7 @@ angular.module('meuguru.services', [])
 
                         })
                 }
+                $scope.segFor       = segFor;
                 $scope.fornecedores = fornecedores;
             },
             getPavilhoes: function($scope) {
@@ -66,12 +81,16 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'locais', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
-                            pavilhoes = data;
-                            $scope.allPavilhoes = data.concat();
-                            $scope.pavilhoes = data.concat();
-                            if(data.length > 15) {
-                                $scope.pavilhoes.splice(LOAD_INICIAL, data.length);
+                            pavilhoes           = data.locais;
+                            segPav              = data.segmentos;
+                            $scope.segPav       = segPav;
+                            $scope.allPavilhoes = pavilhoes.concat();
+                            $scope.pavilhoes    = pavilhoes.concat();
+
+                            if(pavilhoes.length > 15) {
+                                $scope.pavilhoes.splice(LOAD_INICIAL, pavilhoes.length);
                             }
+
                             $scope.load = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();
@@ -81,6 +100,7 @@ angular.module('meuguru.services', [])
 
                         })
                 }
+                $scope.segPav    = segPav;
                 $scope.pavilhoes = pavilhoes;
             },
             getProdutos: function($scope) {
@@ -89,12 +109,16 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'produtos', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
-                            produtos = data;
-                            $scope.allProdutos = data.concat();
-                            $scope.produtos = data.concat();
-                            if(data.length > 15) {
-                                $scope.produtos.splice(LOAD_INICIAL, data.length);
+                            produtos            = data.produtos;
+                            segProd             = data.segmentos;
+                            $scope.segProd      = segProd;
+                            $scope.allProdutos  = produtos.concat();
+                            $scope.produtos     = produtos.concat();
+
+                            if(produtos.length > 15) {
+                                $scope.produtos.splice(LOAD_INICIAL, produtos.length);
                             }
+
                             $scope.load = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();
@@ -104,6 +128,7 @@ angular.module('meuguru.services', [])
 
                         })
                 }
+                $scope.segProd  = segProd;
                 $scope.produtos = produtos;
             },
             getNoticias: function($scope) {
@@ -112,12 +137,16 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'noticias', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
-                            noticias = data;
-                            $scope.allNoticias = data.concat();
-                            $scope.noticias = data.concat();
-                            if(data.length > 15) {
-                                $scope.noticias.splice(LOAD_INICIAL, data.length);
+                            noticias            = data.noticias;
+                            segNot              = data.segmentos;
+                            $scope.segNot       = segNot;
+                            $scope.allNoticias = noticias.concat();
+                            $scope.noticias = noticias.concat();
+
+                            if(noticias.length > 15) {
+                                $scope.noticias.splice(LOAD_INICIAL, noticias.length);
                             }
+
                             $scope.load = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();
@@ -127,6 +156,7 @@ angular.module('meuguru.services', [])
 
                         })
                 }
+                $scope.segNot   = segNot;
                 $scope.noticias = noticias;
             },
             getServicos: function($scope) {
@@ -135,12 +165,16 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'servicos', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
-                            servicos = data;
-                            $scope.allServicos = data.concat();
-                            $scope.servicos = data.concat();
-                            if(data.length) {
-                                $scope.servicos.splice(LOAD_INICIAL, data.length);
+                            servicos            = data.servicos;
+                            segSer              = data.segmentos;
+                            $scope.segSer       = segSer;
+                            $scope.allServicos  = servicos.concat();
+                            $scope.servicos     = servicos.concat();
+
+                            if(servicos.length) {
+                                $scope.servicos.splice(LOAD_INICIAL, servicos.length);
                             }
+
                             $scope.load = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();
@@ -150,6 +184,7 @@ angular.module('meuguru.services', [])
 
                         })
                 }
+                $scope.segSer   = segSer;
                 $scope.servicos = servicos;
             },
             getEstandes: function($scope) {
@@ -158,12 +193,16 @@ angular.module('meuguru.services', [])
                     LoadingService.load();
                     $http.get(url + 'estandes', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
-                            estandes = data;
-                            $scope.allEstandes = data.concat();
-                            $scope.estandes = data.concat();
-                            if(data.length > 15) {
-                                $scope.estandes.splice(LOAD_INICIAL, data.length);
+                            estandes            = data.estandes;
+                            segEst              = data.segmentos;
+                            $scope.segEst       = segEst;
+                            $scope.allEstandes  = estandes.concat();
+                            $scope.estandes     = estandes.concat();
+
+                            if(estandes.length > 15) {
+                                $scope.estandes.splice(LOAD_INICIAL, estandes.length);
                             }
+
                             $scope.load = false;
                             $scope.moredata = false;
                             LoadingService.endLoad();
@@ -173,6 +212,7 @@ angular.module('meuguru.services', [])
 
                         })
                 }
+                $scope.segEst   = segEst;
                 $scope.estandes = estandes;
             }
         }

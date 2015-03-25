@@ -1,10 +1,14 @@
 <div class="list">
-	<label class="item item-input item-floating-label">
+	<label class="item item-input">
 		<span class="input-label">Palavra Chave</span>
-		<input type="text" data-ng-model="filtro.palavra" placeholder="Palavra Chave">
+		<input type="text" data-ng-model="filtro.palavra">
 	</label>
-	<label class="item item-input item-floating-label">
-		<span class="input-label">Categoria</span>
-		<input type="text" data-ng-model="filtro.categoria" placeholder="Categoria">
-	</label>
+    <label class="item item-input item-select">
+        <span class="input-label">
+            Categoria
+        </span>
+        <select ng-model="filtro.categoria" ng-options="segmento for segmento in segProd">
+            <option value=""> -- </option>
+        </select>
+    </label>
 </div>

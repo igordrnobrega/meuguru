@@ -228,6 +228,29 @@ var _filtraPalavraChave = function(items, palavra) {
 	return filtered;
 }
 
+var _filtraData = function(items, date) {
+	var filtered = [];
+
+	if(typeof date != 'undefined') {
+
+		var data = ( date.getDate() > 10 ? date.getDate() : '0' + date.getDate() ) + '/' + (date.getMonth() >= 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(item.hasOwnProperty('dataInicial')){
+				if (item['dataInicial'].indexOf(data) > -1) {
+					filtered.push(item);
+				}
+			}
+		}
+
+	} else {
+		filtered = items;
+	}
+
+
+	return filtered;
+}
+
 Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {
@@ -240,7 +263,6 @@ angular.module('meuguru.filters', [])
 
 .filter('filtrarEvento', function() {
 	return function(items, filtro, all) {
-
 		var collection = items,
 			retorno;
 
@@ -251,7 +273,8 @@ angular.module('meuguru.filters', [])
 				retornoCidade 		= [],
 				retornoCategoria 	= [],
 				retornoPavilhao 	= [],
-				retornoPromotor 	= [];
+				retornoPromotor 	= [],
+				retornoData			= [];
 
 			retornoNome 		= _filtraNome(collection, filtro.nome);
 			retornoEstado 		= _filtraEstado(retornoNome, filtro.estado, 1);
@@ -259,8 +282,9 @@ angular.module('meuguru.filters', [])
 			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
 			retornoPavilhao 	= _filtraPavilhao(retornoCategoria, filtro.pavilhao);
 			retornoPromotor 	= _filtraPromotor(retornoPavilhao, filtro.promotor);
+			retornoData			= _filtraData(retornoPromotor, filtro.data);
 
-			return retornoPromotor;
+			return retornoData;
 		}
 
 		retorno = _filtra(collection);

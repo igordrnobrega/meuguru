@@ -3,12 +3,12 @@
 		<span class="input-label">Palavra Chave</span>
 		<input type="text" data-ng-model="filtro.palavra" placeholder="Palavra Chave">
 	</label>
-	<label class="item item-input item-floating-label">
-		<span class="input-label">Categoria</span>
-		<input type="text" data-ng-model="filtro.categoria" placeholder="Categoria">
-	</label>
-	<label class="item item-input item-floating-label">
-		<span class="input-label">Posição</span>
-		<input type="text" data-ng-model="filtro.posicao" placeholder="Posição">
-	</label>
+    <label class="item item-input item-select">
+        <span class="input-label">
+            Categoria/Posição
+        </span>
+        <select ng-model="filtro.categoria" ng-options="segmento for segmento in segEst">
+            <option value=""> -- </option>
+        </select>
+    </label>
 </div>

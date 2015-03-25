@@ -178,7 +178,7 @@ angular.module('meuguru.controllers', [])
             var _error = function() {
                 LoadingService.endLoad();
                 var errorPopUp = $ionicPopup.show({
-                    title: 'Error',
+                    title: 'Erro',
                     template: '<p style="text-align: center ">Não foi possível localizá-lo.</p>',
                 });
                 $timeout(function() {
@@ -220,7 +220,6 @@ angular.module('meuguru.controllers', [])
                         {
                             text: 'Limpar filtros',
                             onTap: function(e) {
-                                console.log($scope.fornecedores);
                                 if($scope.fornecedores.length > 15) {
                                     $scope.fornecedores.splice(15,$scope.fornecedores.length);
                                 }
