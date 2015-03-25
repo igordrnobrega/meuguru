@@ -604,11 +604,11 @@ only screen and (min-device-pixel-ratio : 1.5) {
 	line-height: 64px;
 }
 
-.ios ion-header-bar.menu-title-bar.bar.bar-header.disable-user-behavior.has-tabs-top {
+.ios ion-header-bar.menu-title-bar {
 	line-height: 64px;
 }
 
-.ios ion-header-bar.menu-title-bar.bar.bar-header.disable-user-behavior.has-tabs-top + .menu .list {
+.ios ion-header-bar.menu-title-bar + .menu .list {
 	margin-top: 64px;
 }
 

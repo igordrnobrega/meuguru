@@ -1,14 +1,68 @@
-angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource', 'pasvaz.bindonce'])
+var db = null;
 
-.run(['$rootScope', '$ionicPlatform',
-	function($rootScope, $ionicPlatform) {
+angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource', 'pasvaz.bindonce', 'ngCordova'])
+
+.run(['$rootScope', '$timeout', '$ionicPlatform', '$ionicPopup', '$cordovaSQLite', '$cordovaStatusbar',
+	function($rootScope, $timeout, $ionicPlatform, $ionicPopup, $cordovaSQLite, $cordovaStatusbar) {
 		$ionicPlatform.ready(function() {
+            if(window.Connection) {
+                if(
+                    navigator.connection.type == Connection.NONE ||
+                    navigator.connection.type == Connection.UNKNOWN
+                ) {
+                    $ionicPopup.confirm({
+                        title: "Sem acesso à internet.",
+                        content: "Não conseguimos estabelecer uma conexão com Internet. Verifique a conexão."
+                    })
+                    .then(function(result) {
+                        ionic.Platform.exitApp();
+                    });
+                }
+            }
+
+            $cordovaStatusbar.overlaysWebView(true);
+            $cordovaStatusbar.styleHex('#1b3d6e');
+
 			if(window.cordova && window.cordova.plugins.Keyboard) {
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 			}
-			if(window.StatusBar) {
-				StatusBar.styleHex('#1b3d6e');
-			}
+
+            if(window.plugins && window.plugins.AdMob) {
+                var admob_key 	= device.platform == "Android" ? "ca-app-pub-9472655871356402/6350910973" : "ca-app-pub-9472655871356402/9304377372";
+                var admob 		= window.plugins.AdMob;
+                $timeout(function() {
+                    admob.createBannerView(
+                    {
+                        'publisherId': admob_key,
+                        'adSize': admob.AD_SIZE.BANNER,
+                        'bannerAtTop': false
+                    },
+                    function() {
+                        admob.requestAd(
+                            {
+                                'isTesting': true,
+                                'extras': {
+                                    'color_bg': 'ECECEC',
+                                    'color_bg_top': 'ECECEC',
+                                    'color_border': 'ECECEC',
+                                    'color_link': 'ECECEC',
+                                    'color_text': 'ECECEC',
+                                    'color_url': 'ECECEC'
+                                },
+                            },
+                            function() {
+                                admob.showAd(true);
+                            },
+                            function() { console.log('failed to request ad'); }
+                        );
+                    },
+                    function() { console.log('failed to create banner view'); }
+                    );
+                }, 2000);
+            }
+
+            db = $cordovaSQLite.openDB("meuguru.db");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS favorito (id integer primary key, id_post text, tx_type text)");
 		});
 
 		$rootScope.checkImg = function(url) {
@@ -30,6 +84,9 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 
 .config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider',
 	function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+        $ionicConfigProvider.views.forwardCache(false);
+        $ionicConfigProvider.views.maxCache(0);
 
 		$ionicConfigProvider.backButton.previousTitleText(false);
 		$ionicConfigProvider.backButton.text('');
@@ -182,6 +239,16 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 				}
 			}
 		})
+
+        .state('tab.favoritos', {
+            url: '/favoritos',
+            views: {
+                'tab': {
+                    templateUrl: 'template/favoritos.html',
+                    controller: 'FavoritosCtrl'
+                }
+            }
+        })
 
 		.state('tab.contato', {
 			url: '/contato',

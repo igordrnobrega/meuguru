@@ -1,65 +1,19 @@
 angular.module('meuguru.controllers', [])
 
-.controller('IndexCtrl', ['$timeout', '$rootScope', '$ionicPlatform', '$ionicPopup',
-    function($timeout, $rootScope, $ionicPlatform, $ionicPopup) {
-        $ionicPlatform.ready(function() {
-            if(window.Connection) {
-                if(
-                    navigator.connection.type == Connection.NONE ||
-                    navigator.connection.type == Connection.UNKNOWN
-                ) {
-                    $ionicPopup.confirm({
-                        title: "Internet Disconnected",
-                        content: "Não possui conexão com Internet."
-                    })
-                    .then(function(result) {
-                        ionic.Platform.exitApp();
-                    });
-                }
-            }
-            if(window.plugins && window.plugins.AdMob) {
-                $timeout(function() {
-                    //Fazer o reconhecimento pra Android, IOS e Windows
-                    var admob_key = device.platform == "Android" ? "ca-app-pub-9472655871356402/6350910973" : "ca-app-pub-9472655871356402/9304377372";
-                    var admob = window.plugins.AdMob;
-                    admob.createBannerView(
-                    {
-                        'publisherId': admob_key,
-                        'adSize': admob.AD_SIZE.BANNER,
-                        'bannerAtTop': false
-                    },
-                    function() {
-                        admob.requestAd(
-                            { 'isTesting': true },
-                            function() {
-                                admob.showAd(true);
-                            },
-                            function() { console.log('failed to request ad'); }
-                        );
-                    },
-                    function() { console.log('failed to create banner view'); }
-                    );
-                }, 2000);
-            }
-        });
+.controller('IndexCtrl', [
+    function() {
 
     }
 ])
 
-.controller('TabsCtrl', ['$scope','$location','$timeout','$ionicPopup','$ionicSideMenuDelegate',
-    function($scope, $location, $timeout, $ionicPopup, $ionicSideMenuDelegate) {
+.controller('TabsCtrl', ['$scope','$location','$timeout','$ionicPopup','$ionicSideMenuDelegate','$cordovaSQLite', 'FavoritosService',
+    function($scope, $location, $timeout, $ionicPopup, $ionicSideMenuDelegate, $cordovaSQLite, FavoritosService) {
         $scope.toggleLeft = function() {
             $ionicSideMenuDelegate.toggleLeft();
         };
 
         $scope.addFavorite = function(route, id) {
-            var favoritePopUp = $ionicPopup.show({
-                title: route,
-                template: '<p style="text-align: center ">Adicionado aos favoritos.</p>',
-            });
-            $timeout(function() {
-                favoritePopUp.close();
-            }, 1500);
+            FavoritosService.setFavorito(route, id);
         };
     }
 ])
@@ -626,6 +580,12 @@ angular.module('meuguru.controllers', [])
             };
         });
     }
+])
+
+.controller('FavoritosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', 'FavoritosService',
+        function($scope, $ionicPopup, MeuGuruService, FavoritosService) {
+            $scope.favoritos = FavoritosService.getFavoritos();
+        }
 ])
 
 .controller('ContatoCtrl',  ['$scope',

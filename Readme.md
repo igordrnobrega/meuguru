@@ -8,3 +8,4 @@ plugins
     org.apache.cordova.geolocation
     org.apache.cordova.network-information
     org.apache.cordova.splashscreen
+    https://github.com/brodysoft/Cordova-SQLitePlugin

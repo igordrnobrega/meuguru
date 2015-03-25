@@ -1,0 +1,6 @@
+<ion-view view-title="Favoritos">
+    <ion-content id="index" data-has-bouncing="false">
+        <p ng-if="favoritos.length == 0">Você não possui nenhum favorito.</p>
+        <p ng-if="favoritos.length != 0" ng-repeat="favorito in favoritos">{{ favorito.id_post }} {{ favorito.tx_type }}</p>
+    </ion-content>
+</ion-view>

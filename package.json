@@ -19,6 +19,8 @@
     "com.rjfun.cordova.plugin.admob",
     "org.apache.cordova.geolocation",
     "uk.co.workingedge.phonegap.plugin.launchnavigator",
-    "org.apache.cordova.splashscreen"
+    "org.apache.cordova.splashscreen",
+    "com.google.playservices",
+    "org.apache.cordova.statusbar"
   ]
 }

@@ -22,6 +22,18 @@ angular.module('meuguru.services', [])
 
         return {
             getEventos: function($scope) {
+                var _prepareView = function() {
+                    $scope.segEventos   = segEventos;
+                    $scope.allEventos   = eventos.concat();
+                    $scope.eventos      = eventos.concat();
+
+                    if(eventos.length > 15) {
+                        $scope.eventos.splice(LOAD_INICIAL, eventos.length);
+                    }
+
+                    $scope.load     = false;
+                    $scope.moredata = false;
+                }
 
                 if(eventos.length == 0) {
                     LoadingService.load();
@@ -29,27 +41,29 @@ angular.module('meuguru.services', [])
                         .success(function(data) {
                             eventos             = data.eventos;
                             segEventos          = data.segmentos;
-                            $scope.segEventos   = segEventos;
-                            $scope.allEventos   = eventos.concat();
-                            $scope.eventos      = eventos.concat();
-
-                            if(eventos.length > 15) {
-                                $scope.eventos.splice(LOAD_INICIAL, eventos.length);
-                            }
-
-                            $scope.load     = false;
-                            $scope.moredata = false;
+                            _prepareView();
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
+                    return;
                 }
-                $scope.segEventos   = segEventos;
-                $scope.eventos      = eventos;
             },
             getFornecedores: function($scope) {
+                var _prepareView = function() {
+                    $scope.segFor           = segFor;
+                    $scope.allFornecedores  = fornecedores.concat();
+                    $scope.fornecedores     = fornecedores.concat();
+                    if(fornecedores.length > 15) {
+                        $scope.fornecedores.splice(LOAD_INICIAL, fornecedores.length);
+                    }
+                    $scope.load = false;
+                    $scope.moredata = false;
+                }
 
                 if(fornecedores.length == 0) {
                     LoadingService.load();
@@ -57,25 +71,30 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             fornecedores            = data.fornecedores;
                             segFor                  = data.segmentos;
-                            $scope.segFor           = segFor;
-                            $scope.allFornecedores  = fornecedores.concat();
-                            $scope.fornecedores     = fornecedores.concat();
-                            if(fornecedores.length > 15) {
-                                $scope.fornecedores.splice(LOAD_INICIAL, fornecedores.length);
-                            }
-                            $scope.load = false;
-                            $scope.moredata = false;
+                            _prepareView();
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
                 }
-                $scope.segFor       = segFor;
-                $scope.fornecedores = fornecedores;
             },
             getPavilhoes: function($scope) {
+                var _prepareView = function() {
+                    $scope.segPav       = segPav;
+                    $scope.allPavilhoes = pavilhoes.concat();
+                    $scope.pavilhoes    = pavilhoes.concat();
+
+                    if(pavilhoes.length > 15) {
+                        $scope.pavilhoes.splice(LOAD_INICIAL, pavilhoes.length);
+                    }
+
+                    $scope.load = false;
+                    $scope.moredata = false;
+                }
 
                 if(pavilhoes.length == 0) {
                     LoadingService.load();
@@ -83,27 +102,30 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             pavilhoes           = data.locais;
                             segPav              = data.segmentos;
-                            $scope.segPav       = segPav;
-                            $scope.allPavilhoes = pavilhoes.concat();
-                            $scope.pavilhoes    = pavilhoes.concat();
 
-                            if(pavilhoes.length > 15) {
-                                $scope.pavilhoes.splice(LOAD_INICIAL, pavilhoes.length);
-                            }
-
-                            $scope.load = false;
-                            $scope.moredata = false;
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
                 }
-                $scope.segPav    = segPav;
-                $scope.pavilhoes = pavilhoes;
             },
             getProdutos: function($scope) {
+                var _prepareView = function() {
+                    $scope.segProd      = segProd;
+                    $scope.allProdutos  = produtos.concat();
+                    $scope.produtos     = produtos.concat();
+
+                    if(produtos.length > 15) {
+                        $scope.produtos.splice(LOAD_INICIAL, produtos.length);
+                    }
+
+                    $scope.load = false;
+                    $scope.moredata = false;
+                }
 
                 if(produtos.length == 0) {
                     LoadingService.load();
@@ -111,27 +133,30 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             produtos            = data.produtos;
                             segProd             = data.segmentos;
-                            $scope.segProd      = segProd;
-                            $scope.allProdutos  = produtos.concat();
-                            $scope.produtos     = produtos.concat();
-
-                            if(produtos.length > 15) {
-                                $scope.produtos.splice(LOAD_INICIAL, produtos.length);
-                            }
-
-                            $scope.load = false;
-                            $scope.moredata = false;
+                            _prepareView();
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
                 }
-                $scope.segProd  = segProd;
-                $scope.produtos = produtos;
             },
             getNoticias: function($scope) {
+                var _prepareView = function() {
+                    $scope.segNot       = segNot;
+                    $scope.allNoticias = noticias.concat();
+                    $scope.noticias = noticias.concat();
+
+                    if(noticias.length > 15) {
+                        $scope.noticias.splice(LOAD_INICIAL, noticias.length);
+                    }
+
+                    $scope.load = false;
+                    $scope.moredata = false;
+                }
 
                 if(noticias.length == 0) {
                     LoadingService.load();
@@ -139,27 +164,30 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             noticias            = data.noticias;
                             segNot              = data.segmentos;
-                            $scope.segNot       = segNot;
-                            $scope.allNoticias = noticias.concat();
-                            $scope.noticias = noticias.concat();
-
-                            if(noticias.length > 15) {
-                                $scope.noticias.splice(LOAD_INICIAL, noticias.length);
-                            }
-
-                            $scope.load = false;
-                            $scope.moredata = false;
+                            _prepareView();
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
                 }
-                $scope.segNot   = segNot;
-                $scope.noticias = noticias;
             },
             getServicos: function($scope) {
+                var _prepareView = function() {
+                    $scope.segSer       = segSer;
+                    $scope.allServicos  = servicos.concat();
+                    $scope.servicos     = servicos.concat();
+
+                    if(servicos.length) {
+                        $scope.servicos.splice(LOAD_INICIAL, servicos.length);
+                    }
+
+                    $scope.load = false;
+                    $scope.moredata = false;
+                }
 
                 if(servicos.length == 0) {
                     LoadingService.load();
@@ -167,53 +195,46 @@ angular.module('meuguru.services', [])
                         .success(function(data, status, headers, config) {
                             servicos            = data.servicos;
                             segSer              = data.segmentos;
-                            $scope.segSer       = segSer;
-                            $scope.allServicos  = servicos.concat();
-                            $scope.servicos     = servicos.concat();
-
-                            if(servicos.length) {
-                                $scope.servicos.splice(LOAD_INICIAL, servicos.length);
-                            }
-
-                            $scope.load = false;
-                            $scope.moredata = false;
+                            _prepareView();
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
                 }
-                $scope.segSer   = segSer;
-                $scope.servicos = servicos;
             },
             getEstandes: function($scope) {
+                var _prepareView = function() {
+                    $scope.segEst       = segEst;
+                    $scope.allEstandes  = estandes.concat();
+                    $scope.estandes     = estandes.concat();
 
+                    if(estandes.length > 15) {
+                        $scope.estandes.splice(LOAD_INICIAL, estandes.length);
+                    }
+
+                    $scope.load = false;
+                    $scope.moredata = false;
+                }
                 if(estandes.length == 0) {
                     LoadingService.load();
                     $http.get(url + 'estandes', {responseType: 'json'})
                         .success(function(data, status, headers, config) {
                             estandes            = data.estandes;
                             segEst              = data.segmentos;
-                            $scope.segEst       = segEst;
-                            $scope.allEstandes  = estandes.concat();
-                            $scope.estandes     = estandes.concat();
-
-                            if(estandes.length > 15) {
-                                $scope.estandes.splice(LOAD_INICIAL, estandes.length);
-                            }
-
-                            $scope.load = false;
-                            $scope.moredata = false;
+                            _prepareView();
                             LoadingService.endLoad();
                             return;
                         })
                         .error(function() {
-
+                            LoadingService.endLoad();
                         })
+                } else {
+                    _prepareView();
                 }
-                $scope.segEst   = segEst;
-                $scope.estandes = estandes;
             }
         }
 
@@ -262,6 +283,59 @@ angular.module('meuguru.services', [])
             },
             endLoad: function() {
                 $ionicLoading.hide();
+            }
+        }
+    }
+])
+
+.factory('FavoritosService', [
+    'LoadingService', '$timeout', '$cordovaSQLite', '$ionicPopup',
+    function(LoadingService, $timeout, $cordovaSQLite, $ionicPopup) {
+        var favoritos = [];
+
+        return {
+            getFavoritos: function(){
+                var query = "SELECT id_post, tx_type FROM favorito";
+                $cordovaSQLite.execute(db, query).then(function(res) {
+                    if(res.rows.length > 0) {
+                        if(favoritos.length != 0){
+                            favoritos = [];
+                        }
+                        for (var i = res.rows.length - 1; i >= 0; i--) {
+                            favoritos.push(res.rows.item(i));
+                        };
+                    }
+                }, function (err) {
+                    var favoritePopUp = $ionicPopup.show({
+                        title: route,
+                        template: '<p style="text-align: center ">Não foi possível recuperar os favoritos. Tente novamente mais tarde.</p>',
+                    });
+                    $timeout(function() {
+                        favoritePopUp.close();
+                    }, 1500);
+                });
+
+                return favoritos;
+            },
+            setFavorito: function(route, id) {
+                var query = "INSERT INTO favorito (id_post, tx_type) VALUES (?,?)";
+                $cordovaSQLite.execute(db, query, [id, route]).then(function(res) {
+                    var favoritePopUp = $ionicPopup.show({
+                        title: route,
+                        template: '<p style="text-align: center ">Adicionado aos favoritos.</p>',
+                    });
+                    $timeout(function() {
+                        favoritePopUp.close();
+                    }, 1500);
+                }, function (err) {
+                    var favoritePopUp = $ionicPopup.show({
+                        title: route,
+                        template: '<p style="text-align: center ">Não foi possível adicionar aos favoritos.</p>',
+                    });
+                    $timeout(function() {
+                        favoritePopUp.close();
+                    }, 1500);
+                });
             }
         }
     }
