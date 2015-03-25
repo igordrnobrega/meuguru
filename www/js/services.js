@@ -256,9 +256,9 @@ angular.module('meuguru.services', [])
                     hideOnStateChange: true,
                     noBackdrop: false
                 });
-                $timeout(function() {
-                    $ionicLoading.hide();
-                }, 100000);
+                // $timeout(function() {
+                //     $ionicLoading.hide();
+                // }, 100000);
             },
             endLoad: function() {
                 $ionicLoading.hide();
