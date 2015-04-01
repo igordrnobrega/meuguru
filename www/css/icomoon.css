@@ -1,0 +1,30 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?-caadvq');
+	src:url('../fonts/icomoon.eot?#iefix-caadvq') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?-caadvq') format('woff'),
+		url('../fonts/icomoon.ttf?-caadvq') format('truetype'),
+		url('../fonts/icomoon.svg?-caadvq#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	font-size: 23px !important;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon-meuguru:before {
+	content: "\e600";
+}
+

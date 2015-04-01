@@ -1,6 +1,75 @@
 <ion-view view-title="Favoritos">
+
+    <div class="tabs tabs-top tabs-icon-left filtro-bar">
+        <a class="tab-item tab-item-right" data-ng-click="showPopup()">
+            <i class="icon ion-funnel"></i>
+            Filtrar
+        </a>
+    </div>
+
     <ion-content id="index" data-has-bouncing="false">
-        <p ng-if="favoritos.length == 0">Você não possui nenhum favorito.</p>
-        <p ng-if="favoritos.length != 0" ng-repeat="favorito in favoritos">{{ favorito.id_post }} {{ favorito.tx_type }}</p>
+        <ion-refresher ng-if="favoritos.length != 0" pulling-text="Puxe para atualizar..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <p ng-if="favoritos.length == 0 && load">Você não possui nenhum favorito.</p>
+        <loading id="loading-favoritos"></loading>
+        <ion-list class="listar">
+            <ion-item class="item-icon-right" data-bindonce="favoritos" data-ng-repeat="favorito in favoritos | filtrarFavorito:filtro.categoria" ng-href="{{ favorito.tx_type == 'Evento' ? '#/tab/evento/' + favorito.evento.ID : (favorito.tx_type == 'Fornecedor' ? '#/tab/fornecedor/' + favorito.fornecedor.ID : (favorito.tx_type == 'Projeto de Estande' ? '#/tab/estande/' + favorito.estande.ID : (favorito.tx_type == 'Notícia' ? '#/tab/noticia/' + favorito.noticia.ID : (favorito.tx_type == 'Pavilhão' ? '#/tab/pavilhao/' + favorito.pavilhao.ID : (favorito.tx_type == 'Produto' ? '#/tab/produto/' + favorito.produto.ID : '#/tab/servico/' + favorito.servico.ID ))))) }}">
+
+                <div ng-if="favorito.tx_type == 'Evento'">
+                    <div class="thumb" style="background:url({{ checkImg(favorito.evento.guid) ? favorito.evento.guid : 'img/no-photo.png' }});"></div>
+                    <h1 bo-class="{{ favorito.evento.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="favorito.evento.post_title"></h1>
+                    <p>Data:<span bo-html="favorito.evento.dataInicial ? favorito.evento.dataInicial : '-'"></span></p>
+                    <p>Segmento:<span bo-html="favorito.evento.name ? favorito.evento.name : '-'"></span></p>
+                    <p>Uf:<span bo-html="favorito.evento.estadoFeira ? favorito.evento.estadoFeira : '-'"></span></p>
+                    <p>Cidade:<span bo-html="favorito.evento.cidadeFeira ? favorito.evento.cidadeFeira : '-'"></span></p>
+                    <p>Promotor:<span bo-html="favorito.evento.promotorFeira ? favorito.evento.promotorFeira : '-'"></span></p>
+                    <p>Pavilhão:<span bo-html="favorito.evento.pavilhaoFeira ? favorito.evento.pavilhaoFeira : '-'"></span></p>
+                </div>
+
+                <div ng-if="favorito.tx_type == 'Projeto de Estande'">
+                    <div class="thumb estande" style="background:url({{ checkImg(favorito.estande.guid) ? favorito.estande.guid : 'img/no-photo.png' }});"></div>
+                    <h1 class="estande" bo-html="favorito.estande.post_title"></h1>
+                    <p class="estande">Arquiteto:<span bo-html="favorito.estande.arquitetoProjeto"></span></p>
+                </div>
+
+                <div ng-if="favorito.tx_type == 'Fornecedor'">
+                    <div class="thumb" style="background:url({{ checkImg(favorito.fornecedor.guid) ? favorito.fornecedor.guid : 'img/no-photo.png' }});"></div>
+                    <h1 bo-class="{{ favorito.fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="favorito.fornecedor.post_title"></h1>
+                    <p>Estado:<span bo-html="favorito.fornecedor.estado ? favorito.fornecedor.estado : '-'"></span></p>
+                    <p>Cidade:<span bo-html="favorito.fornecedor.cidade ? favorito.fornecedor.cidade : '-'"></span></p>
+                    <p class="no-wrap">Serviços:<span bo-html="favorito.fornecedor._yoast_wpseo_metadesc ? favorito.fornecedor._yoast_wpseo_metadesc : '-'"></span></p>
+                </div>
+
+                <div ng-if="favorito.tx_type == 'Notícia'">
+                    <div class="thumb noticia" style="background:url({{ checkImg(favorito.noticia.guid) ? favorito.noticia.guid : 'img/no-photo.png' }});"></div>
+                    <h1 class="noticia-h1" bo-html="favorito.noticia.post_date | date:'dd/MM/yyyy'"></h1>
+                    <p class="noticia-p" bo-html="favorito.noticia.post_title"></p>
+                </div>
+
+                <div ng-if="favorito.tx_type == 'Pavilhão'">
+                    <div class="thumb" style="background:url({{ checkImg(favorito.pavilhao.guid) ? favorito.pavilhao.guid : 'img/no-photo.png' }});"></div>
+                    <h1 bo-class="{{ favorito.pavilhao.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="favorito.pavilhao.post_title"></h1>
+                    <p>Estado:<span bo-html="favorito.pavilhao.estadoPavilhao ? favorito.pavilhao.estadoPavilhao : '-'"></span></p>
+                    <p>Cidade:<span bo-html="favorito.pavilhao.cidadePavilhao ? favorito.pavilhao.cidadePavilhao : '-'"></span></p>
+                </div>
+
+                <div ng-if="favorito.tx_type == 'Produto'">
+                    <div class="thumb" style="background:url({{ checkImg(favorito.produto.guid) ? favorito.produto.guid : 'img/no-photo.png' }});"></div>
+                    <h1 bo-class="{{ favorito.produto.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="favorito.produto.post_title"></h1>
+                    <p>Empresa:<span bo-html="favorito.produto.NomedaLoja ? favorito.produto.NomedaLoja : '-'"></span></p>
+                    <p class="last">Telefone:<span bo-html="favorito.produto.loja.telefoneLoja ? favorito.produto.loja.telefoneLoja : '-'"></span></p>
+                </div>
+
+                <div  ng-if="favorito.tx_type == 'Serviço'">
+                    <div class="thumb" style="background:url({{ checkImg(favorito.servico.guid) ? favorito.servico.guid : 'img/no-photo.png' }});"></div>
+                    <h1 bo-class="{{ favorito.servico.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="favorito.servico.post_title"></h1>
+                    <p>Endereço:<span bo-html="favorito.servico.ruaServico + ', ' + favorito.servico.numeroServico + ' | CEP ' + favorito.servico.cepServico + '-' + favorito.servico.bairroServico + '/' + favorito.servico.estadoServico"></span></p>
+                    <p>Telefone:<span bo-html="favorito.servico.telefoneServico ? favorito.servico.telefoneServico : 'Não Cadastrado'"></span></p>
+                </div>
+
+                <i class="icon ion-chevron-right"></i>
+            </ion-item>
+        </ion-list>
+
     </ion-content>
 </ion-view>

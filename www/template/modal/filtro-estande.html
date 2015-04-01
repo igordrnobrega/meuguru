@@ -5,9 +5,17 @@
 	</label>
     <label class="item item-input item-select">
         <span class="input-label">
-            Categoria/Posição
+            Categoria
         </span>
         <select ng-model="filtro.categoria" ng-options="segmento for segmento in segEst">
+            <option value=""> -- </option>
+        </select>
+    </label>
+    <label class="item item-input item-select">
+        <span class="input-label">
+            Posição
+        </span>
+        <select ng-model="filtro.posicao" ng-options="posicao for posicao in posiEst">
             <option value=""> -- </option>
         </select>
     </label>

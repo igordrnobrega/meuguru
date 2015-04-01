@@ -1,15 +1,16 @@
-<ion-view view-title="Serviço">
+<ion-view view-title="Serviços">
 
     <ion-nav-buttons side="right">
-      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Serviço', servico.ID)"></button>
+        <button ng-if="!servico.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Serviço', servico.ID)"></button>
+        <button ng-if="servico.isFavorito" class="button icon button-clear ion-android-star"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list data-bindonce="servico" class="listar-evento">
-            <ion-item>
+            <ion-item class="info">
                 <div class="thumb" style="background:url({{ checkImg(servico.guid) ? servico.guid : 'img/no-photo.png' }});"></div>
-                <h1 class="{{ servico.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="servico.post_title"></h1>
+                <h1 class="adjM" bo-class="{{ servico.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="servico.post_title"></h1>
                 <p><i class="icon ion-ios-location"></i><span>{{ servico.ruaServico + ', ' + servico.numeroServico + ' | CEP ' + servico.cepServico + '-' + servico.bairroServico + '/' + servico.estadoServico }}</span></p>
                 <p><i class="icon ion-ios-telephone"></i><span bo-html="servico.telefoneServico ? servico.telefoneServico : 'Não Cadastrado'"></span></p>
                 <p><i class="icon ion-ios-world"></i><span><a href="{{ servico.siteServico }}" bo-html="servico.siteServico ? servico.siteServico : '-'"></a></span></p>
@@ -17,7 +18,7 @@
 
             <ion-item class="detail">
                 <h2>Descrição</h2>
-                <p bo-html="servico._yoast_wpseo_metadesc ? servico._yoast_wpseo_metadesc : 'Não possui descrição.'"></p>
+                <p bo-html="servico.post_content ? servico.post_content : 'Sem descrição.'"></p>
             </ion-item>
         </ion-list>
     </ion-content>

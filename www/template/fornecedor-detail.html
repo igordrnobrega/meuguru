@@ -1,15 +1,16 @@
-<ion-view view-title="Fornecedor">
+<ion-view view-title="Fornecedores">
 
     <ion-nav-buttons side="right">
-      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Fornecedor', fornecedor.ID)"></button>
+  		<button ng-if="!fornecedor.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Fornecedor', fornecedor.ID)"></button>
+  		<button ng-if="fornecedor.isFavorito" class="button icon button-clear ion-android-star"></button>
     </ion-nav-buttons>
 
 	<ion-content id="index" data-has-bouncing="false">
 
 		<ion-list data-bindonce="fornecedor" class="listar-evento">
-			<ion-item>
+			<ion-item class="info">
 				<div class="thumb" style="background:url({{ checkImg(fornecedor.guid) ? fornecedor.guid : 'img/no-photo.png' }});"></div>
-				<h1 bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
+				<h1 class="adjM" bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
 				<p><i class="icon ion-ios-location"></i><span>{{ fornecedor.endereco ? fornecedor.endereco : '-' }} {{ fornecedor.cidade ? fornecedor.cidade : '-' }}/{{ fornecedor.estado ? fornecedor.estado : '-' }}</span></p>
 				<p><i class="icon ion-ios-telephone"></i><span bo-html="fornecedor.telefone ? fornecedor.telefone : '-'"></span></p>
 				<p><i class="icon ion-ios-world"></i><span><a bo-href="fornecedor.siteFeira" bo-html="fornecedor.site ? fornecedor.site : '-'"></a></span></p>
@@ -17,7 +18,7 @@
 
 			<ion-item class="detail">
 				<h2>Descrição</h2>
-				<p bo-html="fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : 'Sem descrição.'"></p>
+				<p bo-html="fornecedor.post_content ? fornecedor.post_content : 'Sem descrição.'"></p>
 			</ion-item>
 		</ion-list>
 	</ion-content>

@@ -16,3 +16,16 @@ angular.module('meuguru.directives', [])
 		}
 	}
 ])
+
+.directive('loading', [
+	function () {
+		return {
+			restrict: 'E',
+		    scope: {
+		      text: '=text',
+		      id: '=id'
+		    },
+			templateUrl: 'template/modal/loading.html'
+		}
+	}
+])

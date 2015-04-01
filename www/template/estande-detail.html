@@ -1,15 +1,16 @@
-<ion-view view-title="Estande">
+<ion-view view-title="Projeto de Estandes">
 
     <ion-nav-buttons side="right">
-      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Projeto de Estande', estande.ID)"></button>
+      <button ng-if="!estande.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Projeto de Estande', estande.ID)"></button>
+      <button ng-if="estande.isFavorito" class="button icon button-clear ion-android-star"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list data-bindonce="estande" class="listar-evento">
-            <ion-item>
+            <ion-item class="info">
                 <div class="thumb" style="background:url({{ checkImg(estande.guid) ? estande.guid : 'img/no-photo.png' }});"></div>
-                <h1 bo-class="{{ estande.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="estande.post_title"></h1>
+                <h1 class="adjM" bo-class="{{ estande.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="estande.post_title"></h1>
                 <p><i class="icon ion-person"></i><span>Arquiteto - <b bo-html="estande.arquitetoProjeto"></b></span></p>
                 <p><i class="icon ion-home"></i><span>Montadora - <b bo-html="estande.montadoraProjeto"></b></span></p>
                 <p><i class="icon ion-ios-location"></i><span bo-html="estande.ruaProjeto + ', ' + estande.numeroProjeto + ' | CEP ' + estande.cepProjeto + '-' + estande.bairroProjeto + '/' + estande.estadoProjeto"></span></p>

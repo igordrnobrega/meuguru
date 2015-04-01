@@ -8,7 +8,7 @@
     </div>
 
     <ion-content id="index" data-has-bouncing="false">
-
+        <loading id="loading-servicos"></loading>
         <ion-list class="listar" data-ng-if="!load">
           <ion-item class="item-icon-right" data-bindonce="servicos" data-ng-repeat="servico in servicos | filtrarServico:filtro:allServicos" href="#/tab/servico/{{ servico.ID }}">
                 <div class="thumb" style="background:url({{ checkImg(servico.guid) ? servico.guid : 'img/no-photo.png' }});"></div>

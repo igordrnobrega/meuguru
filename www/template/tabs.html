@@ -1,13 +1,12 @@
 <ion-side-menus data-ng-controller="TabsCtrl">
 	<ion-side-menu-content>
-		<ion-nav-bar class="bar-stable">
+		<ion-nav-bar align-title="left" class="bar-stable">
 			<ion-nav-back-button class="button icon button-clear ion-chevron-left">
 			</ion-nav-back-button>
 
 			<ion-nav-buttons side="left">
 				<button data-ng-click="toggleLeft()" class="button icon button-clear ion-navicon-round"></button>
 			</ion-nav-buttons>
-			<img class="title menu-title" ng-src="img/logo-home.png">
 		</ion-nav-bar>
 		<ion-nav-view name="tab"></ion-nav-view>
 	</ion-side-menu-content>
@@ -17,8 +16,12 @@
 		</ion-header-bar>
 		<ion-list class="menu">
 			<ion-item class="item-icon-left" menu-close href="#/index">
-				<i class="icon ion-home"></i>
-				Home
+				<i class="icon icon-icon-meuguru"></i>
+				Meu Guru
+			</ion-item>
+			<ion-item class="item-icon-left" menu-close href="#/tab/favoritos">
+				<i class="icon ion-android-star"></i>
+				Favoritos
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/eventos">
 				<i class="icon ion-calendar"></i>
@@ -26,11 +29,11 @@
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/fornecedores">
 				<i class="icon ion-person-stalker"></i>
-				Fornecedores
+				Fornecedor
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/pavilhoes">
 				<i class="icon ion-ios-home"></i>
-				Pavilhões
+				Pavilhão
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/servicos">
 				<i class="icon ion-settings"></i>
@@ -38,7 +41,7 @@
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/produtos">
 				<i class="icon ion-ios-book"></i>
-				Cat. de Produtos
+				Catálogo de Produtos
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/noticias">
 				<i class="icon ion-ios-paper"></i>
@@ -47,10 +50,6 @@
 			<ion-item class="item-icon-left" menu-close href="#/tab/estandes">
 				<i class="icon ion-edit"></i>
 				Projetos de Estandes
-			</ion-item>
-			<ion-item class="item-icon-left" menu-close href="#/tab/favoritos">
-				<i class="icon ion-android-star"></i>
-				Favoritos
 			</ion-item>
 			<ion-item class="item-icon-left" menu-close href="#/tab/contato">
 				<i class="icon ion-email"></i>

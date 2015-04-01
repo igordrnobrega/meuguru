@@ -1,7 +1,11 @@
 /* Empty. Add your own CSS if you like */
 body {
-	font-family: 'Roboto Regular', sans-serif !important;
+	font-family: 'Roboto', sans-serif !important;
 	background-color: #1b3d6e;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
+	font-family: 'Roboto', sans-serif !important;
 }
 
 #home {
@@ -22,11 +26,9 @@ body {
 	}
 
 		.bar-header img.menu-title {
-			left: 47px;
-			right: 43px;
-			width: 76px;
-			height: auto;
-			top: 9px;
+			width: auto;
+			height: 30px;
+			margin-top: 6px;
 		}
 
 		.bar-header .title {
@@ -36,6 +38,11 @@ body {
 
 	.button-clear.button-clear {
 		color: #fff !important;
+	}
+
+	.bar {
+  		border: none !important;
+  		border-color: #1c1c1c !important;
 	}
 
 	.list.inside,
@@ -66,10 +73,19 @@ body {
 		padding: 20px 63px;
 	}
 
+	.item.info {
+		padding-bottom: 16px !important;
+	}
+
+	.item.detail {
+		padding-top: 16px !important;
+	}
+
 	.listar .list .item,
 	.listar-evento .list .item {
 		border: none;
 		border-bottom: 2px solid #ececec;
+		padding: 0;
 	}
 
 	.listar .list .item:last-child,
@@ -88,9 +104,36 @@ body {
 		background-repeat: no-repeat !important;
 	}
 
+		.thumb.produto,
 		.listar .list .item .thumb.estande {
-			height: 120px;
-			width: 160px;
+			height: 130px !important;
+			width: 130px !important;
+		}
+
+		.thumb.noticia {
+			height: 90px !important;
+			width: 140px !important;
+		}
+
+		.produto .thumb {
+			height: 100px !important;
+			width: 100px !important;
+		  	margin: 0 !important;
+		}
+
+		.produto h1 {
+  			width: 50% !important;
+		}
+
+		.produto p {
+			display: inline-block;
+			position: absolute;
+			top: 82px;
+			margin-left: 5px;
+		}
+
+		.produto p.last {
+			top: 100px;
 		}
 
 	.listar-evento .list .item .thumb {
@@ -125,15 +168,23 @@ body {
 		position: absolute;
 		top: 0;
 		margin-left: 5px;
+		margin-top: 15px;
 	}
 
-		.listar-evento .list .item h1.noticia-h1,
-		.listar .list .item h1.noticia-h1 {
-			color: #808080;
+		h1.adjM {
+			margin-top: 0 !important;
+		}
+
+		h1.noticia-h1 {
+			color: #808080 !important;
+		}
+
+		h1.noticia-h1.adjM {
+			margin-top: 0 !important;
 		}
 
 		.listar .list .item h1.estande {
-			width: 33%;
+			width: 40%;
 		}
 
 	.listar-evento .list .item h1 {
@@ -159,29 +210,38 @@ body {
 	}
 
 	.listar-evento .list .item p.noticia-header {
-		font-family: 'Roboto Italic' !important;
+		font-family: 'Roboto' !important;
+		font-style: italic;
 		color: #808080;
 	}
 
 	.listar-evento .list .item p.noticia-body {
 		color: #808080;
+		margin: 0;
+	}
+
+	.listar .list .item p.noticia-p {
+	  	white-space: initial;
+	  	font-size: 14px;
 	}
 
 	.listar .list .item p.estande {
 		display: inline-block;
-		width: 40%;
+		width: 58%;
 		overflow: initial;
 		text-overflow: initial;
 		white-space: initial;
 		word-break: break-word;
+		position: absolute;
+		top: 108px;
+		margin-left: 5px;
 	}
-
-
 
 	.listar .list .item p span,
 	.listar-evento .list .item p span {
 		color: #808080;
 		margin-left: 5px;
+		white-space: initial;
 	}
 
 	.listar-evento .list .item p span {
@@ -194,19 +254,24 @@ body {
 		overflow: auto !important;
 		text-overflow: initial !important;
 		white-space: initial !important;
+		color: #808080;
 	}
 
 	.listar-evento .list .detail p {
 		margin: 10px 0 20px;
 	}
 
+	.listar-evento .list .detail p:last-child {
+		margin: 10px 0 0px;
+	}
+
 	.menu .list {
-		margin-top: 44px;
+		margin-top: 42px;
 	}
 
 		.menu .list a,
 		.menu {
-			background-color: rgb(68, 68, 68);
+			background-color: rgb(40, 40, 40);
 			color: #fff;
 		}
 
@@ -295,6 +360,10 @@ label.item.item-input.item-floating-label,
 		right: 5%;
 	}
 
+.back-button {
+	width: 40px;
+}
+
 button.button.back-button.hide.buttons.button.icon.button-clear.ion-chevron-left.header-item {
 	margin-left: 6px;
 }
@@ -317,7 +386,7 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 	text-align: left;
 	background-color: transparent;
 	border: none;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #ddd !important;
 }
 
 .item-input:last-child {
@@ -348,11 +417,20 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 	background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
-
 .loading {
 	background-color: rgba(27,61,110,0.9) !important;
 	width: 50% !important;
 	padding: 10px !important;
+	border-radius: 5px;
+	margin: 65% 25%;
+	-webkit-transition: all .1s .1s linear;
+	-ms-transition: all .1s .1s linear;
+	mso-transition: all .1s .1s linear;
+	-moz-transition: all .1s .1s linear;
+	-o-transition: all .1s .1s linear;
+	-xv-transition: all .1s .1s linear;
+	-apple-transition: all .1s .1s linear;
+	opacity: 1;
 }
 
 	.loading img {
@@ -384,6 +462,8 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 		text-transform: uppercase;
 		margin: 8px 0 0;
 		line-height: 12px;
+		color: #fff;
+		text-align: center;
 	}
 
 /* Smartphones (landscape) ----------- */
@@ -614,4 +694,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
 
 b {
 	font-weight: normal !important;
+}
+
+.item {
+	border-color: #1c1c1c;
 }

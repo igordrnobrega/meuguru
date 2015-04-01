@@ -12,6 +12,7 @@
     </div>
 
     <ion-content id="index" data-has-bouncing="false" >
+        <loading id="loading-eventos"></loading>
 
         <ion-list class="listar" data-ng-if="!load">
           <ion-item class="item-icon-right" data-bindonce="eventos" data-ng-repeat="evento in eventos | filtrarEvento:filtro:allEventos" href="#/tab/evento/{{ evento.ID }}">

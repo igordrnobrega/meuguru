@@ -1,7 +1,21 @@
+var rollPageTop = function() {
+    window.scrollTo(0,0);
+};
+
 angular.module('meuguru.controllers', [])
 
-.controller('IndexCtrl', [
-    function() {
+.controller('IndexCtrl', [ '$scope', 'MeuGuruService',
+    function($scope, MeuGuruService) {
+        var favoritos = [
+            {
+                'id_post'   : '44029',
+                'tx_type'   : 'Fornecedor'
+            },
+            {
+                'id_post'   : '51934',
+                'tx_type'   : 'Evento'
+            }
+        ];
 
     }
 ])
@@ -18,8 +32,8 @@ angular.module('meuguru.controllers', [])
     }
 ])
 
-.controller('AgendaCtrl', ['$scope', '$ionicPopup', '$timeout' ,'MeuGuruService', 'GeoReverseLocationService', 'LoadingService',
-        function($scope, $ionicPopup, $timeout, MeuGuruService, GeoReverseLocationService, LoadingService) {
+.controller('AgendaCtrl', ['$scope', '$ionicPopup', '$timeout' ,'MeuGuruService', 'GeoReverseLocationService', 'LoadingService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, $timeout, MeuGuruService, GeoReverseLocationService, LoadingService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             $scope.GeoReverseLocationService = GeoReverseLocationService;
@@ -41,6 +55,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {};
                             }
                         },
@@ -52,6 +67,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.eventos.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -141,23 +157,24 @@ angular.module('meuguru.controllers', [])
             }
         }
 ])
-.controller('EventoCtrl', ['$scope', '$stateParams', 'MeuGuruService',
-    function($scope, $stateParams, MeuGuruService) {
+.controller('EventoCtrl', ['$scope', '$rootScope', '$stateParams', 'MeuGuruService',
+    function($scope, $rootScope, $stateParams, MeuGuruService) {
         var id = $stateParams.eventoId;
         MeuGuruService.getEventos($scope);
 
-        $scope.$watch('eventos', function() {
-            for (var i = $scope.eventos.length - 1; i >= 0; i--) {
-                if($scope.eventos[i]['ID'] == id) {
-                    $scope.evento = $scope.eventos[i];
+
+        $scope.$watch('allEventos', function() {
+            for (var i = $scope.allEventos.length - 1; i >= 0; i--) {
+                if($scope.allEventos[i]['ID'] == id) {
+                    $scope.evento = $scope.allEventos[i];
                 }
             };
         });
     }
 ])
 
-.controller('FornecedoresCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
-        function($scope, $ionicPopup, MeuGuruService) {
+.controller('FornecedoresCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             var currentStart = 15;
@@ -179,6 +196,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {}
                             }
                         },
@@ -190,6 +208,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.fornecedores.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -217,18 +236,18 @@ angular.module('meuguru.controllers', [])
         var id = $stateParams.fornecedorId;
         MeuGuruService.getFornecedores($scope);
 
-        $scope.$watch('fornecedores', function() {
-            for (var i = $scope.fornecedores.length - 1; i >= 0; i--) {
-                if($scope.fornecedores[i]['ID'] == id) {
-                    $scope.fornecedor = $scope.fornecedores[i];
+        $scope.$watch('allFornecedores', function() {
+            for (var i = $scope.allFornecedores.length - 1; i >= 0; i--) {
+                if($scope.allFornecedores[i]['ID'] == id) {
+                    $scope.fornecedor = $scope.allFornecedores[i];
                 }
             };
         });
     }
 ])
 
-.controller('PavilhoesCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
-        function($scope, $ionicPopup, MeuGuruService) {
+.controller('PavilhoesCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             var currentStart = 15;
@@ -250,6 +269,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {}
                             }
                         },
@@ -261,6 +281,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.pavilhoes.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -288,18 +309,18 @@ angular.module('meuguru.controllers', [])
         var id = $stateParams.pavilhaoId;
         MeuGuruService.getPavilhoes($scope);
 
-        $scope.$watch('pavilhoes', function() {
-            for (var i = $scope.pavilhoes.length - 1; i >= 0; i--) {
-                if($scope.pavilhoes[i]['ID'] == id) {
-                    $scope.pavilhao = $scope.pavilhoes[i];
+        $scope.$watch('allPavilhoes', function() {
+            for (var i = $scope.allPavilhoes.length - 1; i >= 0; i--) {
+                if($scope.allPavilhoes[i]['ID'] == id) {
+                    $scope.pavilhao = $scope.allPavilhoes[i];
                 }
             };
         });
     }
 ])
 
-.controller('ProdutosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
-        function($scope, $ionicPopup, MeuGuruService) {
+.controller('ProdutosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             var currentStart = 15;
@@ -321,6 +342,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {}
                             }
                         },
@@ -332,6 +354,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.produtos.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -359,18 +382,18 @@ angular.module('meuguru.controllers', [])
         var id = $stateParams.produtoId;
         MeuGuruService.getProdutos($scope);
 
-        $scope.$watch('produtos', function() {
-            for (var i = $scope.produtos.length - 1; i >= 0; i--) {
-                if($scope.produtos[i]['ID'] == id) {
-                    $scope.produto = $scope.produtos[i];
+        $scope.$watch('allProdutos', function() {
+            for (var i = $scope.allProdutos.length - 1; i >= 0; i--) {
+                if($scope.allProdutos[i]['ID'] == id) {
+                    $scope.produto = $scope.allProdutos[i];
                 }
             };
         });
     }
 ])
 
-.controller('ServicosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
-        function($scope, $ionicPopup, MeuGuruService) {
+.controller('ServicosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             var currentStart = 15;
@@ -392,6 +415,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {}
                             }
                         },
@@ -403,6 +427,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.servicos.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -430,18 +455,18 @@ angular.module('meuguru.controllers', [])
         var id = $stateParams.servicoId;
         MeuGuruService.getServicos($scope);
 
-        $scope.$watch('servicos', function() {
-            for (var i = $scope.servicos.length - 1; i >= 0; i--) {
-                if($scope.servicos[i]['ID'] == id) {
-                    $scope.servico = $scope.servicos[i];
+        $scope.$watch('allServicos', function() {
+            for (var i = $scope.allServicos.length - 1; i >= 0; i--) {
+                if($scope.allServicos[i]['ID'] == id) {
+                    $scope.servico = $scope.allServicos[i];
                 }
             };
         });
     }
 ])
 
-.controller('NoticiasCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
-        function($scope, $ionicPopup, MeuGuruService) {
+.controller('NoticiasCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             var currentStart = 15;
@@ -463,6 +488,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {}
                             }
                         },
@@ -474,6 +500,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.noticias.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -501,18 +528,18 @@ angular.module('meuguru.controllers', [])
         var id = $stateParams.noticiaId;
         MeuGuruService.getNoticias($scope);
 
-        $scope.$watch('produtos', function() {
-            for (var i = $scope.noticias.length - 1; i >= 0; i--) {
-                if($scope.noticias[i]['ID'] == id) {
-                    $scope.noticia = $scope.noticias[i];
+        $scope.$watch('allNoticias', function() {
+            for (var i = $scope.allNoticias.length - 1; i >= 0; i--) {
+                if($scope.allNoticias[i]['ID'] == id) {
+                    $scope.noticia = $scope.allNoticias[i];
                 }
             };
         });
     }
 ])
 
-.controller('EstandesCtrl', ['$scope', '$ionicPopup', 'MeuGuruService',
-        function($scope, $ionicPopup, MeuGuruService) {
+.controller('EstandesCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
             $scope.load = true;
             $scope.moredata = true;
             var currentStart = 15;
@@ -534,6 +561,7 @@ angular.module('meuguru.controllers', [])
                                 }
 
                                 $scope.moredata = false;
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro = {}
                             }
                         },
@@ -545,6 +573,7 @@ angular.module('meuguru.controllers', [])
                                 if($scope.estandes.length > 15) {
                                     $scope.moredata = true;
                                 }
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro;
                             }
                         }
@@ -572,19 +601,55 @@ angular.module('meuguru.controllers', [])
         var id = $stateParams.estandeId;
         MeuGuruService.getEstandes($scope);
 
-        $scope.$watch('estandes', function() {
-            for (var i = $scope.estandes.length - 1; i >= 0; i--) {
-                if($scope.estandes[i]['ID'] == id) {
-                    $scope.estande = $scope.estandes[i];
+        $scope.$watch('allEstandes', function() {
+            for (var i = $scope.allEstandes.length - 1; i >= 0; i--) {
+                if($scope.allEstandes[i]['ID'] == id) {
+                    $scope.estande = $scope.allEstandes[i];
                 }
             };
         });
     }
 ])
 
-.controller('FavoritosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', 'FavoritosService',
-        function($scope, $ionicPopup, MeuGuruService, FavoritosService) {
-            $scope.favoritos = FavoritosService.getFavoritos();
+.controller('FavoritosCtrl', ['$scope', '$ionicPopup', 'MeuGuruService', '$ionicScrollDelegate',
+        function($scope, $ionicPopup, MeuGuruService, $ionicScrollDelegate) {
+            $scope.favoritos = [];
+            $scope.load = false;
+
+            MeuGuruService.getFavoritos($scope);
+
+            $scope.doRefresh = function() {
+                MeuGuruService.getFavoritos($scope);
+                $scope.$broadcast('scroll.refreshComplete');
+            };
+
+            $scope.filtro = {}
+            $scope.showPopup = function() {
+
+                var myPopup = $ionicPopup.show({
+                    templateUrl: 'template/modal/filtro-favorito.html',
+                    title: 'Filtrar Favoritos',
+                    scope: $scope,
+                    buttons: [
+                        {
+                            text: 'Limpar filtros',
+                            onTap: function(e) {
+                                $ionicScrollDelegate.scrollTop();
+                                return $scope.filtro = {}
+                            }
+                        },
+                        {
+                            text: '<b>Aplicar</b>',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                $ionicScrollDelegate.scrollTop();
+                                return $scope.filtro;
+                            }
+                        }
+                    ]
+                });
+            };
+
         }
 ])
 

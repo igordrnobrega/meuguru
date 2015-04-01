@@ -2,9 +2,10 @@ var db = null;
 
 angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  'meuguru.services', 'meuguru.directives' ,'ngResource', 'pasvaz.bindonce', 'ngCordova'])
 
-.run(['$rootScope', '$timeout', '$ionicPlatform', '$ionicPopup', '$cordovaSQLite', '$cordovaStatusbar',
-	function($rootScope, $timeout, $ionicPlatform, $ionicPopup, $cordovaSQLite, $cordovaStatusbar) {
-		$ionicPlatform.ready(function() {
+.run(['$rootScope', '$timeout', '$ionicPlatform', '$ionicPopup', '$cordovaSQLite', 'MeuGuruService',
+	function($rootScope, $timeout, $ionicPlatform, $ionicPopup, $cordovaSQLite, MeuGuruService) {
+        $ionicPlatform.ready(function() {
+            MeuGuruService.init();
             if(window.Connection) {
                 if(
                     navigator.connection.type == Connection.NONE ||
@@ -20,8 +21,10 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
                 }
             }
 
-            $cordovaStatusbar.overlaysWebView(true);
-            $cordovaStatusbar.styleHex('#1b3d6e');
+            if(window.StatusBar) {
+                StatusBar.overlaysWebView(true);
+                StatusBar.backgroundColorByHexString('#1b3d6e');
+            }
 
 			if(window.cordova && window.cordova.plugins.Keyboard) {
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -67,6 +70,7 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 
 		$rootScope.checkImg = function(url) {
 			if(
+                typeof url != 'undefined' &&
 				url.indexOf('.png') > 1 ||
 				url.indexOf('.jpg') > 1
 			) {
@@ -94,17 +98,22 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 
 		$stateProvider
 
-		.state('index', {
-			url: '/index',
-			templateUrl: 'template/index.html',
-			controller: 'IndexCtrl'
-		})
 
-		.state('tab', {
-			url: "/tab",
-			abstract: true,
-			templateUrl: "template/tabs.html",
-			controller: "TabsCtrl"
+        .state('tab', {
+            url: "/tab",
+            abstract: true,
+            templateUrl: "template/tabs.html",
+            controller: "TabsCtrl"
+        })
+
+		.state('tab.index', {
+			url: '/index',
+            views: {
+                'tab':{
+                    templateUrl: 'template/index.html',
+                    controller: 'IndexCtrl'
+                }
+            }
 		})
 
 		.state('tab.eventos', {
@@ -260,6 +269,6 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers',  'meuguru.filters',  
 			}
 		})
 
-	  $urlRouterProvider.otherwise('/index')
+	  $urlRouterProvider.otherwise('/tab/index')
 	}
 ])

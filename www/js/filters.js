@@ -68,21 +68,35 @@ var _filtraEstado = function(items, sigla, tipo) {
 	return filtered;
 };
 
-var _filtraCategoria = function(items, categoria) {
-	var filtered = [];
+var _filtraCategoria = function(items, categoria, tipo) {
+	var property,
+		filtered = [];
 
 	if(
 		typeof categoria != 'undefined' &&
-		categoria.length > 3
+		categoria != null
 	) {
+
+		switch(tipo) {
+			case 5:
+				property = 'categoria';
+				break;
+			case 6:
+				property = 'posicao';
+				break;
+			default:
+				property = 'name';
+				break;
+		}
+
 		for (var i = 0; i < items.length; i++) {
 			var item = items[i];
 			if(typeof item != 'undefined') {
 				if(
-					item.hasOwnProperty('name') &&
+					item.hasOwnProperty(property) &&
 					typeof categoria != 'undefined'
 				){
-					var name = item['name'].toLowerCase();
+					var name = item[property].toLowerCase();
 					if (name.indexOf(categoria.toLowerCase()) > -1) {
 						filtered.push(item);
 					}
@@ -450,8 +464,8 @@ angular.module('meuguru.filters', [])
 				retornoCategoria 	= [];
 
 			retornoPalavraChave = _filtraPalavraChave(collection, filtro.palavra);
-			retornoPosicao 		= _filtraCategoria(retornoPalavraChave, filtro.posicao);
-			retornoCategoria 	= _filtraCategoria(retornoPosicao, filtro.categoria);
+			retornoPosicao 		= _filtraCategoria(retornoPalavraChave, filtro.posicao, 6);
+			retornoCategoria 	= _filtraCategoria(retornoPosicao, filtro.categoria, 5);
 
 			return retornoCategoria;
 		}
@@ -470,25 +484,30 @@ angular.module('meuguru.filters', [])
 	}
 })
 
-.filter('filtraData', function () {
-	return function (items, date) {
-
+.filter('filtrarFavorito', function() {
+	return function(items, categoria) {
 		var filtered = [];
-		if(typeof date != 'undefined') {
-			var data = ( date.getDate() > 10 ? date.getDate() : '0' + date.getDate() ) + '/' + (date.getMonth() >= 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
+
+		if(
+			typeof categoria != 'undefined' &&
+			categoria != null
+		) {
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				if(typeof item != 'undefined') {
+					if(item.hasOwnProperty('tx_type')){
+						var tx_type = item['tx_type'].toLowerCase();
+						if (tx_type.indexOf(categoria.toLowerCase()) > -1) {
+							filtered.push(item);
+						}
+					}
+				}
+			}
 		} else {
 			filtered = items;
 		}
 
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(item.hasOwnProperty('dataInicial')){
-				if (item['dataInicial'].indexOf(data) > -1) {
-					filtered.push(item);
-				}
-			}
-		}
 
 		return filtered;
-	};
+	}
 })

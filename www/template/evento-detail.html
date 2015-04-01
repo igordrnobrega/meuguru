@@ -1,15 +1,15 @@
 <ion-view view-title="Agenda">
 
     <ion-nav-buttons side="right">
-      <button class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Evento', evento.ID)"></button>
+      <button ng-if="!evento.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Evento', evento.ID)"></button>
+      <button ng-if="evento.isFavorito" class="button icon button-clear ion-android-star"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">
-
         <ion-list data-bindonce="evento" class="listar-evento">
-            <ion-item>
+            <ion-item class="info">
                 <div class="thumb" style="background:url({{ checkImg(evento.guid) ? evento.guid : 'img/no-photo.png' }});"></div>
-                <h1 bo-class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="evento.post_title"></h1>
+                <h1 bo-class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}" class="adjM" bo-html="evento.post_title"></h1>
                 <p><i class="icon ion-calendar"></i><span>{{evento.dataInicial ? evento.dataInicial : '-'}} a {{evento.dataFinal ? evento.dataFinal : '-'}}</span></p>
                 <p><i class="icon ion-ios-location"></i><span>{{evento.cidadeFeira ? evento.cidadeFeira : '-'}}/{{evento.estadoFeira ? evento.estadoFeira : '-'}}</span></p>
                 <p><i class="icon ion-ios-telephone"></i><span bo-html="evento.telefoneFeira ? evento.telefoneFeira : '-'"></span></p>
@@ -18,10 +18,9 @@
 
             <ion-item class="detail">
                 <h2>Descrição</h2>
-                <p bo-html="evento._yoast_wpseo_metadesc"></p>
+                <p bo-html="evento.post_content ? evento.post_content : 'Sem descrição.'"></p>
                 <h2>Horário</h2>
-                <p>Conteúdo disponível somente para anunciantes.
-                Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão </p>
+                <p>Conteúdo disponível somente para anunciantes. Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão direito ao anuncio de uma notícia pré ou pós-evento (podendo ser enviada pela organização do evento ou desenvolvida por nossa equipe).</p>
             </ion-item>
         </ion-list>
     </ion-content>

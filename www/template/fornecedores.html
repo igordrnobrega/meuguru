@@ -8,16 +8,16 @@
     </div>
 
     <ion-content id="index" data-has-bouncing="false" >
-
+        <loading id="loading-fornecedores"></loading>
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-bindonce="fornecedores" data-ng-repeat="fornecedor in fornecedores | filtrarFornecedor:filtro:allFornecedores " href="#/tab/fornecedor/{{ fornecedor.ID }}">
+            <ion-item class="item-icon-right" data-bindonce="fornecedores" data-ng-repeat="fornecedor in fornecedores | filtrarFornecedor:filtro:allFornecedores " href="#/tab/fornecedor/{{ fornecedor.ID }}">
                 <div class="thumb" style="background:url({{ checkImg(fornecedor.guid) ? fornecedor.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
                 <p>Estado:<span bo-html="fornecedor.estado ? fornecedor.estado : '-'"></span></p>
                 <p>Cidade:<span bo-html="fornecedor.cidade ? fornecedor.cidade : '-'"></span></p>
                 <p class="no-wrap">Serviços:<span bo-html="fornecedor._yoast_wpseo_metadesc ? fornecedor._yoast_wpseo_metadesc : '-'"></span></p>
                 <i class="icon ion-chevron-right"></i>
-          </ion-item>
+            </ion-item>
         </ion-list>
         <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata"></ion-infinite-scroll>
     </ion-content>

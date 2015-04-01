@@ -1,4 +1,4 @@
-<ion-view view-title="Locais">
+<ion-view view-title="Pavilhões">
 
 
 	<div class="tabs tabs-top tabs-icon-left filtro-bar">
@@ -9,7 +9,7 @@
 	</div>
 
 	<ion-content id="index" data-has-bouncing="false" >
-
+        <loading id="loading-pavilhoes"></loading>
 		<ion-list class="listar" data-ng-if="!load">
 			<ion-item class="item-icon-right" data-bindonce="pavilhoes" data-ng-repeat="pavilhao in pavilhoes | filtrarPavilhao:filtro:allPavilhoes" href="#/tab/pavilhao/{{ pavilhao.ID }}">
 				<div class="thumb" style="background:url({{ checkImg(pavilhao.guid) ? pavilhao.guid : 'img/no-photo.png' }});"></div>
