@@ -271,6 +271,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 
 		.menu .list a,
 		.menu {
+			overflow-y: scroll;
 			background-color: rgb(40, 40, 40);
 			color: #fff;
 		}
