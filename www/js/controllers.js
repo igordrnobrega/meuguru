@@ -98,7 +98,7 @@ angular.module('meuguru.controllers', [])
                 navigator.geolocation.getCurrentPosition(_success, _error, posOptions);
             }
 
-            var _success = function(pos) {
+            var _success = function(pos, b, c, d, e) {
                 var coords = pos.coords;
                 var img = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords.latitude + "," + coords.longitude + "&zoom=13&size=300x300&sensor=false";
                 LoadingService.endLoad();

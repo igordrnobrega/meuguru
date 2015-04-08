@@ -197,6 +197,7 @@ angular.module('meuguru.services', [])
                 var _prepareView = function() {
                     $scope.segSer       = segSer;
                     $scope.allServicos  = servicos.concat();
+                    $scope.allEventos   = eventos.concat();
                     $scope.servicos     = servicos.concat();
 
                     if(servicos.length) {

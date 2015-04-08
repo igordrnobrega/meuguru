@@ -1,29 +1,27 @@
-var _filtraFeira = function(items, nome) {
+var _filtraNomeEvento = function(items, eventos, nome) {
 	var filtered = [];
 
 	if(
 		typeof nome != 'undefined' &&
 		nome.length > 3
 	) {
+		var feiras = _filtraNome(eventos, nome);
+		var collection = [];
+		var estados = [];
 
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if(typeof item != 'undefined') {
-				if(
-					item.hasOwnProperty('post_title') &&
-					typeof nome != 'undefined'
-				){
-					var post_title = item['post_title'].toLowerCase();
-					if (post_title.indexOf(nome.toLowerCase()) > -1) {
-						filtered.push(item);
-					}
+		for (var i = feiras.length - 1; i >= 0; i--) {
+			if(typeof feiras[i]['estadoFeira'] != 'undefined') {
+				if(estados.indexOf(feiras[i]['estadoFeira']) == -1) {
+					estados.push(feiras[i]['estadoFeira']);
+					collection.push(_filtraEstado(items, feiras[i]['estadoFeira'], 3));
 				}
 			}
-		}
+		};
+
+		filtered = filtered.concat.apply(filtered, collection);
 	} else {
 		filtered = items;
 	}
-
 
 	return filtered;
 };
@@ -449,8 +447,7 @@ angular.module('meuguru.filters', [])
 })
 
 .filter('filtrarServico', function() {
-	return function(items, filtro, all) {
-
+	return function(items, filtro, all, eventos) {
 		var collection = items,
 			retorno;
 
@@ -460,9 +457,17 @@ angular.module('meuguru.filters', [])
 				retornoCidade 		= [],
 				retornoCategoria 	= [];
 
-			retornoEstado 		= _filtraEstado(collection, filtro.estado, 3);
-			retornoFeira 		= _filtraFeira(retornoEstado, filtro.nome);
-			retornoCidade 		= _filtraCidade(retornoFeira, filtro.cidade, 3);
+			if(
+				typeof filtro.estado == 'undefined' &&
+				filtro.nome != ''					&&
+				eventos.length != 0
+			) {
+				retornoEstado   	= _filtraNomeEvento(collection ,eventos, filtro.nome);
+			} else {
+				retornoEstado 		= _filtraEstado(collection, filtro.estado, 3);
+			}
+
+			retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 3);
 			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
 
 			return retornoCategoria;
