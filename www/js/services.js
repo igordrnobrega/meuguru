@@ -19,7 +19,7 @@ angular.module('meuguru.services', [])
             estandes        = [],
             segEst          = [],
             posiEst         = [],
-            favoritos       = [],
+            // favoritos       = [],
             segFav          = [],
             url = "http://api.meuguru.com.br/";
 
@@ -321,6 +321,31 @@ angular.module('meuguru.services', [])
                 }
             },
             getFavoritos: function($scope) {
+
+                var resetFavoritos = function() {
+                    for (var j = eventos.length - 1; j >= 0; j--) {
+                        eventos[j]['isFavorito'] = false;
+                    };
+                    for (var j = estandes.length - 1; j >= 0; j--) {
+                        estandes[j]['isFavorito'] = false;
+                    };
+                    for (var j = fornecedores.length - 1; j >= 0; j--) {
+                        fornecedores[j]['isFavorito'] = false;
+                    };
+                    for (var j = noticias.length - 1; j >= 0; j--) {
+                        noticias[j]['isFavorito'] = false;
+                    };
+                    for (var j = pavilhoes.length - 1; j >= 0; j--) {
+                        pavilhoes[j]['isFavorito'] = false;
+                    };
+                    for (var j = produtos.length - 1; j >= 0; j--) {
+                        produtos[j]['isFavorito'] = false;
+                    };
+                    for (var j = servicos.length - 1; j >= 0; j--) {
+                        servicos[j]['isFavorito'] = false;
+                    };
+                }
+
                 favoritos = FavoritosService.getFavoritos();
 
                 if(
@@ -341,6 +366,7 @@ angular.module('meuguru.services', [])
                         fgServico       = false;
 
                     $scope.segFav = [];
+                    resetFavoritos();
 
                     for (var i = favoritos.length - 1; i >= 0; i--) {
                         switch(favoritos[i]['tx_type']) {
@@ -350,6 +376,7 @@ angular.module('meuguru.services', [])
                                     fgEvento = true;
                                 }
                                 for (var j = eventos.length - 1; j >= 0; j--) {
+                                    eventos[j]['isFavorito'] = false;
                                     if(eventos[j]['ID'] == favoritos[i]['id_post']) {
                                         eventos[j]['isFavorito'] = true;
                                         favoritos[i]['evento'] = eventos[j];
@@ -498,10 +525,8 @@ angular.module('meuguru.services', [])
             getFavoritos: function(){
                 var query = 'SELECT id_post, tx_type FROM favorito';
                 $cordovaSQLite.execute(db, query).then(function(res) {
+                    favoritos = [];
                     if(res.rows.length > 0) {
-                        if(favoritos.length != 0){
-                            favoritos = [];
-                        }
                         for (var i = res.rows.length - 1; i >= 0; i--) {
                             favoritos.push(res.rows.item(i));
                         };
@@ -558,6 +583,45 @@ angular.module('meuguru.services', [])
                     _popUpFalse();
                 });
 
+            },
+            rmFavorito: function(route, id) {
+                var _popUp = function() {
+                    var favoritePopUp = $ionicPopup.show({
+                        title: route,
+                        template: '<p style="text-align: center ">Já foi removido dos favorito.</p>',
+                    });
+                    $timeout(function() {
+                        favoritePopUp.close();
+                    }, 1500);
+                }
+
+                var query = 'SELECT id FROM favorito WHERE id_post = ?';
+                $cordovaSQLite.execute(db, query, [id]).then(function(res) {
+                    if(res.rows.length != 0) {
+                        var query = 'DELETE FROM favorito WHERE id_post = ?';
+                        $cordovaSQLite.execute(db, query, [id]).then(function(res) {
+                            var favoritePopUp = $ionicPopup.show({
+                                title: route,
+                                template: '<p style="text-align: center ">Removido dos favoritos.</p>',
+                            });
+                            $timeout(function() {
+                                favoritePopUp.close();
+                            }, 1500);
+                        }, function (err) {
+                            var favoritePopUp = $ionicPopup.show({
+                                title: route,
+                                template: '<p style="text-align: center ">Não foi possível remover dos favoritos.</p>',
+                            });
+                            $timeout(function() {
+                                favoritePopUp.close();
+                            }, 1500);
+                        });
+                    } else {
+                        _popUp();
+                    }
+                }, function (err) {
+                    _popUp();
+                });
             },
             checkFavorite: function(id) {
                 var query = 'SELECT id FROM favorito WHERE id_post = ?';

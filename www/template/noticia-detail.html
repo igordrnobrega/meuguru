@@ -1,15 +1,16 @@
 <ion-view view-title="Notícias">
 
     <ion-nav-buttons side="right">
+        <button class="button icon button-clear ion-android-share-alt"></button>
         <button ng-if="!noticia.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Notícia', noticia.ID)"></button>
-        <button ng-if="noticia.isFavorito" class="button icon button-clear ion-android-star"></button>
+        <button ng-if="noticia.isFavorito" class="button icon button-clear ion-android-star" ng-click="rmFavorite('Notícia', noticia.ID)"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">
 
         <ion-list data-bindonce="noticia" class="listar-evento">
             <ion-item class="info">
-                <div class="thumb" style="background:url({{ checkImg(noticia.guid) ? noticia.guid : 'img/no-photo.png' }});"></div>
+                <div class="thumb" style="background:url({{ checkImg(noticia._thumbnail_id) ? noticia._thumbnail_id : 'img/no-photo.png' }});"></div>
                 <h1 class="noticia-h1 adjM" bo-html="noticia.post_date | date:'dd/MM/yyyy'"></h1>
                 <h2 class="noticia-title" bo-html="noticia.post_title"></h2>
                 <p class="noticia-header" bo-html="(noticia._yoast_wpseo_focuskw).length >= 10 ? noticia._yoast_wpseo_focuskw : ''"></p>

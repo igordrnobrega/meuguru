@@ -1,8 +1,9 @@
-<ion-view view-title="Projeto de Estandes">
+<ion-view view-title="Projetos de Estandes">
 
     <ion-nav-buttons side="right">
-      <button ng-if="!estande.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Projeto de Estande', estande.ID)"></button>
-      <button ng-if="estande.isFavorito" class="button icon button-clear ion-android-star"></button>
+        <button class="button icon button-clear ion-android-share-alt"></button>
+        <button ng-if="!estande.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Projeto de Estande', estande.ID)"></button>
+        <button ng-if="estande.isFavorito" class="button icon button-clear ion-android-star" ng-click="rmFavorite('Projeto de Estande', estande.ID)"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">

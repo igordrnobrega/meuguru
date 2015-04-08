@@ -467,25 +467,6 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 		text-align: center;
 	}
 
-/* Smartphones (landscape) ----------- */
-@media only screen
-and (orientation : landscape) {
-
-	#home img {
-		width: 35%;
-		margin-top: 104px;
-	}
-
-}
-
-/* iPhone 4 ----------- */
-@media
-only screen and (-webkit-min-device-pixel-ratio : 1.5),
-only screen and (min-device-pixel-ratio : 1.5) {
-/* Styles */
-}
-
-
 /*BIGODE ANIMATION*/
 @-webkit-keyframes mustache {
 	0% { -webkit-transform: rotate(0); }
@@ -699,4 +680,40 @@ b {
 
 .item {
 	border-color: #1c1c1c;
+}
+
+button.button.icon.button-clear.ion-android-share-alt:before {
+  font-size: 27px;
+}
+
+img.flag-destaque {
+	width: 8%;
+	position: absolute;
+	top: 1%;
+	left: 3.2%;
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (orientation : landscape) {
+
+	#home img {
+		width: 35%;
+		margin-top: 104px;
+	}
+
+}
+
+/* Smartphones small screen -----------*/
+@media screen and (max-width: 320px) {
+	.listar .list .item p span,
+	.listar-evento .list .item p span,
+	.listar .list .item p,
+	.listar-evento .list .item p {
+		font-size: 12px;
+	}
+
+	.listar-evento .list .item h2 {
+		font-size: 14px;
+	}
 }

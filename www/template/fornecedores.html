@@ -11,6 +11,7 @@
         <loading id="loading-fornecedores"></loading>
         <ion-list class="listar" data-ng-if="!load">
             <ion-item class="item-icon-right" data-bindonce="fornecedores" data-ng-repeat="fornecedor in fornecedores | filtrarFornecedor:filtro:allFornecedores " href="#/tab/fornecedor/{{ fornecedor.ID }}">
+                <img class="flag-destaque" ng-if="fornecedor.isAnunciante" src="img/flag-destaque.png">
                 <div class="thumb" style="background:url({{ checkImg(fornecedor.guid) ? fornecedor.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
                 <p>Estado:<span bo-html="fornecedor.estado ? fornecedor.estado : '-'"></span></p>

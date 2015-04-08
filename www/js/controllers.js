@@ -29,6 +29,10 @@ angular.module('meuguru.controllers', [])
         $scope.addFavorite = function(route, id) {
             FavoritosService.setFavorito(route, id);
         };
+
+        $scope.rmFavorite = function(route, id) {
+            FavoritosService.rmFavorito(route, id);
+        };
     }
 ])
 

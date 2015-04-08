@@ -1,8 +1,9 @@
 <ion-view view-title="Agenda">
 
     <ion-nav-buttons side="right">
-      <button ng-if="!evento.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Evento', evento.ID)"></button>
-      <button ng-if="evento.isFavorito" class="button icon button-clear ion-android-star"></button>
+        <button class="button icon button-clear ion-android-share-alt"></button>
+        <button ng-if="!evento.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Evento', evento.ID)"></button>
+        <button ng-if="evento.isFavorito" class="button icon button-clear ion-android-star" ng-click="rmFavorite('Evento', evento.ID)"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">
@@ -20,6 +21,12 @@
                 <h2>Descrição</h2>
                 <p bo-html="evento.post_content ? evento.post_content : 'Sem descrição.'"></p>
                 <h2>Horário</h2>
+                <p>Conteúdo disponível somente para anunciantes. Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão direito ao anuncio de uma notícia pré ou pós-evento (podendo ser enviada pela organização do evento ou desenvolvida por nossa equipe).</p>
+                <h2>Serviços Disponíveis</h2>
+                <p>Conteúdo disponível somente para anunciantes. Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão direito ao anuncio de uma notícia pré ou pós-evento (podendo ser enviada pela organização do evento ou desenvolvida por nossa equipe).</p>
+                <h2>Mapas e Regulamento</h2>
+                <p>Conteúdo disponível somente para anunciantes. Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão direito ao anuncio de uma notícia pré ou pós-evento (podendo ser enviada pela organização do evento ou desenvolvida por nossa equipe).</p>
+                <h2>Edição Anterior</h2>
                 <p>Conteúdo disponível somente para anunciantes. Os anunciantes do Meu Guru terão as abas de Horário, Serviços Disponíveis, Mapas e Regulamentos e Edições Anteriores, desbloqueadas para disponibilizar as informações necessárias. Além disso, estarão sempre em primeiro lugar na agenda de eventos, não seguindo a ordem cronológica. Por fim, terão direito ao anuncio de uma notícia pré ou pós-evento (podendo ser enviada pela organização do evento ou desenvolvida por nossa equipe).</p>
             </ion-item>
         </ion-list>

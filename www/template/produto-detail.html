@@ -1,8 +1,9 @@
 <ion-view view-title="Catálogo de Produtos">
 
 	<ion-nav-buttons side="right">
+		<button class="button icon button-clear ion-android-share-alt"></button>
 		<button ng-if="!produto.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Produto', produto.ID)"></button>
-		<button ng-if="produto.isFavorito" class="button icon button-clear ion-android-star"></button>
+		<button ng-if="produto.isFavorito" class="button icon button-clear ion-android-star" ng-click="rmFavorite('Produto', produto.ID)"></button>
 	</ion-nav-buttons>
 
 	<ion-content id="index" data-has-bouncing="false">

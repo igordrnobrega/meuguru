@@ -1,3 +1,33 @@
+var _filtraFeira = function(items, nome) {
+	var filtered = [];
+
+	if(
+		typeof nome != 'undefined' &&
+		nome.length > 3
+	) {
+
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if(typeof item != 'undefined') {
+				if(
+					item.hasOwnProperty('post_title') &&
+					typeof nome != 'undefined'
+				){
+					var post_title = item['post_title'].toLowerCase();
+					if (post_title.indexOf(nome.toLowerCase()) > -1) {
+						filtered.push(item);
+					}
+				}
+			}
+		}
+	} else {
+		filtered = items;
+	}
+
+
+	return filtered;
+};
+
 var _filtraNome = function(items, nome) {
 	var filtered = [];
 
@@ -431,7 +461,8 @@ angular.module('meuguru.filters', [])
 				retornoCategoria 	= [];
 
 			retornoEstado 		= _filtraEstado(collection, filtro.estado, 3);
-			retornoCidade 		= _filtraCidade(retornoEstado, filtro.cidade, 3);
+			retornoFeira 		= _filtraFeira(retornoEstado, filtro.nome);
+			retornoCidade 		= _filtraCidade(retornoFeira, filtro.cidade, 3);
 			retornoCategoria 	= _filtraCategoria(retornoCidade, filtro.categoria);
 
 			return retornoCategoria;

@@ -1,8 +1,9 @@
 <ion-view view-title="Fornecedores">
 
     <ion-nav-buttons side="right">
-  		<button ng-if="!fornecedor.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Fornecedor', fornecedor.ID)"></button>
-  		<button ng-if="fornecedor.isFavorito" class="button icon button-clear ion-android-star"></button>
+        <button class="button icon button-clear ion-android-share-alt"></button>
+	    <button ng-if="!fornecedor.isFavorito" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Fornecedor', fornecedor.ID)"></button>
+  		<button ng-if="fornecedor.isFavorito" class="button icon button-clear ion-android-star" ng-click="rmFavorite('Fornecedor', fornecedor.ID)"></button>
     </ion-nav-buttons>
 
 	<ion-content id="index" data-has-bouncing="false">
