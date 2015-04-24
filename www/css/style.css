@@ -2,6 +2,7 @@
 body {
 	font-family: 'Roboto', sans-serif !important;
 	background-color: #1b3d6e;
+    font-size: 27px;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
@@ -33,7 +34,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 
 		.bar-header .title {
 			color: #fff !important;
-			font-size: 18px;
+			font-size: 0.7em;
 		}
 
 	.button-clear.button-clear {
@@ -71,6 +72,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 		border: none;
 		border-bottom: 2px solid #ececec;
 		padding: 20px 63px;
+        font-size: 0.6em;
 	}
 
 	.item.info {
@@ -150,14 +152,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 	.listar .list .item i.ion-chevron-right {
 		right: -2px;
 		top: -33%;
-		font-size: 22px;
+		font-size: 1.4em;
 		color: #1b3d6e;
 
 	}
 
 	.listar .list .item h1,
 	.listar-evento .list .item h1 {
-		font-size: 14px;
+		font-size: 0.8em;
 		word-break: break-word;
 		text-overflow: initial;
 		white-space: initial;
@@ -193,7 +195,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 	}
 
 		.listar .list .item h1.small-font {
-			font-size: 14px;
+			font-size: 0.5em;
 		}
 
 	.listar-evento .list .item h2 {
@@ -222,7 +224,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 
 	.listar .list .item p.noticia-p {
 	  	white-space: initial;
-	  	font-size: 14px;
+	  	font-size: 0.8em !important;
 	}
 
 	.listar .list .item p.estande {
@@ -278,6 +280,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 
 #contato img {
 	margin: 20px 0;
+  	width: 100%;
 }
 
 	#contato .board a {
@@ -286,11 +289,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 		text-decoration: none;
 		color: #1b3d6e;
 		text-transform: uppercase;
-		font-size: 16px;
+		font-size: 0.6em;
 	}
 
 		#contato .board a i {
-			font-size: 22px;
+			font-size: 1.4em;
 			padding-right: 6px;
 		}
 
@@ -299,12 +302,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 			padding-right: 9px;
 		}
 
+		#contato .logo-contato {
+			width: 60%;
+		}
+
 .filtro-bar a {
 	padding-top: 4px;
 }
 
 .menu-title-bar {
-  font-size: 18px;
+  font-size: 0.7em;
   padding: 10px 20px;
 }
 
@@ -320,7 +327,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span {
 	.popup-buttons button {
 		height: 30px !important;
 		min-height: 20px !important;
-		font-size: 12px !important;
+		font-size: 0.45em !important;
 	}
 
 	.popup-buttons button:first-child {
@@ -341,8 +348,8 @@ label.item.item-input.item-floating-label,
   border-bottom: 1px solid #ccc;
 }
 
-.ion-funnel {
-	  font-size: 24px !important;
+.ion-funnel:before {
+	font-size: 0.7em !important;
 }
 
 .view-container {
@@ -351,7 +358,7 @@ label.item.item-input.item-floating-label,
 
 .tab-item {
 	font-family: 'Roboto', sans-serif !important;
-	font-size: 14px !important;
+	font-size: 0.5em !important;
 	color: #1b3d6e;
 	opacity: 1;
 }
@@ -395,7 +402,7 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 }
 
 	.item-input span {
-		font-size: 14px;
+		font-size: 0.9em;
 	}
 
 .item-select select {
@@ -412,10 +419,19 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 
 .popup-body {
 	text-align: center;
+	font-size: .55em;
+}
+
+.popup-title {
+	font-size: .6em;
 }
 
 .backdrop {
 	background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.icon.icon-bigger {
+	font-size: 1.9em !important;
 }
 
 .loading {
@@ -459,12 +475,16 @@ button.button.back-button.buttons.button.icon.button-clear.ion-chevron-left + di
 	}
 
 	.loading p {
-		font-size: 12px;
+		font-size: 0.7em;
 		text-transform: uppercase;
 		margin: 8px 0 0;
 		line-height: 12px;
 		color: #fff;
 		text-align: center;
+	}
+
+	.loading p.ng-binding {
+		font-size: 0.45em;
 	}
 
 /*BIGODE ANIMATION*/
@@ -683,8 +703,17 @@ b {
 }
 
 button.button.icon.button-clear.ion-android-share-alt:before {
-  font-size: 27px;
+	font-size: 1.4em !important;
 }
+
+button.button.icon.button-clear.ion-android-star-outline:before {
+	font-size: 1.7em !important;
+}
+
+button.button.icon.button-clear.ion-android-star:before {
+	font-size: 1.7em !important;
+}
+
 
 img.flag-destaque {
 	width: 8%;
@@ -693,27 +722,60 @@ img.flag-destaque {
 	left: 3.2%;
 }
 
+.item-complex a p {
+	font-size: 0.68em;
+}
+
 /* Smartphones (landscape) ----------- */
 @media only screen
-and (orientation : landscape) {
+and (orientation : landscape)
+and (max-width: 667px) {
+
+	#contato .logo-contato {
+		width: 40%;
+	}
 
 	#home img {
 		width: 35%;
 		margin-top: 104px;
 	}
 
+	.loading {
+		width: 25% !important;
+		margin: 20% 38%;
+	}
+
+}
+
+@media only screen
+and (orientation : landscape)
+and (max-height: 375px) {
+
+	#contato .logo-contato {
+		width: 40%;
+	}
+
+	#home img {
+		width: 35%;
+		margin-top: 104px;
+	}
+
+	.loading {
+		width: 25% !important;
+		margin: 20% 38%;
+	}
+
 }
 
 /* Smartphones small screen -----------*/
 @media screen and (max-width: 320px) {
-	.listar .list .item p span,
-	.listar-evento .list .item p span,
-	.listar .list .item p,
-	.listar-evento .list .item p {
-		font-size: 12px;
+
+	body {
+		font-size: 24px;
 	}
 
-	.listar-evento .list .item h2 {
-		font-size: 14px;
-	}
+}
+
+.item-icon-left .icon, .item-icon-right .icon {
+    font-size: 1.9em;
 }

@@ -7,3 +7,4 @@ plugins/
 bower_components/
 bower.json
 package.json
+.brackets.json

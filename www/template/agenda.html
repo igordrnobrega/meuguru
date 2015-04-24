@@ -2,30 +2,34 @@
 
     <div class="tabs tabs-top tabs-icon-left filtro-bar">
         <a class="tab-item" data-ng-click="getUserPostion()">
-            <i class="icon ion-android-locate"></i>
-            Próximos
+            <i class="icon ion-android-locate"></i> Próximos
         </a>
         <a class="tab-item" data-ng-click="showPopup()">
-            <i class="icon ion-funnel"></i>
-            Filtrar
+            <i class="icon ion-funnel"></i> Filtrar
         </a>
     </div>
 
-    <ion-content id="index" data-has-bouncing="false" >
+    <ion-content id="index" data-has-bouncing="false">
         <loading id="loading-eventos"></loading>
 
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-bindonce="eventos" data-ng-repeat="evento in eventos | filtrarEvento:filtro:allEventos" href="#/tab/evento/{{ evento.ID }}">
+            <ion-item class="item-icon-right" data-bindonce="eventos" data-ng-repeat="evento in eventos | filtrarEvento:filtro:allEventos" href="#/tab/evento/{{ evento.ID }}">
                 <div class="thumb" style="background:url({{ checkImg(evento.guid) ? evento.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="evento.post_title"></h1>
-                <p>Data:<span bo-html="evento.dataInicial ? evento.dataInicial : '-'"></span></p>
-                <p>Segmento:<span bo-html="evento.name ? evento.name : '-'"></span></p>
-                <p>Uf:<span bo-html="evento.estadoFeira ? evento.estadoFeira : '-'"></span></p>
-                <p>Cidade:<span bo-html="evento.cidadeFeira ? evento.cidadeFeira : '-'"></span></p>
-                <p>Promotor:<span bo-html="evento.promotorFeira ? evento.promotorFeira : '-'"></span></p>
-                <p>Pavilhão:<span bo-html="evento.pavilhaoFeira ? evento.pavilhaoFeira : '-'"></span></p>
+                <p>Data:<span bo-html="evento.dataInicial ? evento.dataInicial : '-'"></span>
+                </p>
+                <p>Segmento:<span bo-html="evento.name ? evento.name : '-'"></span>
+                </p>
+                <p>Uf:<span bo-html="evento.estadoFeira ? evento.estadoFeira : '-'"></span>
+                </p>
+                <p>Cidade:<span bo-html="evento.cidadeFeira ? evento.cidadeFeira : '-'"></span>
+                </p>
+                <p>Promotor:<span bo-html="evento.promotorFeira ? evento.promotorFeira : '-'"></span>
+                </p>
+                <p>Pavilhão:<span bo-html="evento.pavilhaoFeira ? evento.pavilhaoFeira : '-'"></span>
+                </p>
                 <i class="icon ion-chevron-right"></i>
-          </ion-item>
+            </ion-item>
         </ion-list>
 
         <ion-infinite-scroll on-infinite="loadMore()" ng-if="!moredata" distance="3%"></ion-infinite-scroll>
