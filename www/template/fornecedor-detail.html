@@ -13,8 +13,8 @@
 				<div class="thumb" style="background:url({{ checkImg(fornecedor.guid) ? fornecedor.guid : 'img/no-photo.png' }});"></div>
 				<h1 class="adjM" bo-class="{{ fornecedor.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="fornecedor.post_title"></h1>
 				<p><i class="icon ion-ios-location"></i><span>{{ fornecedor.endereco ? fornecedor.endereco : '-' }} {{ fornecedor.cidade ? fornecedor.cidade : '-' }}/{{ fornecedor.estado ? fornecedor.estado : '-' }}</span></p>
-				<p><i class="icon ion-ios-telephone"></i><span bo-html="fornecedor.telefone ? fornecedor.telefone : '-'"></span></p>
-				<p><i class="icon ion-ios-world"></i><span><a bo-href="fornecedor.siteFeira" bo-html="fornecedor.site ? fornecedor.site : '-'"></a></span></p>
+				<p><i class="icon ion-ios-telephone"></i><span><a href="tel: {{fornecedor.telefone}}" bo-html="fornecedor.telefone ? fornecedor.telefone : '-'"></a></span></p>
+				<p><i class="icon ion-ios-world"></i><span><a href="{{fornecedor.site}}" link onclick="return false" bo-html="fornecedor.site ? fornecedor.site : '-'"></a></span></p>
 			</ion-item>
 
 			<ion-item class="detail">

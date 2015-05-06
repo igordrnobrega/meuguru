@@ -13,8 +13,8 @@
                 <h1 bo-class="{{ evento.post_title.length >= 38 ? 'small-font' : '' }}" class="adjM" bo-html="evento.post_title"></h1>
                 <p><i class="icon ion-calendar"></i><span>{{evento.dataInicial ? evento.dataInicial : '-'}} a {{evento.dataFinal ? evento.dataFinal : '-'}}</span></p>
                 <p><i class="icon ion-ios-location"></i><span>{{evento.cidadeFeira ? evento.cidadeFeira : '-'}}/{{evento.estadoFeira ? evento.estadoFeira : '-'}}</span></p>
-                <p><i class="icon ion-ios-telephone"></i><span bo-html="evento.telefoneFeira ? evento.telefoneFeira : '-'"></span></p>
-                <p><i class="icon ion-ios-world"></i><span><a bo-href="evento.siteFeira" bo-html="evento.siteFeira ? evento.siteFeira : '-'"></a></span></p>
+                <p><i class="icon ion-ios-telephone"></i><span><a href="tel: {{evento.telefoneFeira}}" bo-html="evento.telefoneFeira ? evento.telefoneFeira : '-'"></a></span></p>
+                <p><i class="icon ion-ios-world"></i><span><a bo-href="evento.siteFeira" link onclick="return false" bo-html="evento.siteFeira ? evento.siteFeira : '-'"></a></span></p>
             </ion-item>
 
             <ion-item class="detail">

@@ -13,8 +13,8 @@
 				<div class="thumb" style="background:url({{ checkImg(pavilhao.guid) ? pavilhao.guid : 'img/no-photo.png' }});"></div>
 				<h1 class="adjM" bo-class="{{ pavilhao.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="pavilhao.post_title"></h1>
 				<p><i class="icon ion-ios-location"></i><span>{{ pavilhao.ruaPavilhao + ', ' + pavilhao.bairroPavilhao + ' / ' + pavilhao.cepPavilhao + ' - ' + pavilhao.cidadePavilhao + '/' + pavilhao.estadoPavilhao }}</span></p>
-				<p><i class="icon ion-ios-telephone"></i><span bo-html="pavilhao.telefonePavilhao ? pavilhao.telefonePavilhao : '-'"></span></p>
-				<p><i class="icon ion-ios-world"></i><span><a href="{{ pavilhao.siteFeira }}" bo-html="pavilhao.sitePavilhao ? pavilhao.sitePavilhao : '-'"></a></span></p>
+				<p><i class="icon ion-ios-telephone"></i><span><a href="tel: {{pavilhao.telefonePavilhao}}" bo-html="pavilhao.telefonePavilhao ? pavilhao.telefonePavilhao : '-'"></a></span></p>
+				<p><i class="icon ion-ios-world"></i><span><a href="{{pavilhao.sitePavilhao}}" link onclick="return false" bo-html="pavilhao.sitePavilhao ? pavilhao.sitePavilhao : '-'"></a></span></p>
 			</ion-item>
 
 			<ion-item class="detail">

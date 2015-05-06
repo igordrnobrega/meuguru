@@ -29,3 +29,24 @@ angular.module('meuguru.directives', [])
         }
  }
 ])
+
+.directive('link', ['$ionicPlatform',
+ function ($ionicPlatform) {
+        return {
+            restrict: 'A',
+            link: function ($scope, $element, $attrs) {
+                $ionicPlatform.ready(function () {
+                    if (window.cordova && window.cordova.plugins) {
+                        $element.on('click', function() {
+                            var href = $element.attr('href');
+                            if($element.attr('href').indexOf('http://') == -1) {
+                                href = 'http://' + $element.attr('href');
+                            }
+                            window.open(href,'_system', 'location=yes');
+                        })
+                    }
+                });
+            }
+        }
+ }
+])

@@ -14,8 +14,8 @@
 				<h1 class="adjM" bo-class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="produto.post_title" ></h1>
 				<p><i class="icon ion-home"></i><span bo-html="produto.NomedaLoja" ></span></p>
 				<p><i class="icon ion-ios-location"></i><span>{{ produto.loja.ruaLoja + ', ' + produto.loja.cepLoja + ' - ' + produto.loja.cidadeLoja + '/' + produto.loja.estadoLoja }}</span></p>
-				<p><i class="icon ion-ios-telephone"></i><span bo-html="produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-'" ></span></p>
-				<p><i class="icon ion-ios-world"></i><span><a bo-href="produto.loja.siteLoja" bo-html="produto.loja.siteLoja ? produto.loja.siteLoja : '-'" ></a></span></p>
+				<p><i class="icon ion-ios-telephone"></i><span><a href="tel:{{produto.loja.telefoneLoja}}" bo-html="produto.loja.telefoneLoja ? produto.loja.telefoneLoja : '-'"></a></span></p>
+				<p><i class="icon ion-ios-world"></i><span><a href="{{produto.loja.siteLoja}}" link onclick="return false" bo-html="produto.loja.siteLoja ? produto.loja.siteLoja : '-'" ></a></span></p>
 			</ion-item>
 
 			<ion-item class="detail">

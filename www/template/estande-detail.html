@@ -15,8 +15,8 @@
                 <p><i class="icon ion-person"></i><span>Arquiteto - <b bo-html="estande.arquitetoProjeto"></b></span></p>
                 <p><i class="icon ion-home"></i><span>Montadora - <b bo-html="estande.montadoraProjeto"></b></span></p>
                 <p><i class="icon ion-ios-location"></i><span bo-html="estande.ruaProjeto + ', ' + estande.numeroProjeto + ' | CEP ' + estande.cepProjeto + '-' + estande.bairroProjeto + '/' + estande.estadoProjeto"></span></p>
-                <p><i class="icon ion-ios-telephone"></i><span bo-html="estande.telefoneProjeto ? estande.telefoneProjeto : '-'"></span></p>
-                <p><i class="icon ion-ios-world"></i><span><a bo-href="estande.siteProjeto" bo-html="estande.siteProjeto ? estande.siteProjeto : '-'"></a></span></p>
+                <p><i class="icon ion-ios-telephone"></i><span><a href="tel:{{estande.telefoneProjeto}}" bo-html="estande.telefoneProjeto ? estande.telefoneProjeto : '-'"></a></span></p>
+                <p><i class="icon ion-ios-world"></i><span><a href="{{estande.siteProjeto}}" link onclick="return false" bo-html="estande.siteProjeto ? estande.siteProjeto : '-'"></a></span></p>
             </ion-item>
 
             <ion-item class="detail">
