@@ -6,33 +6,31 @@ angular.module('meuguru.controllers', [])
 
 .controller('IndexCtrl', ['$scope', 'MeuGuruService',
     function ($scope, MeuGuruService) {
-        var favoritos = [
-            {
-                'id_post': '44029',
-                'tx_type': 'Fornecedor'
-            },
-            {
-                'id_post': '51934',
-                'tx_type': 'Evento'
-            }
-        ];
-
     }
 ])
 
 .controller('TabsCtrl', ['$scope', '$location', '$timeout', '$ionicPopup', '$ionicSideMenuDelegate', '$cordovaSQLite', 'FavoritosService',
     function ($scope, $location, $timeout, $ionicPopup, $ionicSideMenuDelegate, $cordovaSQLite, FavoritosService) {
+        $scope.isFavorite = false;
+
         $scope.toggleLeft = function () {
             $ionicSideMenuDelegate.toggleLeft();
         };
 
-        $scope.addFavorite = function (route, id) {
-            FavoritosService.setFavorito(route, id);
+        $scope.addFavorite = function (route, obj) {
+            FavoritosService.setFavorito(route, obj);
+            $timeout(function() {
+                FavoritosService.getFavoritosDB();
+            },10);
         };
 
-        $scope.rmFavorite = function (route, id) {
-            FavoritosService.rmFavorito(route, id);
+        $scope.rmFavorite = function (route, obj) {
+            FavoritosService.rmFavorito(route, obj);
         };
+
+        $scope.isFavorito = function (route, obj) {
+            FavoritosService.isFavorito(route, obj, $scope);
+        }
     }
 ])
 

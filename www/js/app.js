@@ -2,11 +2,11 @@ var db = null;
 
 angular.module('meuguru', ['ionic', 'meuguru.controllers', 'meuguru.filters', 'meuguru.services', 'meuguru.directives', 'ngResource', 'pasvaz.bindonce', 'ngCordova'])
 
-.run(['$rootScope', '$timeout', '$ionicPlatform', '$ionicPopup', '$cordovaSQLite', 'MeuGuruService',
- function ($rootScope, $timeout, $ionicPlatform, $ionicPopup, $cordovaSQLite, MeuGuruService) {
+.run(['$rootScope', '$timeout', '$window', '$ionicPlatform', '$ionicPopup', '$cordovaSQLite', 'MeuGuruService',
+ function ($rootScope, $timeout, $window, $ionicPlatform, $ionicPopup, $cordovaSQLite, MeuGuruService) {
         $ionicPlatform.ready(function () {
             MeuGuruService.init();
-            if (window.Connection) {
+            if ($window.Connection) {
                 if (
                     navigator.connection.type == Connection.NONE ||
                     navigator.connection.type == Connection.UNKNOWN
@@ -21,18 +21,18 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers', 'meuguru.filters', 'm
                 }
             }
 
-            if (window.StatusBar) {
+            if ($window.StatusBar) {
                 StatusBar.overlaysWebView(true);
                 StatusBar.backgroundColorByHexString('#1b3d6e');
             }
 
-            if (window.cordova && window.cordova.plugins.Keyboard) {
+            if ($window.cordova && $window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
 
-            if (window.plugins && window.plugins.AdMob) {
+            if ($window.plugins && $window.plugins.AdMob) {
                 var admob_key = device.platform == "Android" ? "ca-app-pub-9472655871356402/6350910973" : "ca-app-pub-9472655871356402/9304377372";
-                var admob = window.plugins.AdMob;
+                var admob = $window.plugins.AdMob;
                 $timeout(function () {
                     admob.createBannerView({
                             'publisherId': admob_key,
@@ -66,8 +66,16 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers', 'meuguru.filters', 'm
                 }, 2000);
             }
 
-            db = $cordovaSQLite.openDB("meuguru.db");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS favorito (id integer primary key, id_post text, tx_type text)");
+            // db = $cordovaSQLite.openDB({ name: 'meuguru.db', bgType: 1 });
+            db = $window.openDatabase('tte.db', '1', 'tte', 1024 * 1024 * 100);
+            console.log(db);
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS evento (id_tb integer primary key, ID, guid, post_title, dataInicial, name, estadoFeira, cidadeFeira, promotorFeira, pavilhaoFeira, dataFinal, telefoneFeira, siteFeira, post_content, type)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS fornecedor (id_tb integer primary key, ID, guid, post_title, estado, cidade, _yoast_wpseo_metadesc, telefone, site, isAnunciante integer, endereco, post_content, type)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS pavilhao (id_tb integer primary key, ID, guid, post_title, estadoPavilhao, cidadePavilhao, ruaPavilhao, bairroPavilhao, cepPavilhao, telefonePavilhao, sitePavilhao, post_content, type)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS servico (id_tb integer primary key, ID, guid, post_title, estadoServico, ruaServico, numeroServico, cepServico, bairroServico, telefoneServico, siteServico, post_content, type)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS produto (id_tb integer primary key, ID, guid, post_title, NomedaLoja, telefoneLoja, ruaLoja, cepLoja, cidadeLoja, estadoLoja, siteLoja, post_content, type)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS noticia (id_tb integer primary key, ID, _thumbnail_id, post_title, post_date, _yoast_wpseo_focuskw, post_content, type)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS estande (id_tb integer primary key, ID, guid, post_title, arquitetoProjeto, montadoraProjeto, ruaProjeto, numeroProjeto, cepProjeto, bairroProjeto, estadoProjeto, telefoneProjeto, siteProjeto, post_content, type)");
         });
 
         $rootScope.checkImg = function (url) {

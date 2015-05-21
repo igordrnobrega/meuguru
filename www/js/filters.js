@@ -525,8 +525,8 @@ angular.module('meuguru.filters', [])
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
                 if (typeof item != 'undefined') {
-                    if (item.hasOwnProperty('tx_type')) {
-                        var tx_type = item['tx_type'].toLowerCase();
+                    if (item.hasOwnProperty('type')) {
+                        var tx_type = item['type'].toLowerCase();
                         if (tx_type.indexOf(categoria.toLowerCase()) > -1) {
                             filtered.push(item);
                         }

@@ -1,7 +1,10 @@
+var favoritos   = [],
+    segFav      = [];
+
 angular.module('meuguru.services', [])
 
-.factory('MeuGuruService', ['$http', '$log', '$interval', 'FavoritosService',
-    function($http, $log, $interval, FavoritosService) {
+.factory('MeuGuruService', ['$http', '$log', '$interval', '$timeout', 'FavoritosService',
+    function($http, $log, $interval, $timeout, FavoritosService) {
 
         var LOAD_INICIAL    = 15,
             eventos         = [],
@@ -20,7 +23,7 @@ angular.module('meuguru.services', [])
             segEst          = [],
             posiEst         = [],
             // favoritos       = [],
-            segFav          = [],
+            // segFav          = [],
             url = "http://api.meuguru.com.br/";
 
         return {
@@ -263,6 +266,9 @@ angular.module('meuguru.services', [])
                     }
                 })
             },
+            initFavoritos: function () {
+                   FavoritosService.getFavoritosDB(favoritos);
+            },
             init: function(){
                 if(eventos.length == 0) {
                     $http.get(url + 'eventos', {responseType: 'json'}).
@@ -320,150 +326,36 @@ angular.module('meuguru.services', [])
                             return;
                         });
                 }
+                if(favoritos.length == 0) {
+                    $timeout(function () {
+                        FavoritosService.getFavoritosDB();
+                    },5);
+                }
             },
             getFavoritos: function($scope) {
 
-                var resetFavoritos = function() {
-                    for (var j = eventos.length - 1; j >= 0; j--) {
-                        eventos[j]['isFavorito'] = false;
-                    };
-                    for (var j = estandes.length - 1; j >= 0; j--) {
-                        estandes[j]['isFavorito'] = false;
-                    };
-                    for (var j = fornecedores.length - 1; j >= 0; j--) {
-                        fornecedores[j]['isFavorito'] = false;
-                    };
-                    for (var j = noticias.length - 1; j >= 0; j--) {
-                        noticias[j]['isFavorito'] = false;
-                    };
-                    for (var j = pavilhoes.length - 1; j >= 0; j--) {
-                        pavilhoes[j]['isFavorito'] = false;
-                    };
-                    for (var j = produtos.length - 1; j >= 0; j--) {
-                        produtos[j]['isFavorito'] = false;
-                    };
-                    for (var j = servicos.length - 1; j >= 0; j--) {
-                        servicos[j]['isFavorito'] = false;
-                    };
-                }
-
-                favoritos = FavoritosService.getFavoritos();
-
                 if(
-                    eventos.length != 0 &&
+                    eventos.length      != 0 &&
                     fornecedores.length != 0 &&
-                    pavilhoes.length != 0 &&
-                    produtos.length != 0 &&
-                    noticias.length != 0 &&
-                    servicos.length != 0 &&
-                    estandes.length != 0
+                    pavilhoes.length    != 0 &&
+                    produtos.length     != 0 &&
+                    noticias.length     != 0 &&
+                    servicos.length     != 0 &&
+                    estandes.length     != 0 &&
+                    favoritos.length    != 0
                 ) {
-                    var fgEvento        = false,
-                        fgEstande       = false,
-                        fgFornecedor    = false,
-                        fgNoticia       = false,
-                        fgPavilhao      = false,
-                        fgProduto       = false,
-                        fgServico       = false;
 
-                    $scope.segFav = [];
-                    resetFavoritos();
-
-                    for (var i = favoritos.length - 1; i >= 0; i--) {
-                        switch(favoritos[i]['tx_type']) {
-                            case 'Evento':
-                                if(!fgEvento) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgEvento = true;
-                                }
-                                for (var j = eventos.length - 1; j >= 0; j--) {
-                                    eventos[j]['isFavorito'] = false;
-                                    if(eventos[j]['ID'] == favoritos[i]['id_post']) {
-                                        eventos[j]['isFavorito'] = true;
-                                        favoritos[i]['evento'] = eventos[j];
-                                    }
-                                };
-                                break;
-                            case 'Projeto de Estande':
-                                if(!fgEstande) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgEstande = true;
-                                }
-                                for (var j = estandes.length - 1; j >= 0; j--) {
-                                    if(estandes[j]['ID'] == favoritos[i]['id_post']) {
-                                        estandes[j]['isFavorito'] = true;
-                                        favoritos[i]['estande'] = estandes[j];
-                                    }
-                                };
-                                break;
-                            case 'Fornecedor':
-                                if(!fgFornecedor) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgFornecedor = true;
-                                }
-                                for (var j = fornecedores.length - 1; j >= 0; j--) {
-                                    if(fornecedores[j]['ID'] == favoritos[i]['id_post']) {
-                                        fornecedores[j]['isFavorito'] = true;
-                                        favoritos[i]['fornecedor'] = fornecedores[j];
-                                    }
-                                };
-                                break;
-                            case 'Notícia':
-                                if(!fgNoticia) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgNoticia = true;
-                                }
-                                for (var j = noticias.length - 1; j >= 0; j--) {
-                                    if(noticias[j]['ID'] == favoritos[i]['id_post']) {
-                                        noticias[j]['isFavorito'] = true;
-                                        favoritos[i]['noticia'] = noticias[j];
-                                    }
-                                };
-                                break;
-                            case 'Pavilhão':
-                                if(!fgPavilhao) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgPavilhao = true;
-                                }
-                                for (var j = pavilhoes.length - 1; j >= 0; j--) {
-                                    if(pavilhoes[j]['ID'] == favoritos[i]['id_post']) {
-                                        pavilhoes[j]['isFavorito'] = true;
-                                        favoritos[i]['pavilhao'] = pavilhoes[j];
-                                    }
-                                };
-                                break;
-                            case 'Produto':
-                                if(!fgProduto) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgProduto = true;
-                                }
-                                for (var j = produtos.length - 1; j >= 0; j--) {
-                                    if(produtos[j]['ID'] == favoritos[i]['id_post']) {
-                                        produtos[j]['isFavorito'] = true;
-                                        favoritos[i]['produto'] = produtos[j];
-                                    }
-                                };
-                                break;
-                            case 'Serviço':
-                                if(!fgServico) {
-                                    $scope.segFav.push(favoritos[i]['tx_type']);
-                                    fgServico = true;
-                                }
-                                for (var j = servicos.length - 1; j >= 0; j--) {
-                                    if(servicos[j]['ID'] == favoritos[i]['id_post']) {
-                                        servicos[j]['isFavorito'] = true;
-                                        favoritos[i]['servico'] = servicos[j];
-                                    }
-                                };
-                                break;
-                        }
-                    };
                     $scope.favoritos = favoritos;
+                    $scope.segFav = segFav;
+
                     var loading = document.getElementById('loading-favoritos');
                     if(loading){
                         loading.style.opacity = 0;
                         loading.style.display = 'none';
                     }
+                    $scope.load = false;
+                    $scope.moredata = false;
+
                 }
             }
         }
@@ -519,32 +411,322 @@ angular.module('meuguru.services', [])
 .factory('FavoritosService', [
     '$rootScope', '$timeout', '$cordovaSQLite', '$ionicPopup',
     function($rootScope, $timeout, $cordovaSQLite, $ionicPopup) {
-        var favoritos = [],
-            setTimer;
+        var setTimer;
 
         return {
-            getFavoritos: function(){
-                var query = 'SELECT id_post, tx_type FROM favorito';
-                $cordovaSQLite.execute(db, query).then(function(res) {
-                    favoritos = [];
-                    if(res.rows.length > 0) {
-                        for (var i = res.rows.length - 1; i >= 0; i--) {
-                            favoritos.push(res.rows.item(i));
+            getTabelas: function (route, obj){
+                var retorno;
+                switch (route) {
+                    case 'Evento':
+                        retorno = {
+                            'tabela' : 'evento',
+                            'campos' : [
+                                'ID',
+                                'guid',
+                                'post_title',
+                                'dataInicial',
+                                'name',
+                                'estadoFeira',
+                                'cidadeFeira',
+                                'promotorFeira',
+                                'pavilhaoFeira',
+                                'dataFinal',
+                                'telefoneFeira',
+                                'siteFeira',
+                                'post_content',
+                                'type'
+                            ]
                         };
-                    }
-                }, function (err) {
-                    var favoritePopUp = $ionicPopup.show({
-                        title: route,
-                        template: '<p style="text-align: center ">Não foi possível recuperar os favoritos. Tente novamente mais tarde.</p>',
-                    });
-                    $timeout(function() {
-                        favoritePopUp.close();
-                    }, 1500);
-                });
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.ID,
+                                obj.guid,
+                                obj.post_title,
+                                obj.dataInicial,
+                                obj.name,
+                                obj.estadoFeira,
+                                obj.cidadeFeira,
+                                obj.promotorFeira,
+                                obj.pavilhaoFeira,
+                                obj.dataFinal,
+                                obj.telefoneFeira,
+                                obj.siteFeira,
+                                obj.post_content,
+                                'evento'
+                            ]
+                        }
+                        break;
+                    case 'Fornecedor':
+                        retorno = {
+                            'tabela' : 'fornecedor',
+                            'campos' : [
+                                'guid',
+                                'estado',
+                                'post_title',
+                                'cidade',
+                                '_yoast_wpseo_metadesc',
+                                'telefone',
+                                'site',
+                                'post_content',
+                                'isAnunciante',
+                                'ID',
+                                'endereco',
+                                'type'
+                            ]
+                        };
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.guid,
+                                obj.estado,
+                                obj.post_title,
+                                obj.cidade,
+                                obj._yoast_wpseo_metadesc,
+                                obj.telefone,
+                                obj.site,
+                                obj.post_content,
+                                obj.isAnunciante,
+                                obj.ID,
+                                obj.endereco,
+                                'fornecedor'
+                            ]
+                        }
 
-                return favoritos;
+                        break;
+                    case 'Pavilhão':
+                        retorno = {
+                            'tabela' : 'pavilhao',
+                            'campos' : [
+                                'ID',
+                                'guid',
+                                'post_title',
+                                'estadoPavilhao',
+                                'cidadePavilhao',
+                                'ruaPavilhao',
+                                'bairroPavilhao',
+                                'cepPavilhao',
+                                'telefonePavilhao',
+                                'sitePavilhao',
+                                'post_content',
+                                'type'
+                            ],
+                        };
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.ID,
+                                obj.guid,
+                                obj.post_title,
+                                obj.estadoPavilhao,
+                                obj.cidadePavilhao,
+                                obj.ruaPavilhao,
+                                obj.bairroPavilhao,
+                                obj.cepPavilhao,
+                                obj.telefonePavilhao,
+                                obj.sitePavilhao,
+                                obj.post_content,
+                                'pavilhao'
+                            ]
+                        }
+
+                        break;
+                    case 'Serviço':
+                        retorno = {
+                            'tabela' : 'servico',
+                            'campos' : [
+                                'ID',
+                                'guid',
+                                'post_title',
+                                'ruaServico',
+                                'numeroServico',
+                                'cepServico',
+                                'telefoneServico',
+                                'siteServico',
+                                'post_content',
+                                'bairroServico',
+                                'estadoServico',
+                                'type'
+                            ]
+                        };
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.ID,
+                                obj.guid,
+                                obj.post_title,
+                                obj.ruaServico,
+                                obj.numeroServico,
+                                obj.cepServico,
+                                obj.telefoneServico,
+                                obj.siteServico,
+                                obj.post_content,
+                                obj.bairroServico,
+                                obj.estadoServico,
+                                'servico'
+                            ]
+                        }
+
+                        break;
+                    case 'Produto':
+                        retorno = {
+                            'tabela' : 'produto',
+                            'campos' : [
+                                'ID',
+                                'guid',
+                                'post_title',
+                                'NomedaLoja',
+                                'telefoneLoja',
+                                'ruaLoja',
+                                'cepLoja',
+                                'cidadeLoja',
+                                'estadoLoja',
+                                'siteLoja',
+                                'post_content',
+                                'type'
+                            ]
+                        };
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.ID,
+                                obj.guid,
+                                obj.post_title,
+                                obj.NomedaLoja,
+                                obj.telefoneLoja,
+                                obj.ruaLoja,
+                                obj.cepLoja,
+                                obj.cidadeLoja,
+                                obj.estadoLoja,
+                                obj.siteLoja,
+                                obj.post_content,
+                                'produto'
+                            ]
+                        }
+
+                        break;
+                    case 'Notícia':
+                        retorno = {
+                            'tabela' : 'noticia',
+                            'campos' : [
+                                'ID',
+                                '_thumbnail_id',
+                                'post_title',
+                                'post_date',
+                                '_yoast_wpseo_focuskw',
+                                'post_content',
+                                'type'
+                            ],
+
+                        };
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.ID,
+                                obj._thumbnail_id,
+                                obj.post_title,
+                                obj.post_date,
+                                obj._yoast_wpseo_focuskw,
+                                obj.post_content,
+                                'noticia'
+                            ]
+                        }
+
+                        break;
+                    case 'Projeto de Estande':
+                        retorno = {
+                            'tabela' : 'estande',
+                            'campos' : [
+                                'ID',
+                                'guid',
+                                'post_title',
+                                'arquitetoProjeto',
+                                'montadoraProjeto',
+                                'ruaProjeto',
+                                'numeroProjeto',
+                                'cepProjeto',
+                                'bairroProjeto',
+                                'estadoProjeto',
+                                'telefoneProjeto',
+                                'siteProjeto',
+                                'post_content',
+                                'type'
+                            ],
+
+                        };
+
+                        if (typeof obj != 'undefined') {
+                            retorno['insert'] = [
+                                obj.ID,
+                                obj.guid,
+                                obj.post_title,
+                                obj.arquitetoProjeto,
+                                obj.montadoraProjeto,
+                                obj.ruaProjeto,
+                                obj.numeroProjeto,
+                                obj.cepProjeto,
+                                obj.bairroProjeto,
+                                obj.estadoProjeto,
+                                obj.telefoneProjeto,
+                                obj.siteProjeto,
+                                obj.post_content,
+                                'estande'
+                            ];
+                        };
+
+                        break;
+                }
+
+                return retorno;
             },
-            setFavorito: function(route, id) {
+            getFavoritosDB: function(){
+
+                favoritos = [];
+
+                var func = function (tabela) {
+                    var query = 'SELECT ';
+                    for (var i = tabela['campos'].length - 1; i >= 0; i--) {
+                        if (i > 0) {
+                            query += tabela['campos'][i] + ',';
+                        } else {
+                            query += tabela['campos'][i] + '';
+                        }
+                    };
+                    query += ' FROM ' + tabela['tabela'];
+
+                    $cordovaSQLite.execute(db, query).then(function(res) {
+                        console.log(tabela);
+                        if(res.rows.length > 0) {
+                            for (var i = res.rows.length - 1; i >= 0; i--) {
+                                favoritos.push(res.rows.item(i));
+                            };
+                            segFav.push(tabela['tabela']);
+                        }
+                    }, function (err) {
+                        var favoritePopUp = $ionicPopup.show({
+                            title: route,
+                            template: '<p style="text-align: center ">Não foi possível recuperar os favoritos. Tente novamente mais tarde.</p>',
+                        });
+                        $timeout(function() {
+                            favoritePopUp.close();
+                        }, 1500);
+                    });
+                };
+
+                var servicos = [
+                    'Evento',
+                    'Fornecedor',
+                    'Pavilhão',
+                    'Serviço',
+                    'Produto',
+                    'Notícia',
+                    'Projeto de Estande'
+                ];
+
+                for (var i = servicos.length - 1; i >= 0; i--) {
+                    tabela = this.getTabelas(servicos[i]);
+                    retorna = false;
+                    if (i == 0) {
+                        retorna = true;
+                    }
+                    func(tabela);
+                };
+            },
+            setFavorito: function(route, obj) {
 
                 var _popUpFalse = function() {
                     var favoritePopUp = $ionicPopup.show({
@@ -556,11 +738,26 @@ angular.module('meuguru.services', [])
                     }, 1500);
                 }
 
-                var query = 'SELECT id FROM favorito WHERE id_post = ?';
-                $cordovaSQLite.execute(db, query, [id]).then(function(res) {
+                tabela = this.getTabelas(route, obj);
+
+                var query = 'SELECT ID FROM ' + tabela['tabela'] + ' WHERE ID like ?';
+                $cordovaSQLite.execute(db, query, [obj.ID]).then(function(res) {
                     if(res.rows.length == 0) {
-                        var query = 'INSERT INTO favorito (id_post, tx_type) VALUES (?,?)';
-                        $cordovaSQLite.execute(db, query, [id, route]).then(function(res) {
+
+                        var query       = 'INSERT INTO ' + tabela['tabela'] + ' (';
+                        var qtdParams   = '';
+                        for (var i = 0; i < tabela['campos'].length; i++) {
+                            if (i != tabela['campos'].length - 1) {
+                                query       += tabela['campos'][i] + ',';
+                                qtdParams   += '?,';
+                            } else {
+                                query       += tabela['campos'][i] + '';
+                                qtdParams   += '?';
+                            }
+                        };
+                        query += ') VALUES (' + qtdParams + ')';
+
+                        $cordovaSQLite.execute(db, query, tabela['insert']).then(function(res) {
                             var favoritePopUp = $ionicPopup.show({
                                 title: route,
                                 template: '<p style="text-align: center ">Adicionado aos favoritos.</p>',
@@ -585,22 +782,24 @@ angular.module('meuguru.services', [])
                 });
 
             },
-            rmFavorito: function(route, id) {
+            rmFavorito: function(route, obj) {
                 var _popUp = function() {
                     var favoritePopUp = $ionicPopup.show({
                         title: route,
-                        template: '<p style="text-align: center ">Já foi removido dos favorito.</p>',
+                        template: '<p style="text-align: center ">Já foi removido dos favoritos.</p>',
                     });
                     $timeout(function() {
                         favoritePopUp.close();
                     }, 1500);
                 }
 
-                var query = 'SELECT id FROM favorito WHERE id_post = ?';
-                $cordovaSQLite.execute(db, query, [id]).then(function(res) {
+                tabela = this.getTabelas(route, obj)
+
+                var query = 'SELECT ID FROM ' + tabela['tabela'] + ' WHERE ID = ?';
+                $cordovaSQLite.execute(db, query, [obj.ID]).then(function(res) {
                     if(res.rows.length != 0) {
-                        var query = 'DELETE FROM favorito WHERE id_post = ?';
-                        $cordovaSQLite.execute(db, query, [id]).then(function(res) {
+                        var query = 'DELETE FROM ' + tabela['tabela'] + ' WHERE ID = ?';
+                        $cordovaSQLite.execute(db, query, [obj.ID]).then(function(res) {
                             var favoritePopUp = $ionicPopup.show({
                                 title: route,
                                 template: '<p style="text-align: center ">Removido dos favoritos.</p>',
@@ -624,11 +823,13 @@ angular.module('meuguru.services', [])
                     _popUp();
                 });
             },
-            checkFavorite: function(id) {
-                var query = 'SELECT id FROM favorito WHERE id_post = ?';
-                $cordovaSQLite.execute(db, query, [id]).then(function(res) {
-                    alert(res.rows.length);
-                    return res.rows.length != 0 ? false : true;
+            isFavorito: function(route, obj, $scope) {
+
+                tabela = this.getTabelas(route, obj);
+
+                var query = 'SELECT ID FROM ' + tabela['tabela'] + ' WHERE ID = ?';
+                $cordovaSQLite.execute(db, query, [obj.ID]).then(function(res) {
+                    $scope.isFavorite = res.rows.length != 0 ? true : false;
                 }, function (err) {
                     return  false;
                 });
