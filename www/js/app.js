@@ -66,16 +66,16 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers', 'meuguru.filters', 'm
                 }, 2000);
             }
 
-            // db = $cordovaSQLite.openDB({ name: 'meuguru.db', bgType: 1 });
-            db = $window.openDatabase('tte.db', '1', 'tte', 1024 * 1024 * 100);
-            console.log(db);
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS evento (id_tb integer primary key, ID, guid, post_title, dataInicial, name, estadoFeira, cidadeFeira, promotorFeira, pavilhaoFeira, dataFinal, telefoneFeira, siteFeira, post_content, type)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS fornecedor (id_tb integer primary key, ID, guid, post_title, estado, cidade, _yoast_wpseo_metadesc, telefone, site, isAnunciante integer, endereco, post_content, type)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS pavilhao (id_tb integer primary key, ID, guid, post_title, estadoPavilhao, cidadePavilhao, ruaPavilhao, bairroPavilhao, cepPavilhao, telefonePavilhao, sitePavilhao, post_content, type)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS servico (id_tb integer primary key, ID, guid, post_title, estadoServico, ruaServico, numeroServico, cepServico, bairroServico, telefoneServico, siteServico, post_content, type)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS produto (id_tb integer primary key, ID, guid, post_title, NomedaLoja, telefoneLoja, ruaLoja, cepLoja, cidadeLoja, estadoLoja, siteLoja, post_content, type)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS noticia (id_tb integer primary key, ID, _thumbnail_id, post_title, post_date, _yoast_wpseo_focuskw, post_content, type)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS estande (id_tb integer primary key, ID, guid, post_title, arquitetoProjeto, montadoraProjeto, ruaProjeto, numeroProjeto, cepProjeto, bairroProjeto, estadoProjeto, telefoneProjeto, siteProjeto, post_content, type)");
+            db = $cordovaSQLite.openDB('meuguru.db');
+            // db = $window.openDatabase('tte.db', '1', 'tte', 1024 * 1024 * 100);
+            // alert(db);
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS evento (id_tb integer primary key, ID integer, guid text, post_title text, dataInicial text, name  text, estadoFeira text, cidadeFeira text, promotorFeira text, pavilhaoFeira text, dataFinal text, telefoneFeira text, siteFeira text, post_content text, type text)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS fornecedor (id_tb integer primary key, ID integer, guid text, post_title text, estado text, cidade text, _yoast_wpseo_metadesc text, telefone text, site text, isAnunciante integer, endereco text, post_content text, type text)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS pavilhao (id_tb integer primary key, ID integer, guid text, post_title text, estadoPavilhao text, cidadePavilhao text, ruaPavilhao text, bairroPavilhao text, cepPavilhao text, telefonePavilhao text, sitePavilhao text, post_content text, type text)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS servico (id_tb integer primary key, ID integer, guid text, post_title text, estadoServico text, ruaServico text, numeroServico text, cepServico text, bairroServico text, telefoneServico text, siteServico text, post_content text, type text)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS produto (id_tb integer primary key, ID integer, guid text, post_title text, NomedaLoja text, telefoneLoja text, ruaLoja text, cepLoja text, cidadeLoja text, estadoLoja text, siteLoja text, post_content text, type text)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS noticia (id_tb integer primary key, ID integer, _thumbnail_id text, post_title text, post_date text, _yoast_wpseo_focuskw text, post_content text, type text)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS estande (id_tb integer primary key, ID integer, guid text, post_title text, arquitetoProjeto text, montadoraProjeto text, ruaProjeto text, numeroProjeto text, cepProjeto text, bairroProjeto text, estadoProjeto text, telefoneProjeto text, siteProjeto text, post_content text, type text)");
         });
 
         $rootScope.checkImg = function (url) {

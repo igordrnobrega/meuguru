@@ -341,8 +341,7 @@ angular.module('meuguru.services', [])
                     produtos.length     != 0 &&
                     noticias.length     != 0 &&
                     servicos.length     != 0 &&
-                    estandes.length     != 0 &&
-                    favoritos.length    != 0
+                    estandes.length     != 0
                 ) {
 
                     $scope.favoritos = favoritos;
@@ -689,9 +688,9 @@ angular.module('meuguru.services', [])
                     query += ' FROM ' + tabela['tabela'];
 
                     $cordovaSQLite.execute(db, query).then(function(res) {
-                        console.log(tabela);
                         if(res.rows.length > 0) {
                             for (var i = res.rows.length - 1; i >= 0; i--) {
+                                item =res.rows.item(i);
                                 favoritos.push(res.rows.item(i));
                             };
                             segFav.push(tabela['tabela']);

@@ -21,7 +21,7 @@ angular.module('meuguru.controllers', [])
             FavoritosService.setFavorito(route, obj);
             $timeout(function() {
                 FavoritosService.getFavoritosDB();
-            },10);
+            },1000);
         };
 
         $scope.rmFavorite = function (route, obj) {
