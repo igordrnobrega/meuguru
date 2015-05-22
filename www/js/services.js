@@ -22,8 +22,6 @@ angular.module('meuguru.services', [])
             estandes        = [],
             segEst          = [],
             posiEst         = [],
-            // favoritos       = [],
-            // segFav          = [],
             url = "http://api.meuguru.com.br/";
 
         return {
@@ -334,28 +332,41 @@ angular.module('meuguru.services', [])
             },
             getFavoritos: function($scope) {
 
-                if(
-                    eventos.length      != 0 &&
-                    fornecedores.length != 0 &&
-                    pavilhoes.length    != 0 &&
-                    produtos.length     != 0 &&
-                    noticias.length     != 0 &&
-                    servicos.length     != 0 &&
-                    estandes.length     != 0
-                ) {
-
-                    $scope.favoritos = favoritos;
-                    $scope.segFav = segFav;
-
+                var endLoad = function() {
                     var loading = document.getElementById('loading-favoritos');
                     if(loading){
                         loading.style.opacity = 0;
                         loading.style.display = 'none';
                     }
-                    $scope.load = false;
-                    $scope.moredata = false;
-
                 }
+
+
+                var timer = $interval(function() {
+                    if(
+                        eventos.length      != 0 &&
+                        fornecedores.length != 0 &&
+                        pavilhoes.length    != 0 &&
+                        produtos.length     != 0 &&
+                        noticias.length     != 0 &&
+                        servicos.length     != 0 &&
+                        estandes.length     != 0
+                    ) {
+
+                        $scope.favoritos = favoritos;
+                        $scope.segFav = segFav;
+
+                        endLoad();
+
+                        $scope.load = true;
+                        $scope.moredata = false;
+                        $interval.cancel(timer);
+                    } else if (favoritos.length == 0) {
+                        endLoad();
+                        $scope.favoritos = favoritos;
+                        $interval.cancel(timer);
+                        $scope.load = true;
+                    }
+                }, 500);
             }
         }
 

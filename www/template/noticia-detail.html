@@ -2,8 +2,7 @@
 
     <ion-nav-buttons side="right">
         <button class="button icon button-clear ion-android-share-alt"></button>
-        <button ng-init="isFavorito('Notícia', noticia)" ng-if="!isFavorite" class="button icon button-clear ion-android-star-outline" ng-click="addFavorite('Notícia', noticia)"></button>
-        <button ng-init="isFavorito('Notícia', noticia)" ng-if="isFavorite" class="button icon button-clear ion-android-star" ng-click="rmFavorite('Notícia', noticia)"></button>
+        <button ng-init="isFavorito('Notícia', noticia)" ng-if="noticia" class="button icon button-clear {{ favoriteButton }}" ng-click="favorito('Notícia', noticia)"></button>
     </ion-nav-buttons>
 
     <ion-content id="index" data-has-bouncing="false">

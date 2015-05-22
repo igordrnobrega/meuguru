@@ -65,10 +65,11 @@ angular.module('meuguru', ['ionic', 'meuguru.controllers', 'meuguru.filters', 'm
                     );
                 }, 2000);
             }
-
-            db = $cordovaSQLite.openDB('meuguru.db');
-            // db = $window.openDatabase('tte.db', '1', 'tte', 1024 * 1024 * 100);
-            // alert(db);
+            if($window.plugins){
+                db = $cordovaSQLite.openDB('meuguru.db');
+            } else {
+                db = $window.openDatabase('tte.db', '1', 'tte', 1024 * 1024 * 100);
+            }
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS evento (id_tb integer primary key, ID integer, guid text, post_title text, dataInicial text, name  text, estadoFeira text, cidadeFeira text, promotorFeira text, pavilhaoFeira text, dataFinal text, telefoneFeira text, siteFeira text, post_content text, type text)");
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS fornecedor (id_tb integer primary key, ID integer, guid text, post_title text, estado text, cidade text, _yoast_wpseo_metadesc text, telefone text, site text, isAnunciante integer, endereco text, post_content text, type text)");
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS pavilhao (id_tb integer primary key, ID integer, guid text, post_title text, estadoPavilhao text, cidadePavilhao text, ruaPavilhao text, bairroPavilhao text, cepPavilhao text, telefonePavilhao text, sitePavilhao text, post_content text, type text)");

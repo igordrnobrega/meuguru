@@ -11,26 +11,56 @@ angular.module('meuguru.controllers', [])
 
 .controller('TabsCtrl', ['$scope', '$location', '$timeout', '$ionicPopup', '$ionicSideMenuDelegate', '$cordovaSQLite', 'FavoritosService',
     function ($scope, $location, $timeout, $ionicPopup, $ionicSideMenuDelegate, $cordovaSQLite, FavoritosService) {
-        $scope.isFavorite = false;
 
-        $scope.toggleLeft = function () {
-            $ionicSideMenuDelegate.toggleLeft();
+        var montaBotao = function() {
+            if (!$scope.isFavorite) {
+                $scope.favoriteButton = 'ion-android-star-outline';
+            } else {
+                $scope.favoriteButton = 'ion-android-star';
+            }
         };
 
-        $scope.addFavorite = function (route, obj) {
+        var addFavorite = function (route, obj) {
             FavoritosService.setFavorito(route, obj);
+            $timeout(function() {
+                $scope.isFavorito(route, obj);
+            }, 100);
             $timeout(function() {
                 FavoritosService.getFavoritosDB();
             },1000);
         };
 
-        $scope.rmFavorite = function (route, obj) {
+        var rmFavorite = function (route, obj) {
             FavoritosService.rmFavorito(route, obj);
+            $timeout(function() {
+                $scope.isFavorito(route, obj);
+            }, 100);
+            $timeout(function() {
+                FavoritosService.getFavoritosDB();
+            },1000);
         };
+
+        $scope.toggleLeft = function () {
+            $ionicSideMenuDelegate.toggleLeft();
+        };
+
+        $scope.favorito = function (route, obj) {
+            if ($scope.isFavorite) {
+                rmFavorite(route, obj);
+            } else {
+                addFavorite(route, obj);
+            }
+        }
 
         $scope.isFavorito = function (route, obj) {
             FavoritosService.isFavorito(route, obj, $scope);
+            $timeout(function() {
+                montaBotao();
+            },1000);
         }
+
+        $scope.isFavorite = false;
+        montaBotao();
     }
 ])
 
@@ -142,7 +172,7 @@ angular.module('meuguru.controllers', [])
                                         };
                                         $scope.filtro.estado = estado;
                                     });
-
+                                $ionicScrollDelegate.scrollTop();
                                 return $scope.filtro.sqEstado;
                             }
                         }
@@ -164,6 +194,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('EventoCtrl', ['$scope', '$rootScope', '$stateParams', 'MeuGuruService',
     function ($scope, $rootScope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.eventoId;
             MeuGuruService.getEventos($scope);
 
@@ -238,6 +269,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('FornecedorCtrl', ['$scope', '$stateParams', 'MeuGuruService',
     function ($scope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.fornecedorId;
             MeuGuruService.getFornecedores($scope);
 
@@ -311,6 +343,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('PavilhaoCtrl', ['$scope', '$stateParams', 'MeuGuruService',
     function ($scope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.pavilhaoId;
             MeuGuruService.getPavilhoes($scope);
 
@@ -384,6 +417,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('ProdutoCtrl', ['$scope', '$stateParams', 'MeuGuruService',
     function ($scope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.produtoId;
             MeuGuruService.getProdutos($scope);
 
@@ -457,6 +491,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('ServicoCtrl', ['$scope', '$stateParams', 'MeuGuruService',
     function ($scope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.servicoId;
             MeuGuruService.getServicos($scope);
 
@@ -530,6 +565,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('NoticiaCtrl', ['$scope', '$stateParams', 'MeuGuruService',
     function ($scope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.noticiaId;
             MeuGuruService.getNoticias($scope);
 
@@ -603,6 +639,7 @@ angular.module('meuguru.controllers', [])
 ])
     .controller('EstandeCtrl', ['$scope', '$stateParams', 'MeuGuruService',
     function ($scope, $stateParams, MeuGuruService) {
+            $scope.isFavorite = false;
             var id = $stateParams.estandeId;
             MeuGuruService.getEstandes($scope);
 
