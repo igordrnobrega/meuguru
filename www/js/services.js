@@ -321,6 +321,7 @@ angular.module('meuguru.services', [])
                         then(function(resp) {
                             estandes        = resp.data.estandes;
                             segEst          = resp.data.segmentos;
+                            posiEst         = resp.data.posicoes;
                             return;
                         });
                 }
