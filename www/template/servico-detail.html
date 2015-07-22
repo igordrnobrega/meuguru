@@ -11,7 +11,7 @@
             <ion-item class="info">
                 <div class="thumb" style="background:url({{ checkImg(servico.guid) ? servico.guid : 'img/no-photo.png' }});"></div>
                 <h1 class="adjM" bo-class="{{ servico.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="servico.post_title"></h1>
-                <p><i class="icon ion-ios-location"></i><span>{{ servico.ruaServico + ', ' + servico.numeroServico + ' | CEP ' + servico.cepServico + '-' + servico.bairroServico + '/' + servico.estadoServico }}</span></p>
+                <p><i class="icon ion-ios-location"></i><span>{{ servico.ruaServico + ', ' + servico.numeroServico + ' | CEP ' + servico.cepServico + ' - ' + servico.bairroServico + ' , ' + servico.cidadeServico + '/' + servico.estadoServico }}</span></p>
                 <p><i class="icon ion-ios-telephone"></i><span><a href="tel: {{servico.telefoneServico}}" bo-html="servico.telefoneServico ? servico.telefoneServico : 'Não Cadastrado'"></a></span></p>
                 <p><i class="icon ion-ios-world"></i><span><a href="{{ servico.siteServico }}" link onclick="return false" bo-html="servico.siteServico ? servico.siteServico : '-'"></a></span></p>
             </ion-item>

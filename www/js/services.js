@@ -705,7 +705,16 @@ angular.module('meuguru.services', [])
                                 item =res.rows.item(i);
                                 favoritos.push(res.rows.item(i));
                             };
-                            segFav.push(tabela['tabela']);
+                            var tem = false;
+                            for (var i = segFav.length - 1; i >= 0; i--) {
+                                if(segFav[i] ===  tabela['tabela']) {
+                                    tem = true;
+                                    break;
+                                }
+                            };
+                            if (!tem) {
+                                segFav.push(tabela['tabela']);
+                            }
                         }
                     }, function (err) {
                         var favoritePopUp = $ionicPopup.show({
