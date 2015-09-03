@@ -10,7 +10,7 @@
     <ion-content id="index" data-has-bouncing="false">
         <loading id="loading-noticias"></loading>
         <ion-list class="listar" data-ng-if="!load">
-          <ion-item class="item-icon-right" data-bindonce="noticias" data-ng-repeat="noticia in noticias | filtrarProduto:filtro:allNoticias" href="#/tab/noticia/{{ noticia.ID }}">
+          <ion-item class="item-icon-right" data-bindonce="noticias" data-ng-repeat="noticia in noticias | filtrarProduto:filtro:allNoticias  track by noticia.ID" href="#/tab/noticia/{{ noticia.ID }}">
                 <div class="thumb noticia" style="background:url({{ checkImg(noticia._thumbnail_id) ? noticia._thumbnail_id : 'img/no-photo.png' }});"></div>
                 <h1 class="noticia-h1" bo-html="noticia.post_date | date:'dd/MM/yyyy'"></h1>
                 <p class="noticia-p" bo-html="noticia.post_title"></p>

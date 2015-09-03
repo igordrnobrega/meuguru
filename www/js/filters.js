@@ -62,6 +62,7 @@ var _filtraEstado = function (items, sigla, tipo) {
 
     if (
         typeof sigla != 'undefined' &&
+        sigla !== null &&
         sigla.length == 2
     ) {
         switch (tipo) {
@@ -238,28 +239,32 @@ var _filtraPalavraChave = function (items, palavra) {
     ) {
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
-            if (item.hasOwnProperty('_yoast_wpseo_metadesc')) {
-                var meta = item['_yoast_wpseo_metadesc'].toLowerCase();
-                var title = item['post_title'].toLowerCase();
-                if (
-                    meta.indexOf(palavra.toLowerCase()) > -1 ||
-                    title.indexOf(palavra.toLowerCase()) > -1
-                ) {
-                    filtered.push(item);
-                }
-            } else if (item.hasOwnProperty('post_content')) {
-                var content = item['post_content'].toLowerCase();
-                var title = item['post_title'].toLowerCase();
-                if (
-                    content.indexOf(palavra.toLowerCase()) > -1 ||
-                    title.indexOf(palavra.toLowerCase()) > -1
-                ) {
-                    filtered.push(item);
-                }
-            } else if (item.hasOwnProperty('post_title')) {
-                var title = item['post_title'].toLowerCase();
-                if (title.indexOf(palavra.toLowerCase()) > -1) {
-                    filtered.push(item);
+
+console.log(item);
+            if (typeof item != 'undefined') {
+                if (item.hasOwnProperty('_yoast_wpseo_metadesc')) {
+                    var meta = item['_yoast_wpseo_metadesc'].toLowerCase();
+                    var title = item['post_title'].toLowerCase();
+                    if (
+                        meta.indexOf(palavra.toLowerCase()) > -1 ||
+                        title.indexOf(palavra.toLowerCase()) > -1
+                    ) {
+                        filtered.push(item);
+                    }
+                } else if (item.hasOwnProperty('post_content')) {
+                    var content = item['post_content'].toLowerCase();
+                    var title = item['post_title'].toLowerCase();
+                    if (
+                        content.indexOf(palavra.toLowerCase()) > -1 ||
+                        title.indexOf(palavra.toLowerCase()) > -1
+                    ) {
+                        filtered.push(item);
+                    }
+                } else if (item.hasOwnProperty('post_title')) {
+                    var title = item['post_title'].toLowerCase();
+                    if (title.indexOf(palavra.toLowerCase()) > -1) {
+                        filtered.push(item);
+                    }
                 }
             }
         }

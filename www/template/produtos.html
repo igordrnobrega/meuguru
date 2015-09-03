@@ -10,7 +10,7 @@
     <ion-content id="index" data-has-bouncing="false">
         <loading id="loading-produtos"></loading>
         <ion-list class="listar produto" data-ng-if="!load">
-            <ion-item class="item-icon-right item-produto" data-bindonce="produtos" data-ng-repeat="produto in produtos | filtrarProduto:filtro:allProdutos" href="#/tab/produto/{{ produto.ID }}">
+            <ion-item class="item-icon-right item-produto" data-bindonce="produtos" data-ng-repeat="produto in produtos | filtrarProduto:filtro:allProdutos track by produto.ID" href="#/tab/produto/{{ produto.ID }}">
                 <div class="thumb" style="background:url({{ checkImg(produto.guid) ? produto.guid : 'img/no-photo.png' }});"></div>
                 <h1 bo-class="{{ produto.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="produto.post_title"></h1>
                 <p>Empresa:<span bo-html="produto.NomedaLoja ? produto.NomedaLoja : '-'"></span></p>

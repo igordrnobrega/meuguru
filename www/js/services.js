@@ -23,6 +23,7 @@ angular.module('meuguru.services', [])
             segEst          = [],
             posiEst         = [],
             url = "http://api.meuguru.com.br/";
+            // url = "http://dev.meuguru.com.br/";
 
         return {
             getEventos: function($scope) {

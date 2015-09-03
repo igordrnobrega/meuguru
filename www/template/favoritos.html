@@ -13,7 +13,7 @@
         <p ng-if="favoritos.length == 0 && load" class="favoritos-none">Você não possui favoritos.</p>
         <loading id="loading-favoritos"></loading>
         <ion-list class="listar" ng-if="favoritos.length != 0">
-            <ion-item class="item-icon-right" data-bindonce="favoritos" data-ng-repeat="favorito in favoritos | filtrarFavorito:filtro.categoria" ng-href="{{ favorito.type == 'evento' ? '#/tab/evento/' + favorito.ID : (favorito.type == 'fornecedor' ? '#/tab/fornecedor/' + favorito.ID : (favorito.type == 'estande' ? '#/tab/estande/' + favorito.ID : (favorito.type == 'noticia' ? '#/tab/noticia/' + favorito.ID : (favorito.type == 'pavilhao' ? '#/tab/pavilhao/' + favorito.ID : (favorito.type == 'produto' ? '#/tab/produto/' + favorito.ID : '#/tab/servico/' + favorito.ID ))))) }}">
+            <ion-item class="item-icon-right" data-bindonce="favoritos" data-ng-repeat="favorito in favoritos | filtrarFavorito:filtro.categoria track by favorito.ID" ng-href="{{ favorito.type == 'evento' ? '#/tab/evento/' + favorito.ID : (favorito.type == 'fornecedor' ? '#/tab/fornecedor/' + favorito.ID : (favorito.type == 'estande' ? '#/tab/estande/' + favorito.ID : (favorito.type == 'noticia' ? '#/tab/noticia/' + favorito.ID : (favorito.type == 'pavilhao' ? '#/tab/pavilhao/' + favorito.ID : (favorito.type == 'produto' ? '#/tab/produto/' + favorito.ID : '#/tab/servico/' + favorito.ID ))))) }}">
                 <div ng-if="favorito.type == 'evento'">
                     <div class="thumb" style="background:url({{ checkImg(favorito.guid) ? favorito.guid : 'img/no-photo.png' }});"></div>
                     <h1 bo-class="{{ favorito.post_title.length >= 38 ? 'small-font' : '' }}" bo-html="favorito.post_title"></h1>
